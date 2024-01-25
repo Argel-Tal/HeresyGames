@@ -121,12 +121,17 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
           "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}, {\"Column8\", Text.Trim, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
           "in",
           "    #\"Promoted Headers\""
         ],
@@ -146,7 +151,8 @@
           "let",
           "    Source = (#\"playerLog sample file Param\" as binary) => let",
           "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}, {\"Column8\", Text.Trim, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
           "in",
           "    #\"Promoted Headers\"",
           "in",
@@ -205,12 +211,17 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
           "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
           "in",
           "    #\"Promoted Headers\""
         ],
@@ -230,9 +241,10 @@
           "let",
           "    Source = (#\"GameMeta sample file param\" as binary) => let",
           "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
-          "in",
-          "    #\"Promoted Headers\"",
+          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
+          "    in",
+          "        #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
@@ -371,97 +383,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": " forceOrg",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "94c03d17-4c6e-4514-ab45-4df493327497",
-            "sourceColumn": " forceOrg",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " ROW/Subfaction",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "c801409c-2a27-4f8e-84b9-2656c9a18239",
-            "sourceColumn": " ROW/Subfaction",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " alliedFaction",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "fc318db7-970e-4b4f-b8aa-152a4ae3d3fb",
-            "sourceColumn": " alliedFaction",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " VPs",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "6981d4c6-d41b-4da4-b076-5fd8a7c0218d",
-            "sourceColumn": " VPs",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " player",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "fcf46991-fd3d-4bee-a565-c0a5fe471deb",
-            "sourceColumn": " player",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " warlord",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "122bee49-7233-4324-8b68-be517876908c",
-            "sourceColumn": " warlord",
-            "summarizeBy": "none"
-          },
-          {
-            "name": " warlordTrait",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "edf01444-3014-46e6-b6d2-054630c26aaa",
-            "sourceColumn": " warlordTrait",
-            "summarizeBy": "none"
-          },
-          {
             "name": "Winner",
             "annotations": [
               {
@@ -487,6 +408,97 @@
             "lineageTag": "83226474-30dc-448a-adc7-a808272d66e9",
             "sourceColumn": "Max VPs",
             "summarizeBy": "none"
+          },
+          {
+            "name": "forceOrg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f7257c39-68da-44e4-9e78-c34f756ac75c",
+            "sourceColumn": "forceOrg",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ROW/Subfaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fcae9fe1-70e0-49e9-8afc-5abcfbc0d216",
+            "sourceColumn": "ROW/Subfaction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "alliedFaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "933e9df4-98b7-4e73-8b2e-e2b4c3cc1de1",
+            "sourceColumn": "alliedFaction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "VPs",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7c2484a6-84af-4a7c-837b-ae35c4e7a5b9",
+            "sourceColumn": "VPs",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "player 2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6246ee8e-0e04-4487-b920-395c888da9a4",
+            "sourceColumn": "player",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "warlord",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3d4fb2b9-6433-4fb7-9833-cb62e38a873c",
+            "sourceColumn": "warlord",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "warlordTrait",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dcbd7068-5fc7-492f-a605-7c7a5e58c0e7",
+            "sourceColumn": "warlordTrait",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -510,17 +522,17 @@
                 "    #\"Filtered out Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
                 "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered out Hidden Files\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
                 "    #\"Expanded CSV Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}),",
                 "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
                 "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
-                "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\" VPs\", Int64.Type}}),",
-                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\" warlord\", Text.Proper, type text}, {\" warlordTrait\", Text.Proper, type text}, {\"faction\", Text.Proper, type text}, {\" forceOrg\", Text.Proper, type text}}),",
+                "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\"VPs\", Int64.Type}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\"warlord\", Text.Proper, type text}, {\"warlordTrait\", Text.Proper, type text}, {\"faction\", Text.Proper, type text}, {\"forceOrg\", Text.Proper, type text}}),",
                 "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
                 "    #\"Duplicated summarised tb\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - Copy\"),",
-                "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\" VPs\", List.Max, \"Max VPs\"}}),",
-                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
-                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded duplicated tb\",\"\",null,Replacer.ReplaceValue,{\" ROW/Subfaction\", \" alliedFaction\"}),",
-                "    #\"Added Winner col\" = Table.AddColumn(#\"Replaced Value\", \"Winner\", each [#\" VPs\"] = [Max VPs]),",
+                "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}, {\"Player\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded duplicated tb\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"}),",
+                "    #\"Added Winner col\" = Table.AddColumn(#\"Replaced Value\", \"Winner\", each [#\"VPs\"] = [Max VPs]),",
                 "    #\"Changed Winner to T|F\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"Winner\", type logical}})",
                 "in",
                 "    #\"Changed Winner to T|F\""
@@ -557,7 +569,7 @@
             "summarizeBy": "none"
           },
           {
-            "name": " gameSize",
+            "name": "gameSize",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -566,12 +578,12 @@
             ],
             "dataType": "int64",
             "formatString": "0",
-            "lineageTag": "dd3dc38c-136f-45b4-9c33-9a85bbd9c0ae",
-            "sourceColumn": " gameSize",
+            "lineageTag": "ae6b163e-99ae-4915-a028-9eaba2766bea",
+            "sourceColumn": "gameSize",
             "summarizeBy": "none"
           },
           {
-            "name": " mission",
+            "name": "mission",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -579,12 +591,12 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "f4a526af-abb9-4cf7-9524-41da5233fba2",
-            "sourceColumn": " mission",
+            "lineageTag": "9bd048f8-9868-40a9-8830-e633f96e5466",
+            "sourceColumn": "mission",
             "summarizeBy": "none"
           },
           {
-            "name": " deployment",
+            "name": "deployment",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -592,8 +604,8 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "d5505ed6-c8c7-4469-be50-d3c7033365db",
-            "sourceColumn": " deployment",
+            "lineageTag": "a99b9814-ee2f-4466-a742-efc68295dc3e",
+            "sourceColumn": "deployment",
             "summarizeBy": "none"
           }
         ],
@@ -619,8 +631,8 @@
                 "    #\"Fetch CSV Contents\" = Table.AddColumn(#\"Filtered Hidden Files\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
                 "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch CSV Contents\", {\"Transform File\"}),",
                 "    #\"Expanded CSV\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\"))),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded CSV\",{{\" gameSize\", Int64.Type}}),",
-                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\" mission\", Text.Proper, type text}, {\" deployment\", Text.Proper, type text}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded CSV\",{{\"gameSize\", Int64.Type}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"mission\", Text.Proper, type text}, {\"deployment\", Text.Proper, type text}})",
                 "in",
                 "    #\"Capitalized Each Word\""
               ],
@@ -635,21 +647,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          }
-        ],
-        "columns": [
-          {
-            "name": "Column1",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "09108cd0-fed1-46af-a7b2-9d96e7340182",
-            "sourceColumn": "Column1",
-            "summarizeBy": "none"
           }
         ],
         "lineageTag": "5a95dd1a-5ba1-4238-be63-102e59600cbc",
@@ -695,9 +692,10 @@
               "expression": [
                 "let",
                 "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Removed Columns\""
               ],
               "type": "m"
             }

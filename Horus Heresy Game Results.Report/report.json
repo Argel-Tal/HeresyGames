@@ -27,16 +27,25 @@
       "name": "ReportSection",
       "visualContainers": [
         {
-          "config": "{\"name\":\"c61cec9e6badc1ec84a2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":784.6216768916156,\"y\":420,\"width\":300,\"height\":300,\"z\":1}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"MeasuresTable.Wins\"}],\"Category\":[{\"queryRef\":\"playerlogs.faction\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"faction\"},\"Name\":\"playerlogs.faction\",\"NativeReferenceName\":\"faction\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"5fcdba2ff19c835df213\",\"layouts\":[{\"id\":0,\"position\":{\"x\":553.6196319018405,\"y\":107.32106339468302,\"z\":2,\"width\":300.3680981595092,\"height\":300.3680981595092}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"playerlogs.faction\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"faction\"},\"Name\":\"playerlogs.faction\",\"NativeReferenceName\":\"faction\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
           "filters": "[]",
-          "height": 300.00,
-          "width": 300.00,
-          "x": 784.62,
-          "y": 420.00,
+          "height": 300.37,
+          "width": 300.37,
+          "x": 553.62,
+          "y": 107.32,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"c61cec9e6badc1ec84a2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":899.7955010224949,\"y\":420.1226993865031,\"z\":1,\"width\":299.71370143149284,\"height\":299.71370143149284}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"MeasuresTable.Wins\"}],\"Category\":[{\"queryRef\":\"playerlogs.faction\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"faction\"},\"Name\":\"playerlogs.faction\",\"NativeReferenceName\":\"faction\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 299.71,
+          "width": 299.71,
+          "x": 899.80,
+          "y": 420.12,
           "z": 1.00
         },
         {
-          "config": "{\"name\":\"ffae7dec1bf976ce15ff\",\"layouts\":[{\"id\":0,\"position\":{\"x\":899.6523517382414,\"y\":107.17791411042947,\"width\":300,\"height\":300,\"z\":0}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"GameMeta. gameSize\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"GameMeta\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\" gameSize\"},\"Name\":\"GameMeta. gameSize\",\"NativeReferenceName\":\" gameSize\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"ffae7dec1bf976ce15ff\",\"layouts\":[{\"id\":0,\"position\":{\"x\":899.6523517382414,\"y\":107.17791411042947,\"width\":300,\"height\":300,\"z\":0}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"GameMeta.gameSize\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"GameMeta\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"gameSize\"},\"Name\":\"GameMeta.gameSize\",\"NativeReferenceName\":\"gameSize\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 300.00,
           "width": 300.00,
