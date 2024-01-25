@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -623,6 +623,81 @@
                 "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\" mission\", Text.Proper, type text}, {\" deployment\", Text.Proper, type text}})",
                 "in",
                 "    #\"Capitalized Each Word\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MeasuresTable",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "09108cd0-fed1-46af-a7b2-9d96e7340182",
+            "sourceColumn": "Column1",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "5a95dd1a-5ba1-4238-be63-102e59600cbc",
+        "measures": [
+          {
+            "name": "Wins",
+            "expression": [
+              "CALCULATE(",
+              "    DISTINCTCOUNT(playerlogs[GameID])",
+              "    , FILTER(playerlogs, playerlogs[Winner] = TRUE)",
+              ") // end calc"
+            ],
+            "formatString": "0",
+            "lineageTag": "992db15c-574d-4358-be84-2cebcb509d35"
+          },
+          {
+            "name": "Games",
+            "expression": [
+              "CALCULATE(",
+              "    DISTINCTCOUNT(GameMeta[gameID])",
+              "    ) // end calc"
+            ],
+            "formatString": "0",
+            "lineageTag": "fc089950-95ae-4907-aba6-d06f7f675070"
+          },
+          {
+            "name": "Win rate",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "[Wins] / [Games]",
+            "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "MeasuresTable",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}})",
+                "in",
+                "    #\"Changed Type\""
               ],
               "type": "m"
             }
