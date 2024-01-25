@@ -6,7 +6,7 @@
       "boundSection": "ReportSectioncdb76e3656f4a83f60e8",
       "config": "{}",
       "name": "Pod",
-      "parameters": "[{\"name\":\"Param_Filterbee0abf9659f26e29710\",\"boundFilter\":\"Filterbee0abf9659f26e29710\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"playerlogs\"}},\"Property\":\"Faction\"}}}]",
+      "parameters": "[{\"name\":\"Param_Filter013408e8c4d2b5e6e1ec\",\"boundFilter\":\"Filter013408e8c4d2b5e6e1ec\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Factions\"}},\"Property\":\"Faction\"}}}]",
       "type": 1
     }
   ],
@@ -28,81 +28,183 @@
   ],
   "sections": [
     {
-      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"181L\"}}}}}]}}",
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"181L\"}}}}}],\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.3}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}}}]}}",
       "displayName": "Summary",
       "displayOption": 3,
       "filters": "[]",
-      "height": 1280.00,
+      "height": 800.00,
       "name": "ReportSection",
       "visualContainers": [
         {
-          "config": "{\"name\":\"5fcdba2ff19c835df213\",\"layouts\":[{\"id\":0,\"position\":{\"x\":613.75,\"y\":106.25,\"z\":2000,\"width\":386.25,\"height\":756.25}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"playerlogs.Faction\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Faction\"},\"Name\":\"playerlogs.Faction\",\"NativeReferenceName\":\"Faction\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "config": "{\"name\":\"4ed6df7b9588588decb5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":114,\"z\":2001,\"width\":548,\"height\":158,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"ABOUT\"}]}]}}]}}}",
           "filters": "[]",
-          "height": 756.25,
-          "width": 386.25,
-          "x": 613.75,
-          "y": 106.25,
+          "height": 158.00,
+          "width": 548.00,
+          "x": 0.00,
+          "y": 114.00,
+          "z": 2001.00
+        },
+        {
+          "config": "{\"name\":\"5fcdba2ff19c835df213\",\"layouts\":[{\"id\":0,\"position\":{\"x\":906.6666666666667,\"y\":113.33333333333334,\"z\":2000,\"width\":373.33333333333337,\"height\":686.6666666666667}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Factions.Faction\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"},\"Name\":\"Factions.Faction\",\"NativeReferenceName\":\"Faction1\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"categoryAxis\":[{\"properties\":{\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 686.67,
+          "width": 373.33,
+          "x": 906.67,
+          "y": 113.33,
           "z": 2000.00
         },
         {
-          "config": "{\"name\":\"c61cec9e6badc1ec84a2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":613.75,\"y\":862.5,\"z\":1000,\"width\":386.25,\"height\":417.5}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"playerlogs.Faction\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Games\"},{\"queryRef\":\"MeasuresTable.Wins\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Faction\"},\"Name\":\"playerlogs.Faction\",\"NativeReferenceName\":\"Faction\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"c61cec9e6badc1ec84a2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":560,\"z\":1000,\"width\":534,\"height\":240}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Factions.Faction\",\"active\":true},{\"queryRef\":\"Subfactions.Subfactions\"}],\"Values\":[{\"queryRef\":\"MeasuresTable.Games\"},{\"queryRef\":\"MeasuresTable.Wins\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Subfactions\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"},\"Name\":\"Factions.Faction\",\"NativeReferenceName\":\"Faction1\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Subfactions\"},\"Name\":\"Subfactions.Subfactions\",\"NativeReferenceName\":\"Subfactions\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
-          "height": 417.50,
-          "width": 386.25,
-          "x": 613.75,
-          "y": 862.50,
+          "height": 240.00,
+          "width": 534.00,
+          "x": 0.00,
+          "y": 560.00,
           "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.3}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}}}]}}",
+      "displayName": "Faction Stats",
+      "displayOption": 3,
+      "filters": "[{\"name\":\"Filter013408e8c4d2b5e6e1ec\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Factions\"}},\"Property\":\"Faction\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Mechanicum'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5,\"objects\":{}}]",
+      "height": 1080.00,
+      "name": "ReportSectioncdb76e3656f4a83f60e8",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"200bb9e449021b34a377\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":442.8571428571429,\"z\":11,\"width\":584.2857142857143,\"height\":130}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"MeasuresTable.Games\"}],\"Columns\":[{\"queryRef\":\"Most picked Warlords.Warlord\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m1\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"Most picked Warlords\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m1\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Warlord\"},\"Name\":\"Most picked Warlords.Warlord\",\"NativeReferenceName\":\"Warlord\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Warlord\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"columnHeaders\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"titleAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}}}],\"values\":[{\"properties\":{\"valuesOnRow\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Most picked Warlords'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 130.00,
+          "width": 584.29,
+          "x": 0.00,
+          "y": 442.86,
+          "z": 11.00
+        },
+        {
+          "config": "{\"name\":\"253c72876d9a3c28295b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":584.2857142857143,\"y\":572.8571428571429,\"z\":4,\"width\":415.7142857142857,\"height\":212.85714285714286}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Subfactions.Subfactions\",\"active\":true}],\"Values\":[{\"queryRef\":\"MeasuresTable.Wins\"},{\"queryRef\":\"MeasuresTable.Games\"},{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Subfactions\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Subfactions\"},\"Name\":\"Subfactions.Subfactions\",\"NativeReferenceName\":\"Subfactions1\"}]},\"queryFieldParametersByRole\":{\"Rows\":[{\"index\":0,\"length\":1,\"expr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Measure by\"}},\"Property\":\"Measure By\"}}}]},\"columnProperties\":{\"Subfactions.Subfactions\":{\"displayName\":\"Subfactions\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"244D\"}}}},\"selector\":{\"metadata\":\"Force Organisations.ForceOrg\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"235D\"}}}},\"selector\":{\"metadata\":\"Subfactions.Subfactions\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"244D\"}}}},\"selector\":{\"metadata\":\"playerlogs.Warlord\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"243D\"}}}},\"selector\":{\"metadata\":\"Missions.Missions\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"246D\"}}}},\"selector\":{\"metadata\":\"Deployment Maps.Maps\"}}],\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Custom Statistics'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 212.86,
+          "width": 415.71,
+          "x": 584.29,
+          "y": 572.86,
+          "z": 4.00
+        },
+        {
+          "config": "{\"name\":\"2a9f966278db512e641b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":45,\"z\":2,\"width\":226.66666666666669,\"height\":40}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Return to Summary'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'PageNavigation'\"}}},\"navigationSection\":{\"expr\":{\"Literal\":{\"Value\":\"'ReportSection'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 226.67,
+          "x": 0.00,
+          "y": 45.00,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"575ce0f4e02213f1873d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":786,\"z\":7,\"width\":500,\"height\":294}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Deployment Maps.Maps\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Deployment Maps\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Maps\"},\"Name\":\"Deployment Maps.Maps\",\"NativeReferenceName\":\"Maps\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 294.00,
+          "width": 500.00,
+          "x": 0.00,
+          "y": 786.00,
+          "z": 7.00
+        },
+        {
+          "config": "{\"name\":\"9e91c5d700fab96301ea\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":572.8571428571429,\"z\":1,\"width\":351.42857142857144,\"height\":212.85714285714286}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"MeasuresTable.Most successful Warlord\"},{\"queryRef\":\"MeasuresTable.Most successful Warlord trait\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Most successful Warlord\"},\"Name\":\"MeasuresTable.Most successful Warlord\",\"NativeReferenceName\":\"Most successful Warlord\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Most successful Warlord trait\"},\"Name\":\"MeasuresTable.Most successful Warlord trait\",\"NativeReferenceName\":\"Most successful Warlord trait\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"layout\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"shapeCustomRectangle\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}},\"selector\":{\"id\":\"default\"}}],\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}},\"selector\":{\"id\":\"default\"}}],\"label\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}}},\"selector\":{\"id\":\"default\"}}]}}}",
+          "filters": "[]",
+          "height": 212.86,
+          "width": 351.43,
+          "x": 0.00,
+          "y": 572.86,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"a08ce1508ffe549f8d05\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":106,\"z\":3,\"width\":1000,\"height\":150,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Factions.Faction)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"}},\"Function\":3},\"Name\":\"Min(Factions.Faction)\",\"NativeReferenceName\":\"First Faction\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Faction summary'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}},\"underline\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"spacing\":[{\"properties\":{\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150.00,
+          "width": 1000.00,
+          "x": 0.00,
+          "y": 106.00,
+          "z": 3.00
+        },
+        {
+          "config": "{\"name\":\"b234f924817d0f9637c0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":308.5714285714286,\"z\":6,\"width\":351.42857142857144,\"height\":134.2857142857143,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"MeasuresTable.Games\"},{\"queryRef\":\"MeasuresTable.Wins\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Wins\"},\"Name\":\"MeasuresTable.Wins\",\"NativeReferenceName\":\"Wins\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Games\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"25D\"}}},\"horizontalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}},\"selector\":{\"id\":\"default\"}}],\"label\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}}},\"selector\":{\"id\":\"default\"}}]}}}",
+          "filters": "[]",
+          "height": 134.29,
+          "width": 351.43,
+          "x": 0.00,
+          "y": 308.57,
+          "z": 6.00
+        },
+        {
+          "config": "{\"name\":\"bfeef522440e3abb1e55\",\"layouts\":[{\"id\":0,\"position\":{\"x\":584.2857142857143,\"y\":308.5714285714286,\"z\":0,\"width\":415.7142857142857,\"height\":264.2857142857143}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"GameMeta.Gamesize\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"GameMeta\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Gamesize\"},\"Name\":\"GameMeta.Gamesize\",\"NativeReferenceName\":\"Gamesize\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Win % across different points levels'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 264.29,
+          "width": 415.71,
+          "x": 584.29,
+          "y": 308.57,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"e5907da7b41e5a0e7150\",\"layouts\":[{\"id\":0,\"position\":{\"x\":500,\"y\":786,\"z\":9,\"width\":500,\"height\":294}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Missions.Missions\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"m1\",\"Entity\":\"Missions\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m1\"}},\"Property\":\"Missions\"},\"Name\":\"Missions.Missions\",\"NativeReferenceName\":\"Missions\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"start\":{\"expr\":{\"Literal\":{\"Value\":\"-1D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 294.00,
+          "width": 500.00,
+          "x": 500.00,
+          "y": 786.00,
+          "z": 9.00
+        },
+        {
+          "config": "{\"name\":\"e9ffed6743c45f316eb6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":351.42857142857144,\"y\":572.8571428571429,\"z\":10,\"width\":232.85714285714286,\"height\":212.85714285714286,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Measure By.Measure By\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measure by\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Measure By\"},\"Name\":\"Measure By.Measure By\",\"NativeReferenceName\":\"Measure By\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measure by\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Measure By Fields\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'''Subfactions''[Subfactions]'\"}}]]}}}]}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"cachedFilterDisplayItems\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Measure by\"}},\"Property\":\"Measure By Fields\"}},\"Right\":{\"Literal\":{\"Value\":\"'''Subfactions''[Subfactions]'\"}}}}},\"displayName\":\"Subfactions\"}]}}",
+          "filters": "[]",
+          "height": 212.86,
+          "width": 232.86,
+          "x": 351.43,
+          "y": 572.86,
+          "z": 10.00
         }
       ],
       "width": 1000.00
     },
     {
       "config": "{}",
-      "displayName": "Faction Stats",
-      "displayOption": 3,
-      "filters": "[{\"name\":\"Filterbee0abf9659f26e29710\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"playerlogs\"}},\"Property\":\"Faction\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Faction\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Mechanicum'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5}]",
-      "height": 1080.00,
-      "name": "ReportSectioncdb76e3656f4a83f60e8",
-      "ordinal": 1,
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectiond3ae228456660d07aa78",
+      "ordinal": 2,
       "visualContainers": [
         {
-          "config": "{\"name\":\"2a9f966278db512e641b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":27.142857142857146,\"z\":2,\"width\":227.14285714285717,\"height\":40}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Return to Summary'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'PageNavigation'\"}}},\"navigationSection\":{\"expr\":{\"Literal\":{\"Value\":\"'ReportSection'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
-          "filters": "[]",
-          "height": 40.00,
-          "width": 227.14,
-          "x": 0.00,
-          "y": 27.14,
-          "z": 2.00
-        },
-        {
-          "config": "{\"name\":\"9e91c5d700fab96301ea\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":353.33333333333337,\"z\":1,\"width\":495,\"height\":223.33333333333334}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"MeasuresTable.Most picked Warlord\"},{\"queryRef\":\"MeasuresTable.Most successful Warlord\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Most picked Warlord\"},\"Name\":\"MeasuresTable.Most picked Warlord\",\"NativeReferenceName\":\"Most picked Warlord\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Most successful Warlord\"},\"Name\":\"MeasuresTable.Most successful Warlord\",\"NativeReferenceName\":\"Most successful Warlord\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"layout\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"shapeCustomRectangle\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}},\"selector\":{\"id\":\"default\"}}],\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}},\"selector\":{\"id\":\"default\"}}]}}}",
-          "filters": "[]",
-          "height": 223.33,
-          "width": 495.00,
-          "x": 0.00,
-          "y": 353.33,
-          "z": 1.00
-        },
-        {
-          "config": "{\"name\":\"a08ce1508ffe549f8d05\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":106.66666666666667,\"z\":3,\"width\":591.6666666666667,\"height\":150,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(playerlogs.Faction)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"playerlogs\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Faction\"}},\"Function\":3},\"Name\":\"Min(playerlogs.Faction)\",\"NativeReferenceName\":\"First Faction\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Faction summary'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}},\"underline\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
-          "filters": "[]",
-          "height": 150.00,
-          "width": 591.67,
-          "x": 0.00,
-          "y": 106.67,
-          "z": 3.00
-        },
-        {
-          "config": "{\"name\":\"bfeef522440e3abb1e55\",\"layouts\":[{\"id\":0,\"position\":{\"x\":700,\"y\":106.66666666666667,\"z\":0,\"width\":300,\"height\":300}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"GameMeta.Gamesize\",\"active\":true}],\"Y\":[{\"queryRef\":\"MeasuresTable.Win rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"GameMeta\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"},\"Name\":\"MeasuresTable.Win rate\",\"NativeReferenceName\":\"Win rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Gamesize\"},\"Name\":\"GameMeta.Gamesize\",\"NativeReferenceName\":\"Gamesize\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Win rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"8d7240bd892859bb26c9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":627.1428571428572,\"y\":398.5714285714286,\"z\":0,\"width\":300,\"height\":300}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Most picked Warlords.Warlord\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Most picked Warlords\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Warlord\"},\"Name\":\"Most picked Warlords.Warlord\",\"NativeReferenceName\":\"Warlord\"}]},\"drillFilterOtherVisuals\":true}}",
           "filters": "[]",
           "height": 300.00,
           "width": 300.00,
-          "x": 700.00,
-          "y": 106.67,
+          "x": 627.14,
+          "y": 398.57,
           "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"aa88d50c04f7e7a824ca\",\"layouts\":[{\"id\":0,\"position\":{\"x\":980,\"y\":227.14285714285717,\"width\":300,\"height\":300,\"z\":2}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Factions.Faction\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"},\"Name\":\"Factions.Faction\",\"NativeReferenceName\":\"Faction\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Factions\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Faction\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Solar Auxilia'\"}}]]}}}]}}}}]}}}",
+          "filters": "[]",
+          "height": 300.00,
+          "width": 300.00,
+          "x": 980.00,
+          "y": 227.14,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"d5682c827ca08b07260e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64.28571428571429,\"y\":122.85714285714286,\"z\":1,\"width\":410,\"height\":144.2857142857143}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"MeasuresTable.Games\"}],\"Columns\":[{\"queryRef\":\"Most picked Warlords.Warlord\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m1\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"Most picked Warlords\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m1\"}},\"Property\":\"Games\"},\"Name\":\"MeasuresTable.Games\",\"NativeReferenceName\":\"Games\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Warlord\"},\"Name\":\"Most picked Warlords.Warlord\",\"NativeReferenceName\":\"Warlord\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Warlord\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Most picked Warlords'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 144.29,
+          "width": 410.00,
+          "x": 64.29,
+          "y": 122.86,
+          "z": 1.00
         }
       ],
-      "width": 1000.00
+      "width": 1280.00
     }
   ]
 }

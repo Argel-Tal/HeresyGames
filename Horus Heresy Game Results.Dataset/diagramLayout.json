@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 272.82039400000014,
         "y": 0
       },
       "nodes": [
@@ -76,7 +76,7 @@
         {
           "location": {
             "x": 0,
-            "y": 373.79937100000024
+            "y": 411.00215200000025
           },
           "nodeIndex": "Missions",
           "nodeLineageTag": "c1e49b41-42f0-48b9-8cb2-11d2617ca06f",
@@ -124,6 +124,31 @@
             "width": 234
           },
           "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1348.7081610000005,
+            "y": 318.14318492563649
+          },
+          "nodeIndex": "Measure by",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 424.50355899999977,
+            "y": 705.14533692563668
+          },
+          "nodeIndex": "Most picked Warlords",
+          "nodeLineageTag": "4b790bd6-ae98-485e-a03d-06c89f908d41",
+          "size": {
+            "height": 127.36599899999987,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

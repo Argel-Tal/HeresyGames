@@ -379,6 +379,7 @@
       },
       {
         "name": "9403ebe0-e75a-412b-ac58-aff9dbb4893c",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "GameID",
         "fromTable": "playerlogs",
         "toColumn": "GameID",
@@ -411,6 +412,13 @@
         "fromTable": "playerlogs",
         "toColumn": "Subfactions",
         "toTable": "Subfactions"
+      },
+      {
+        "name": "0f879927-76a2-4e5c-874b-40878bcf9861",
+        "fromColumn": "Warlord",
+        "fromTable": "playerlogs",
+        "toColumn": "Warlord",
+        "toTable": "Most picked Warlords"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -733,7 +741,7 @@
             "name": "Wins",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(playerlogs[GameID])+0",
+              "    DISTINCTCOUNT(playerlogs[GameID])",
               "    , FILTER(playerlogs, playerlogs[Winner] = TRUE)",
               ") // end calc"
             ],
@@ -744,7 +752,7 @@
             "name": "Games",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(GameMeta[GameID])",
+              "    DISTINCTCOUNT(playerlogs[GameID])",
               "    ) // end calc"
             ],
             "formatString": "0",
@@ -758,7 +766,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "expression": "[Wins] / [Games]",
+            "expression": "IFERROR([Wins] / [Games], 0)",
             "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
           },
           {
@@ -790,6 +798,21 @@
               "    ) // end FirstNonBlank"
             ],
             "lineageTag": "dd271a88-a02b-461b-9e9d-8b873b5965a6"
+          },
+          {
+            "name": "Most successful Warlord trait",
+            "expression": [
+              "",
+              "    FIRSTNONBLANK(",
+              "        TOPN(",
+              "            1",
+              "            , VALUES('Warlord Traits'[Name])",
+              "            , RANKX(ALL('Warlord Traits'[Name]),[wins],,ASC)",
+              "        ), // end TOPN",
+              "        1",
+              "    ) // end FirstNonBlank"
+            ],
+            "lineageTag": "91168480-158d-4b1c-8e44-97c442a31b02"
           }
         ],
         "partitions": [
@@ -1140,6 +1163,151 @@
                 "    #\"Changed Type\""
               ],
               "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Measure by",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "41f029c0625541d38acc299a96189b58"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Measure By",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": false,
+            "lineageTag": "81a2fd81-8aa7-4a45-8e8d-c711230492db",
+            "relatedColumnDetails": {
+              "groupByColumns": [
+                {
+                  "groupingColumn": "Measure By Fields"
+                }
+              ]
+            },
+            "sortByColumn": "Measure By Order",
+            "sourceColumn": "[Value1]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Measure By Fields",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "extendedProperties": [
+              {
+                "name": "ParameterMetadata",
+                "type": "json",
+                "value": {
+                  "kind": 2,
+                  "version": 3
+                }
+              }
+            ],
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": false,
+            "lineageTag": "ac943799-efff-4bf8-9741-94f7bfd7d773",
+            "sortByColumn": "Measure By Order",
+            "sourceColumn": "[Value2]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Measure By Order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": false,
+            "lineageTag": "f5d5d569-3617-4921-86ae-44343e63ec96",
+            "sourceColumn": "[Value3]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "68b72fcf-a580-44af-9356-8696366b8e7b",
+        "partitions": [
+          {
+            "name": "Measure by",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "{",
+                "    (\"Subfactions\", NAMEOF('Subfactions'[Subfactions]), 0)",
+                "    , (\"ForceOrg\", NAMEOF('Force Organisations'[ForceOrg]), 1)",
+                "    , (\"Deployment\", NAMEOF('Deployment Maps'[Maps]), 2)",
+                "    , (\"Mission\", NAMEOF('Missions'[Missions]), 3)",
+                "    , (\"Warlord\", NAMEOF('playerlogs'[Warlord]), 4)",
+                "}"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Most picked Warlords",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "d0fb1df51dda42d4b3b55ea40bf657e9"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Warlord",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "d50d3424-c81f-45d0-a6e2-a492233ebfa0",
+            "sourceColumn": "playerlogs[Warlord]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "4b790bd6-ae98-485e-a03d-06c89f908d41",
+        "partitions": [
+          {
+            "name": "Most picked Warlords",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "TOPN(",
+                "    3,",
+                "    VALUES(playerlogs[Warlord]),",
+                "    [Games]",
+                ") // end topN"
+              ],
+              "type": "calculated"
             }
           }
         ]
