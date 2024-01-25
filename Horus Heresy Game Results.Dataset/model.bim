@@ -1,0 +1,674 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.124.1805.0 (23.12)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "GitURL",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "description": "Where are we going?",
+        "expression": "\"/repos/Argel-Tal/HeresyGames/contents/\" meta [IsParameterQuery=true, List={\"/repos/Argel-Tal/HeresyGames/contents/\"}, DefaultValue=\"/repos/Argel-Tal/HeresyGames/contents/\", Type=\"Text\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "5106138a-39ff-4e06-bd40-c95f472d15d2",
+        "queryGroup": "00 Parameters"
+      },
+      {
+        "name": "BranchName",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "description": "Which branch to pull data off",
+        "expression": "\"PBI-InitialDev\" meta [IsParameterQuery=true, List={\"Main\"}, DefaultValue=\"Main\", Type=\"Any\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "51e36f11-e1c3-431c-84b4-8e5a27629d90",
+        "queryGroup": "00 Parameters"
+      },
+      {
+        "name": "playerLog Sample File",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Json.Document(",
+          "            Web.Contents(",
+          "                \"https://api.github.com\"",
+          "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=\" & BranchName]",
+          "            )",
+          "    ),",
+          "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+          "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+          "    #\"ReadCSVs\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
+          "    Contents = ReadCSVs{0}[Contents]",
+          "in",
+          "    Contents"
+        ],
+        "kind": "m",
+        "lineageTag": "03b1b911-829c-4a2d-a0dd-96884af44efe",
+        "queryGroup": "02 Player Logs\\Helper Queries"
+      },
+      {
+        "name": "playerLog sample file Param",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": "#\"playerLog Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"playerLog Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "0e98d9ce-f1ed-479c-92ab-bd3094c5aec3",
+        "queryGroup": "02 Player Logs\\Helper Queries"
+      },
+      {
+        "name": "playerlog Sample table",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\""
+        ],
+        "kind": "m",
+        "lineageTag": "47d3d3dd-8574-4b51-bc91-0f0dcbcae792",
+        "queryGroup": "02 Player Logs\\Transform File from playerlogs"
+      },
+      {
+        "name": "playerLog Transform",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Function"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = (#\"playerLog sample file Param\" as binary) => let",
+          "        Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "        #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "    in",
+          "        #\"Promoted Headers\"",
+          "in",
+          "    Source"
+        ],
+        "kind": "m",
+        "lineageTag": "85666415-5cca-43e6-9e79-949941851163",
+        "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"playerlog Sample table\"\"}\" ]",
+        "queryGroup": "02 Player Logs\\Helper Queries"
+      },
+      {
+        "name": "GameMeta Sample File",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Json.Document(",
+          "            Web.Contents(",
+          "                \"https://api.github.com\"",
+          "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/games?ref=\" & BranchName]",
+          "            )",
+          "    ),",
+          "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+          "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+          "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
+          "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
+          "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
+          "    Navigation1 = #\"Fetch Contents\"{0}[Contents]",
+          "in",
+          "    Navigation1"
+        ],
+        "kind": "m",
+        "lineageTag": "78635b28-ae2c-495a-8ebc-d1dfa4fb77f7",
+        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+      },
+      {
+        "name": "GameMeta sample file param",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": "#\"GameMeta Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"GameMeta Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "7ca63196-48c2-4049-9baa-2bbdff584f6d",
+        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+      },
+      {
+        "name": "GameMeta Sample table",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\""
+        ],
+        "kind": "m",
+        "lineageTag": "5701e3cd-9568-46be-b1a8-05ee9160cbd9",
+        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)"
+      },
+      {
+        "name": "GameMeta Transform",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Function"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = (#\"GameMeta sample file param\" as binary) => let",
+          "        Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "        #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "    in",
+          "        #\"Promoted Headers\"",
+          "in",
+          "    Source"
+        ],
+        "kind": "m",
+        "lineageTag": "cc8968ed-ed07-4076-b2bf-7c9dbf034f97",
+        "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"GameMeta Sample table\"\"}\" ]",
+        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "folder": "02 Player Logs\\Transform File from playerlogs"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "02 Player Logs\\Helper Queries"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "folder": "02 Player Logs"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "00 Parameters"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "4"
+          }
+        ],
+        "folder": "01 GameMeta"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "01 GameMeta\\Transform File from playerlogs (2)"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "38de6f21-7fa6-4420-a83f-4a6293720938",
+        "fromColumn": "GameID",
+        "fromTable": "playerlogs",
+        "toColumn": "gameID",
+        "toTable": "GameMeta"
+      }
+    ],
+    "sourceQueryCulture": "en-AU",
+    "tables": [
+      {
+        "name": "playerlogs",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "GameID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8b9a1336-5f5f-4fdf-8318-08dc12085218",
+            "sourceColumn": "GameID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Player",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d14149af-1db7-46b7-9e56-705186e80185",
+            "sourceColumn": "Player",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "faction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "36c2510b-2be2-40af-8f64-7d8207bc6d25",
+            "sourceColumn": "faction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " forceOrg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "94c03d17-4c6e-4514-ab45-4df493327497",
+            "sourceColumn": " forceOrg",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " ROW/Subfaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c801409c-2a27-4f8e-84b9-2656c9a18239",
+            "sourceColumn": " ROW/Subfaction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " alliedFaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fc318db7-970e-4b4f-b8aa-152a4ae3d3fb",
+            "sourceColumn": " alliedFaction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " VPs",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6981d4c6-d41b-4da4-b076-5fd8a7c0218d",
+            "sourceColumn": " VPs",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " player",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fcf46991-fd3d-4bee-a565-c0a5fe471deb",
+            "sourceColumn": " player",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " warlord",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "122bee49-7233-4324-8b68-be517876908c",
+            "sourceColumn": " warlord",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " warlordTrait",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "edf01444-3014-46e6-b6d2-054630c26aaa",
+            "sourceColumn": " warlordTrait",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Max of  VPs",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c099f5bd-6416-42e3-9b40-a079b02cdb72",
+            "sourceColumn": "Max of  VPs",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "GameID.1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7ec75a4a-1079-45a8-986b-adcc764a3983",
+            "sourceColumn": "GameID.1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Winner",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "06245a2a-abfb-463e-8720-483669a83af1",
+            "sourceColumn": "Winner",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
+        "partitions": [
+          {
+            "name": "playerlogs",
+            "mode": "import",
+            "queryGroup": "02 Player Logs",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Json.Document(",
+                "            Web.Contents(",
+                "                \"https://api.github.com\"",
+                "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=\" & BranchName]",
+                "            )",
+                "    ),",
+                "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+                "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
+                "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
+                "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
+                "    #\"Expanded Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded Contents\",{\"name\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
+                "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\" VPs\", Int64.Type}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Changed Type\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Grouped Rows\", \"tb\", \"tb - Copy\"),",
+                "    #\"Aggregated tb\" = Table.AggregateTableColumn(#\"Duplicated Column\", \"tb\", {{\" VPs\", List.Max, \"Max of  VPs\"}}),",
+                "    #\"Expanded tb - Copy\" = Table.ExpandTableColumn(#\"Aggregated tb\", \"tb - Copy\", {\"GameID\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"GameID.1\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Expanded tb - Copy\", \"Winner\", each [#\" VPs\"] = [Max of  VPs]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"Winner\", type logical}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GameMeta",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "gameID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "75bfc527-26a4-466d-98f7-28b1fa97ade9",
+            "sourceColumn": "gameID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " gameSize",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dd3dc38c-136f-45b4-9c33-9a85bbd9c0ae",
+            "sourceColumn": " gameSize",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " mission",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f4a526af-abb9-4cf7-9524-41da5233fba2",
+            "sourceColumn": " mission",
+            "summarizeBy": "none"
+          },
+          {
+            "name": " deployment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d5505ed6-c8c7-4469-be50-d3c7033365db",
+            "sourceColumn": " deployment",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "0eb22fc7-57ad-49aa-8884-90e4e9487049",
+        "partitions": [
+          {
+            "name": "GameMeta",
+            "mode": "import",
+            "queryGroup": "01 GameMeta",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Json.Document(",
+                "            Web.Contents(",
+                "                \"https://api.github.com\"",
+                "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/games?ref=\" & BranchName]",
+                "            )",
+                "    ),",
+                "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+                "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
+                "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
+                "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch Contents\", {\"Transform File\"}),",
+                "    #\"Expanded Table\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\")))",
+                "in",
+                "    #\"Expanded Table\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
