@@ -8,15 +8,15 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1805.0 (23.12)"
+        "value": "2.124.1554.0 (23.12)"
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\"]"
       },
       {
         "name": "PBI_ProTooling",
-        "value": "[\"DevMode\"]"
+        "value": "[\"DevMode\",\"DaxQueryView_Desktop\"]"
       }
     ],
     "culture": "en-US",
@@ -55,7 +55,7 @@
         "expression": "\"/repos/Argel-Tal/HeresyGames/contents/\" meta [IsParameterQuery=true, List={\"/repos/Argel-Tal/HeresyGames/contents/\"}, DefaultValue=\"/repos/Argel-Tal/HeresyGames/contents/\", Type=\"Text\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "5106138a-39ff-4e06-bd40-c95f472d15d2",
-        "queryGroup": "00 Parameters"
+        "queryGroup": "00 Utilities\\00.01 Parameters"
       },
       {
         "name": "BranchName",
@@ -73,7 +73,7 @@
         "expression": "\"PBI-InitialDev\" meta [IsParameterQuery=true, List={\"Main\"}, DefaultValue=\"Main\", Type=\"Any\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "51e36f11-e1c3-431c-84b4-8e5a27629d90",
-        "queryGroup": "00 Parameters"
+        "queryGroup": "00 Utilities\\00.01 Parameters"
       },
       {
         "name": "playerLog Sample File",
@@ -100,7 +100,7 @@
         ],
         "kind": "m",
         "lineageTag": "03b1b911-829c-4a2d-a0dd-96884af44efe",
-        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "playerLog sample file Param",
@@ -113,7 +113,7 @@
         "expression": "#\"playerLog Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"playerLog Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "0e98d9ce-f1ed-479c-92ab-bd3094c5aec3",
-        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "playerlog Sample table",
@@ -129,15 +129,16 @@
         ],
         "expression": [
           "let",
-          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}, {\"Column8\", Text.Trim, type text}}),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
           "in",
           "    #\"Promoted Headers\""
         ],
         "kind": "m",
         "lineageTag": "47d3d3dd-8574-4b51-bc91-0f0dcbcae792",
-        "queryGroup": "02 Player Logs\\Transform function for playerlogs"
+        "queryGroup": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs"
       },
       {
         "name": "playerLog Transform",
@@ -150,18 +151,19 @@
         "expression": [
           "let",
           "    Source = (#\"playerLog sample file Param\" as binary) => let",
-          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}, {\"Column8\", Text.Trim, type text}}),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
-          "in",
-          "    #\"Promoted Headers\"",
+          "        Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
+          "        #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
+          "        #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
+          "    in",
+          "        #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
         "kind": "m",
         "lineageTag": "85666415-5cca-43e6-9e79-949941851163",
         "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"playerlog Sample table\"\"}\" ]",
-        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "GameMeta Sample File",
@@ -169,6 +171,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Binary"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
@@ -190,7 +196,7 @@
         ],
         "kind": "m",
         "lineageTag": "78635b28-ae2c-495a-8ebc-d1dfa4fb77f7",
-        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta\\Helper Queries"
       },
       {
         "name": "GameMeta sample file param",
@@ -198,12 +204,16 @@
           {
             "name": "PBI_ResultType",
             "value": "Binary"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": "#\"GameMeta Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"GameMeta Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "7ca63196-48c2-4049-9baa-2bbdff584f6d",
-        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta\\Helper Queries"
       },
       {
         "name": "GameMeta Sample table",
@@ -219,15 +229,16 @@
         ],
         "expression": [
           "let",
-          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}}),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
+          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}}),",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column3\", Text.Proper, type text}, {\"Column2\", Text.Proper, type text}, {\"Column1\", Text.Proper, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
           "in",
           "    #\"Promoted Headers\""
         ],
         "kind": "m",
         "lineageTag": "5701e3cd-9568-46be-b1a8-05ee9160cbd9",
-        "queryGroup": "01 GameMeta\\Transform function for GameMeta"
+        "queryGroup": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta"
       },
       {
         "name": "GameMeta Transform",
@@ -235,14 +246,19 @@
           {
             "name": "PBI_ResultType",
             "value": "Function"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
           "    Source = (#\"GameMeta sample file param\" as binary) => let",
-          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}}),",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Trimmed Text\", [PromoteAllScalars=true])",
+          "        Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}}),",
+          "        #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column3\", Text.Proper, type text}, {\"Column2\", Text.Proper, type text}, {\"Column1\", Text.Proper, type text}}),",
+          "        #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
           "    in",
           "        #\"Promoted Headers\"",
           "in",
@@ -251,7 +267,7 @@
         "kind": "m",
         "lineageTag": "cc8968ed-ed07-4076-b2bf-7c9dbf034f97",
         "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"GameMeta Sample table\"\"}\" ]",
-        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
+        "queryGroup": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta\\Helper Queries"
       }
     ],
     "queryGroups": [
@@ -262,7 +278,7 @@
             "value": "2"
           }
         ],
-        "folder": "02 Player Logs"
+        "folder": "01 GitHub Tables\\01.01 Player Logs"
       },
       {
         "annotations": [
@@ -271,7 +287,7 @@
             "value": "0"
           }
         ],
-        "folder": "00 Parameters"
+        "folder": "00 Utilities"
       },
       {
         "annotations": [
@@ -280,7 +296,7 @@
             "value": "1"
           }
         ],
-        "folder": "01 GameMeta"
+        "folder": "01 GitHub Tables\\01.00 GameMeta"
       },
       {
         "annotations": [
@@ -289,7 +305,7 @@
             "value": "1"
           }
         ],
-        "folder": "02 Player Logs\\Transform function for playerlogs"
+        "folder": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs"
       },
       {
         "annotations": [
@@ -298,7 +314,7 @@
             "value": "0"
           }
         ],
-        "folder": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
+        "folder": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta"
       },
       {
         "annotations": [
@@ -307,7 +323,7 @@
             "value": "0"
           }
         ],
-        "folder": "01 GameMeta\\Transform function for GameMeta"
+        "folder": "01 GitHub Tables\\01.01 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "annotations": [
@@ -316,16 +332,85 @@
             "value": "0"
           }
         ],
-        "folder": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
+        "folder": "01 GitHub Tables\\01.00 GameMeta\\Transform function for GameMeta\\Helper Queries"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "folder": "00 Utilities\\00.02 Support Tables"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "00 Utilities\\00.01 Parameters"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "folder": "01 GitHub Tables"
       }
     ],
     "relationships": [
       {
-        "name": "38de6f21-7fa6-4420-a83f-4a6293720938",
+        "name": "8c2150af-3cb5-43eb-b30f-cdbe2cbd6dd7",
+        "fromColumn": "Deployment",
+        "fromTable": "GameMeta",
+        "toColumn": "Maps",
+        "toTable": "Deployment Maps"
+      },
+      {
+        "name": "9afbd4f3-de12-409d-bae9-576f71e5c71b",
+        "fromColumn": "Mission",
+        "fromTable": "GameMeta",
+        "toColumn": "Missions",
+        "toTable": "Missions"
+      },
+      {
+        "name": "9403ebe0-e75a-412b-ac58-aff9dbb4893c",
         "fromColumn": "GameID",
         "fromTable": "playerlogs",
-        "toColumn": "gameID",
+        "toColumn": "GameID",
         "toTable": "GameMeta"
+      },
+      {
+        "name": "d88105c0-11fe-4c5f-a4b2-601f0e63ef3e",
+        "fromColumn": "warlordTrait",
+        "fromTable": "playerlogs",
+        "toColumn": "Name",
+        "toTable": "Warlord Traits"
+      },
+      {
+        "name": "6f437bba-85ea-4bec-83b9-b77f6adcd15d",
+        "fromColumn": "forceOrg",
+        "fromTable": "playerlogs",
+        "toColumn": "ForceOrg",
+        "toTable": "Force Organisations"
+      },
+      {
+        "name": "556c5ae2-54f5-4b3e-b932-5509f705007b",
+        "fromColumn": "Faction",
+        "fromTable": "playerlogs",
+        "toColumn": "Faction",
+        "toTable": "Factions"
+      },
+      {
+        "name": "0bdb355f-75f5-4172-975a-1beb492d1ef7",
+        "fromColumn": "ROW/Subfaction",
+        "fromTable": "playerlogs",
+        "toColumn": "Subfactions",
+        "toTable": "Subfactions"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -367,19 +452,6 @@
             "dataType": "string",
             "lineageTag": "d14149af-1db7-46b7-9e56-705186e80185",
             "sourceColumn": "Player",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "faction",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "36c2510b-2be2-40af-8f64-7d8207bc6d25",
-            "sourceColumn": "faction",
             "summarizeBy": "none"
           },
           {
@@ -462,32 +534,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "player 2",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "6246ee8e-0e04-4487-b920-395c888da9a4",
-            "sourceColumn": "player",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "warlord",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "3d4fb2b9-6433-4fb7-9833-cb62e38a873c",
-            "sourceColumn": "warlord",
-            "summarizeBy": "none"
-          },
-          {
             "name": "warlordTrait",
             "annotations": [
               {
@@ -499,6 +545,32 @@
             "lineageTag": "dcbd7068-5fc7-492f-a605-7c7a5e58c0e7",
             "sourceColumn": "warlordTrait",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Faction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "883aff79-fa17-43aa-a26c-2f00fbaa311b",
+            "sourceColumn": "Faction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Warlord",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e6337ff5-6091-442f-8488-b565a37857fb",
+            "sourceColumn": "Warlord",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -506,7 +578,7 @@
           {
             "name": "playerlogs",
             "mode": "import",
-            "queryGroup": "02 Player Logs",
+            "queryGroup": "01 GitHub Tables\\01.01 Player Logs",
             "source": {
               "expression": [
                 "let",
@@ -522,15 +594,15 @@
                 "    #\"Filtered out Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
                 "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered out Hidden Files\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
                 "    #\"Expanded CSV Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
                 "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
                 "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
                 "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\"VPs\", Int64.Type}}),",
-                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\"warlord\", Text.Proper, type text}, {\"warlordTrait\", Text.Proper, type text}, {\"faction\", Text.Proper, type text}, {\"forceOrg\", Text.Proper, type text}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\"Warlord\", Text.Proper, type text}, {\"warlordTrait\", Text.Proper, type text}, {\"Faction\", Text.Proper, type text}, {\"forceOrg\", Text.Proper, type text}}),",
                 "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
                 "    #\"Duplicated summarised tb\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - Copy\"),",
                 "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
-                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}, {\"Player\", \"faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"player\", \"warlord\", \"warlordTrait\"}),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
                 "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded duplicated tb\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"}),",
                 "    #\"Added Winner col\" = Table.AddColumn(#\"Replaced Value\", \"Winner\", each [#\"VPs\"] = [Max VPs]),",
                 "    #\"Changed Winner to T|F\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"Winner\", type logical}})",
@@ -556,7 +628,7 @@
         ],
         "columns": [
           {
-            "name": "gameID",
+            "name": "GameID",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -564,26 +636,26 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "75bfc527-26a4-466d-98f7-28b1fa97ade9",
-            "sourceColumn": "gameID",
+            "lineageTag": "81a9066d-438d-459b-868f-6a45c2c49da1",
+            "sourceColumn": "GameID",
             "summarizeBy": "none"
           },
           {
-            "name": "gameSize",
+            "name": "Gamesize",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
-            "lineageTag": "ae6b163e-99ae-4915-a028-9eaba2766bea",
-            "sourceColumn": "gameSize",
+            "lineageTag": "cbfdf05c-efbe-412d-968b-6087c9f31cb8",
+            "sourceColumn": "Gamesize",
             "summarizeBy": "none"
           },
           {
-            "name": "mission",
+            "name": "Mission",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -591,12 +663,12 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "9bd048f8-9868-40a9-8830-e633f96e5466",
-            "sourceColumn": "mission",
+            "lineageTag": "bf82d08d-4dac-4308-9f92-da6497d1efce",
+            "sourceColumn": "Mission",
             "summarizeBy": "none"
           },
           {
-            "name": "deployment",
+            "name": "Deployment",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -604,8 +676,8 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "a99b9814-ee2f-4466-a742-efc68295dc3e",
-            "sourceColumn": "deployment",
+            "lineageTag": "832d27c7-8b19-43f5-8613-d22451b02d58",
+            "sourceColumn": "Deployment",
             "summarizeBy": "none"
           }
         ],
@@ -614,7 +686,7 @@
           {
             "name": "GameMeta",
             "mode": "import",
-            "queryGroup": "01 GameMeta",
+            "queryGroup": "01 GitHub Tables\\01.00 GameMeta",
             "source": {
               "expression": [
                 "let",
@@ -629,12 +701,14 @@
                 "    #\"Fetch binary files\" = Table.AddColumn(#\"Expanded Source TB\", \"Contents\", each Web.Contents([download_url])),",
                 "    #\"Filtered Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
                 "    #\"Fetch CSV Contents\" = Table.AddColumn(#\"Filtered Hidden Files\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch CSV Contents\", {\"Transform File\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch CSV Contents\", {\"name\", \"Transform File\"}),",
                 "    #\"Expanded CSV\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\"))),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded CSV\",{{\"gameSize\", Int64.Type}}),",
-                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"mission\", Text.Proper, type text}, {\"deployment\", Text.Proper, type text}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded CSV\",{{\"Gamesize\", Int64.Type}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Mission\", Text.Proper, type text}, {\"Deployment\", Text.Proper, type text}}),",
+                "    #\"Extracted Text Before Delimiter\" = Table.TransformColumns(#\"Capitalized Each Word\", {{\"name\", each Text.BeforeDelimiter(_, \".csv\"), type text}}),",
+                "    #\"Renamed filename -> gameID\" = Table.RenameColumns(#\"Extracted Text Before Delimiter\",{{\"name\", \"GameID\"}})",
                 "in",
-                "    #\"Capitalized Each Word\""
+                "    #\"Renamed filename -> gameID\""
               ],
               "type": "m"
             }
@@ -647,6 +721,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "lineageTag": "5a95dd1a-5ba1-4238-be63-102e59600cbc",
@@ -655,7 +733,7 @@
             "name": "Wins",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(playerlogs[GameID])",
+              "    DISTINCTCOUNT(playerlogs[GameID])+0",
               "    , FILTER(playerlogs, playerlogs[Winner] = TRUE)",
               ") // end calc"
             ],
@@ -666,7 +744,7 @@
             "name": "Games",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(GameMeta[gameID])",
+              "    DISTINCTCOUNT(GameMeta[GameID])",
               "    ) // end calc"
             ],
             "formatString": "0",
@@ -682,12 +760,43 @@
             ],
             "expression": "[Wins] / [Games]",
             "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
+          },
+          {
+            "name": "Most picked Warlord",
+            "expression": [
+              "",
+              "    FIRSTNONBLANK(",
+              "        TOPN(",
+              "            1",
+              "            , VALUES(playerlogs[Warlord])",
+              "            , RANKX(ALL(playerlogs[Warlord]),[Games],,ASC)",
+              "        ), // end TOPN",
+              "        1",
+              "    ) // end FirstNonBlank"
+            ],
+            "lineageTag": "16cdec54-e039-4764-a872-7a4036cc5f97"
+          },
+          {
+            "name": "Most successful Warlord",
+            "expression": [
+              "",
+              "    FIRSTNONBLANK(",
+              "        TOPN(",
+              "            1",
+              "            , VALUES(playerlogs[Warlord])",
+              "            , RANKX(ALL(playerlogs[Warlord]),[Win rate],,ASC)",
+              "        ), // end TOPN",
+              "        1",
+              "    ) // end FirstNonBlank"
+            ],
+            "lineageTag": "dd271a88-a02b-461b-9e9d-8b873b5965a6"
           }
         ],
         "partitions": [
           {
             "name": "MeasuresTable",
             "mode": "import",
+            "queryGroup": "00 Utilities",
             "source": {
               "expression": [
                 "let",
@@ -696,6 +805,339 @@
                 "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
                 "in",
                 "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Warlord Traits",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Faction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b7cc3b22-e4c5-4099-81de-9483c82113d6",
+            "sourceColumn": "Faction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Index",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "aab38495-27ff-4400-9653-b181afb388e0",
+            "sourceColumn": "Index",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "85969730-4527-4790-bb5b-b369b5f9787b",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Effect",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9b39d151-2ecf-4c18-a0c6-2223ff0032ea",
+            "sourceColumn": "Effect",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "3a53066d-17fa-4231-a10b-c6386b13f3df",
+        "partitions": [
+          {
+            "name": "Warlord Traits",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"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\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Faction = _t, Index = _t, Name = _t, Effect = _t]),",
+                "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Faction\", Text.Trim, type text}, {\"Index\", Text.Trim, type text}, {\"Name\", Text.Trim, type text}, {\"Effect\", Text.Trim, type text}}),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Trimmed Text\",{{\"Faction\", type text}, {\"Index\", Int64.Type}, {\"Name\", type text}, {\"Effect\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Factions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Macrofaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "25181ba5-f6a3-4439-8b57-1bbd8684f517",
+            "sourceColumn": "Macrofaction",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Faction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1ad90d5e-19d2-456a-a71e-b4af8c92bf07",
+            "sourceColumn": "Faction",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "29cf617a-ffbd-494a-9649-aa8e449bb7f0",
+        "partitions": [
+          {
+            "name": "Factions",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"bZDNTgMxDIRfxeq5h4oDnPsHrWiRYEF7KD1YG7exmsaVk1Q8PpsiJEj2lIy/STz2bjfaUmfRc5fOo/FfsR/vRo04VJimL3aMPf6vs2Pb3yIjfKbJ5O4e5snFkP8ZKmf/a6IQRTnAs+ejvZnrWnZu6MjiM1+gnmDqj+RKsjxfSEVvXR4CzC07o+QL11rFQ4uqLFr+0FqOBE2HFWku2BG04q5UonVuy+jgkUOV9iWPABtRU5KZEzHDg9wirtBXb1pRZ2CJkaqAHy4qnlHZVwEXhNHCU0I1BXm3kkLfB5qsi4n7A+QAK9E0kMPAjFDrHA26PoY3NXnDK/nBGFN3sQg/utoSdqdgmVy1jMZi7BdBBn5r+/03\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Macrofaction = _t, Faction = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Macrofaction\", type text}, {\"Faction\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Deployment Maps",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Maps",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d22e4b75-402a-413f-80d7-a5b75e8ce362",
+            "sourceColumn": "Maps",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "145ed490-c10a-4439-9c22-d86d3e30f4cb",
+        "partitions": [
+          {
+            "name": "Deployment Maps",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"HcyxDkAwEMbxV7l09hLCYLBJGBrD0aMNPcm1iLfHbd//N3zWmmrH5OFYIHuCNjCZsbCmxpt/HFC0O0KZPSA7qCllOR7lBmMkUS75CrtiGaczeZ098nqiOOiyhO27Hl8=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Maps = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Maps\", type text}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Maps\", Text.Proper, type text}})",
+                "in",
+                "    #\"Capitalized Each Word\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Missions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Missions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8c6fb601-a267-4e68-acb0-1a646ac9aad8",
+            "sourceColumn": "Missions",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "c1e49b41-42f0-48b9-8cb2-11d2617ca06f",
+        "partitions": [
+          {
+            "name": "Missions",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WcsrJz09RcEstTVGK1YlW8s8rzkksTc8oAfOCMxJLSlKLFIJLijKzU8FCLvm5mXmZ+XlgTkhmSqpCfpqCc2JRXmI6REF4YhFIyCcztVgpNhYA\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Missions = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Missions\", type text}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Missions\", Text.Proper, type text}})",
+                "in",
+                "    #\"Capitalized Each Word\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Force Organisations",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ForceOrg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "771e42b4-9492-433e-8da8-cec3e9ad6f27",
+            "sourceColumn": "ForceOrg",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "4ef12bc4-603f-440e-a561-b21da848f6d1",
+        "partitions": [
+          {
+            "name": "Force Organisations",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45Wci4qLU5MSVWK1YlW8k0sKcqsUMhPUwgqzcwDC/nnFecklqZnlIB5PqllmYklGYkQOefE4pLUnBwoz7EotxKk1SWxKFvBOT+3ICczMS8ZaHAsAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ForceOrg = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"ForceOrg\", type text}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"ForceOrg\", Text.Proper, type text}})",
+                "in",
+                "    #\"Capitalized Each Word\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Subfactions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Subfactions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8982892a-499c-47fb-9510-496fca748f7c",
+            "sourceColumn": "Subfactions",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "4aa21526-ab3c-4e89-aadb-17aa8aa26e13",
+        "partitions": [
+          {
+            "name": "Subfactions",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"bVTBbtswDP0VoecNKLbDzonTNkUTNEi6FljXA2PTtmBZMig5qff1oyTLcbtdDJikyMfHR76+Xm2wkkZkwxFJo5M5XL19eb16pMKIPRZ97gwFy0JXqH7319fffljxQuDqaKbW9ISFOHQIVCMU4/ujdKDEwlrolQu2HckChSmFq1GEsvpjiiUhNK4m01d1etEC5XUqm9XGYnzEsRyJ2ue7pzHTbU9DKrDQuUTtbHDEatxQzt/MtB3oITh+GY1ia4ixSpvQiltDOQb/oRnEutcOSexqUKDfg3lFppuin0FXPVBs/AA5yVLmkpt/LEskqavISO9ysE4cjLYjRV0N2nq8S3QEA6hgf2LwP/WRTMPdPZvzZDwgddxRImMJGi8+HlPrU70ATcYb24Djhu/bDnlg8jSPR1TiVlo3S48NEpNANBbdwwn1mRsQOzLO5CYC9HT/a/UptkC9ODRAUUTfqUhkixsl3aX8GtqWKWW8j2poOwlT4lJSDONZV4YkaJaF4YFSbUyiuBqAuNgf0FPGHSgcJ2Un41LxG8nKyhSc7ZwsnvodcLTCSEAEVKJS7CXZ4EwDa8OMkMiSjp8w/M+l7bNmZGycppkNZoLwoVxAcZalYz8Ul+gVBP3u8YSKB2b0Z8/BTNMJPPK+JcHfGarGB4l0D0Y6L95pRZbMDxIP+j/4ZWtZLbu02t644SFYXlZ/BuKQnmUlWdqsKCel2Epr5zD3CF1SfEaI/kescJ5y8S4DTSt+alT/ocs7v0epoQToISWMgDjh1h+FGcWQN77yKQVu/KKNWXhrWPv+QPVzNqkR6YRcGDCsd9Dh6W3SYYB8Bl5G38pkXmHOnbowpFEysbQ8hl1j60VBMblUNoFaD8VIp59gHQ/MBk+SiRrPwKIMc7PWnUaZR3V/fZBKsWfOfCA4LfDn45IuAh8gvl9FisjqgRUvgRG+/QU=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Subfactions = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Subfactions\", type text}})",
+                "in",
+                "    #\"Changed Type\""
               ],
               "type": "m"
             }
