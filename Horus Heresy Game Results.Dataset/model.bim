@@ -462,19 +462,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "GameID.1",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "7ec75a4a-1079-45a8-986b-adcc764a3983",
-            "sourceColumn": "GameID.1",
-            "summarizeBy": "none"
-          },
-          {
             "name": "Winner",
             "annotations": [
               {
@@ -527,11 +514,13 @@
                 "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
                 "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
                 "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\" VPs\", Int64.Type}}),",
-                "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Changed VPs to int\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\" warlord\", Text.Proper, type text}, {\" warlordTrait\", Text.Proper, type text}, {\"faction\", Text.Proper, type text}, {\" forceOrg\", Text.Proper, type text}}),",
+                "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
                 "    #\"Duplicated summarised tb\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - Copy\"),",
                 "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\" VPs\", List.Max, \"Max VPs\"}}),",
-                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"GameID\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"GameID.1\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
-                "    #\"Added Winner col\" = Table.AddColumn(#\"Expanded duplicated tb\", \"Winner\", each [#\" VPs\"] = [Max VPs]),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded duplicated tb\",\"\",null,Replacer.ReplaceValue,{\" ROW/Subfaction\", \" alliedFaction\"}),",
+                "    #\"Added Winner col\" = Table.AddColumn(#\"Replaced Value\", \"Winner\", each [#\" VPs\"] = [Max VPs]),",
                 "    #\"Changed Winner to T|F\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"Winner\", type logical}})",
                 "in",
                 "    #\"Changed Winner to T|F\""
@@ -575,7 +564,8 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "string",
+            "dataType": "int64",
+            "formatString": "0",
             "lineageTag": "dd3dc38c-136f-45b4-9c33-9a85bbd9c0ae",
             "sourceColumn": " gameSize",
             "summarizeBy": "none"
@@ -628,9 +618,11 @@
                 "    #\"Filtered Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
                 "    #\"Fetch CSV Contents\" = Table.AddColumn(#\"Filtered Hidden Files\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
                 "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch CSV Contents\", {\"Transform File\"}),",
-                "    #\"Expanded CSV\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\")))",
+                "    #\"Expanded CSV\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\"))),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded CSV\",{{\" gameSize\", Int64.Type}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\" mission\", Text.Proper, type text}, {\" deployment\", Text.Proper, type text}})",
                 "in",
-                "    #\"Expanded CSV\""
+                "    #\"Capitalized Each Word\""
               ],
               "type": "m"
             }
