@@ -79,10 +79,6 @@
         "name": "playerLog Sample File",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Binary"
           }
@@ -104,15 +100,11 @@
         ],
         "kind": "m",
         "lineageTag": "03b1b911-829c-4a2d-a0dd-96884af44efe",
-        "queryGroup": "02 Player Logs\\Helper Queries"
+        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "playerLog sample file Param",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Binary"
@@ -121,15 +113,11 @@
         "expression": "#\"playerLog Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"playerLog Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "0e98d9ce-f1ed-479c-92ab-bd3094c5aec3",
-        "queryGroup": "02 Player Logs\\Helper Queries"
+        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "playerlog Sample table",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -144,15 +132,11 @@
         ],
         "kind": "m",
         "lineageTag": "47d3d3dd-8574-4b51-bc91-0f0dcbcae792",
-        "queryGroup": "02 Player Logs\\Transform File from playerlogs"
+        "queryGroup": "02 Player Logs\\Transform function for playerlogs"
       },
       {
         "name": "playerLog Transform",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Function"
@@ -161,25 +145,21 @@
         "expression": [
           "let",
           "    Source = (#\"playerLog sample file Param\" as binary) => let",
-          "        Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
-          "    in",
-          "        #\"Promoted Headers\"",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
         "kind": "m",
         "lineageTag": "85666415-5cca-43e6-9e79-949941851163",
         "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"playerlog Sample table\"\"}\" ]",
-        "queryGroup": "02 Player Logs\\Helper Queries"
+        "queryGroup": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
       },
       {
         "name": "GameMeta Sample File",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Binary"
@@ -204,15 +184,11 @@
         ],
         "kind": "m",
         "lineageTag": "78635b28-ae2c-495a-8ebc-d1dfa4fb77f7",
-        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
       },
       {
         "name": "GameMeta sample file param",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Binary"
@@ -221,15 +197,11 @@
         "expression": "#\"GameMeta Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"GameMeta Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "7ca63196-48c2-4049-9baa-2bbdff584f6d",
-        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
       },
       {
         "name": "GameMeta Sample table",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -244,15 +216,11 @@
         ],
         "kind": "m",
         "lineageTag": "5701e3cd-9568-46be-b1a8-05ee9160cbd9",
-        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)"
+        "queryGroup": "01 GameMeta\\Transform function for GameMeta"
       },
       {
         "name": "GameMeta Transform",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Function"
@@ -261,38 +229,20 @@
         "expression": [
           "let",
           "    Source = (#\"GameMeta sample file param\" as binary) => let",
-          "        Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
-          "    in",
-          "        #\"Promoted Headers\"",
+          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
         "kind": "m",
         "lineageTag": "cc8968ed-ed07-4076-b2bf-7c9dbf034f97",
         "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"GameMeta Sample table\"\"}\" ]",
-        "queryGroup": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+        "queryGroup": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
       }
     ],
     "queryGroups": [
-      {
-        "annotations": [
-          {
-            "name": "PBI_QueryGroupOrder",
-            "value": "1"
-          }
-        ],
-        "folder": "02 Player Logs\\Transform File from playerlogs"
-      },
-      {
-        "annotations": [
-          {
-            "name": "PBI_QueryGroupOrder",
-            "value": "0"
-          }
-        ],
-        "folder": "02 Player Logs\\Helper Queries"
-      },
       {
         "annotations": [
           {
@@ -315,7 +265,7 @@
         "annotations": [
           {
             "name": "PBI_QueryGroupOrder",
-            "value": "4"
+            "value": "1"
           }
         ],
         "folder": "01 GameMeta"
@@ -324,10 +274,10 @@
         "annotations": [
           {
             "name": "PBI_QueryGroupOrder",
-            "value": "0"
+            "value": "1"
           }
         ],
-        "folder": "01 GameMeta\\Transform File from playerlogs (2)"
+        "folder": "02 Player Logs\\Transform function for playerlogs"
       },
       {
         "annotations": [
@@ -336,7 +286,25 @@
             "value": "0"
           }
         ],
-        "folder": "01 GameMeta\\Transform File from playerlogs (2)\\Helper Queries"
+        "folder": "02 Player Logs\\Transform function for playerlogs\\Helper Queries"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "01 GameMeta\\Transform function for GameMeta"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "01 GameMeta\\Transform function for GameMeta\\Helper Queries"
       }
     ],
     "relationships": [
@@ -354,12 +322,12 @@
         "name": "playerlogs",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -494,19 +462,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "Max of  VPs",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "c099f5bd-6416-42e3-9b40-a079b02cdb72",
-            "sourceColumn": "Max of  VPs",
-            "summarizeBy": "none"
-          },
-          {
             "name": "GameID.1",
             "annotations": [
               {
@@ -532,6 +487,19 @@
             "lineageTag": "06245a2a-abfb-463e-8720-483669a83af1",
             "sourceColumn": "Winner",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Max VPs",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "83226474-30dc-448a-adc7-a808272d66e9",
+            "sourceColumn": "Max VPs",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -549,24 +517,24 @@
                 "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=\" & BranchName]",
                 "            )",
                 "    ),",
-                "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
-                "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
-                "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
-                "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
-                "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
-                "    #\"Expanded Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded Contents\",{\"name\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Converted Source to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Expanded Source Table\" = Table.ExpandRecordColumn(#\"Converted Source to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+                "    #\"Fetch binary files\" = Table.AddColumn(#\"Expanded Source Table\", \"Contents\", each Web.Contents([download_url])),",
+                "    #\"Filtered out Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
+                "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered out Hidden Files\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
+                "    #\"Expanded CSV Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
                 "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
                 "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\" VPs\", Int64.Type}}),",
-                "    #\"Grouped Rows\" = Table.Group(#\"Changed Type\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
-                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Grouped Rows\", \"tb\", \"tb - Copy\"),",
-                "    #\"Aggregated tb\" = Table.AggregateTableColumn(#\"Duplicated Column\", \"tb\", {{\" VPs\", List.Max, \"Max of  VPs\"}}),",
-                "    #\"Expanded tb - Copy\" = Table.ExpandTableColumn(#\"Aggregated tb\", \"tb - Copy\", {\"GameID\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"GameID.1\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
-                "    #\"Added Custom\" = Table.AddColumn(#\"Expanded tb - Copy\", \"Winner\", each [#\" VPs\"] = [Max of  VPs]),",
-                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"Winner\", type logical}})",
+                "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\" VPs\", Int64.Type}}),",
+                "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Changed VPs to int\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
+                "    #\"Duplicated summarised tb\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - Copy\"),",
+                "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\" VPs\", List.Max, \"Max VPs\"}}),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"GameID\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}, {\"GameID.1\", \"Player\", \"faction\", \" forceOrg\", \" ROW/Subfaction\", \" alliedFaction\", \" VPs\", \" player\", \" warlord\", \" warlordTrait\"}),",
+                "    #\"Added Winner col\" = Table.AddColumn(#\"Expanded duplicated tb\", \"Winner\", each [#\" VPs\"] = [Max VPs]),",
+                "    #\"Changed Winner to T|F\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"Winner\", type logical}})",
                 "in",
-                "    #\"Changed Type1\""
+                "    #\"Changed Winner to T|F\""
               ],
               "type": "m"
             }
@@ -577,12 +545,12 @@
         "name": "GameMeta",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -654,15 +622,15 @@
                 "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/games?ref=\" & BranchName]",
                 "            )",
                 "    ),",
-                "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
-                "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
-                "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
-                "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
-                "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch Contents\", {\"Transform File\"}),",
-                "    #\"Expanded Table\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\")))",
+                "    #\"Converted Source to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Expanded Source TB\" = Table.ExpandRecordColumn(#\"Converted Source to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
+                "    #\"Fetch binary files\" = Table.AddColumn(#\"Expanded Source TB\", \"Contents\", each Web.Contents([download_url])),",
+                "    #\"Filtered Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
+                "    #\"Fetch CSV Contents\" = Table.AddColumn(#\"Filtered Hidden Files\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Fetch CSV Contents\", {\"Transform File\"}),",
+                "    #\"Expanded CSV\" = Table.ExpandTableColumn(#\"Removed Other Columns\", \"Transform File\", Table.ColumnNames(#\"GameMeta Transform\"(#\"GameMeta Sample File\")))",
                 "in",
-                "    #\"Expanded Table\""
+                "    #\"Expanded CSV\""
               ],
               "type": "m"
             }
