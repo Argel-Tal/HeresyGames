@@ -70,7 +70,7 @@
           }
         ],
         "description": "Which branch to pull data off",
-        "expression": "\"PBI-InitialDev\" meta [IsParameterQuery=true, List={\"Main\"}, DefaultValue=\"Main\", Type=\"Any\", IsParameterQueryRequired=true]",
+        "expression": "\"FakeData\" meta [IsParameterQuery=true, List={\"Main\", \"FakeData\", \"PBI-InitialDev\"}, DefaultValue=\"FakeData\", Type=\"Any\", IsParameterQueryRequired=true]",
         "kind": "m",
         "lineageTag": "51e36f11-e1c3-431c-84b4-8e5a27629d90",
         "queryGroup": "00 Utilities\\00.01 Parameters"
@@ -621,6 +621,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -749,13 +753,8 @@
           },
           {
             "name": "Win rate",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
             "expression": "IFERROR([Wins] / [Games], 0)",
+            "formatString": "0.00%;-0.00%;0.00%",
             "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
           },
           {
