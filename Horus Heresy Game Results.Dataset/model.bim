@@ -1,5 +1,5 @@
 {
-  "compatibilityLevel": 1550,
+  "compatibilityLevel": 1567,
   "model": {
     "annotations": [
       {
@@ -8,11 +8,11 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1554.0 (23.12)"
+        "value": "2.124.1805.0 (23.12)"
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Result Index\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -151,12 +151,12 @@
         "expression": [
           "let",
           "    Source = (#\"playerLog sample file Param\" as binary) => let",
-          "        Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
-          "        #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
-          "        #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
-          "    in",
-          "        #\"Promoted Headers\"",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
@@ -246,21 +246,17 @@
           {
             "name": "PBI_ResultType",
             "value": "Function"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
           "    Source = (#\"GameMeta sample file param\" as binary) => let",
-          "        Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "        #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}}),",
-          "        #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column3\", Text.Proper, type text}, {\"Column2\", Text.Proper, type text}, {\"Column1\", Text.Proper, type text}}),",
-          "        #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
-          "    in",
-          "        #\"Promoted Headers\"",
+          "    Source = Csv.Document(#\"GameMeta sample file param\",[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}}),",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column3\", Text.Proper, type text}, {\"Column2\", Text.Proper, type text}, {\"Column1\", Text.Proper, type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
@@ -419,6 +415,13 @@
         "fromTable": "playerlogs",
         "toColumn": "Warlord",
         "toTable": "Most picked Warlords"
+      },
+      {
+        "name": "e3d78a54-26af-4d4b-80f5-867a3bcc6061",
+        "fromColumn": "Winner",
+        "fromTable": "playerlogs",
+        "toColumn": "Result",
+        "toTable": "Result Index"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -470,23 +473,9 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "boolean",
-            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "dataType": "string",
             "lineageTag": "06245a2a-abfb-463e-8720-483669a83af1",
             "sourceColumn": "Winner",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "Max VPs",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "83226474-30dc-448a-adc7-a808272d66e9",
-            "sourceColumn": "Max VPs",
             "summarizeBy": "none"
           },
           {
@@ -533,10 +522,11 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
-            "dataType": "string",
+            "dataType": "int64",
+            "formatString": "0",
             "lineageTag": "7c2484a6-84af-4a7c-837b-ae35c4e7a5b9",
             "sourceColumn": "VPs",
             "summarizeBy": "none"
@@ -608,14 +598,17 @@
                 "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\"VPs\", Int64.Type}}),",
                 "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\"Warlord\", Text.Proper, type text}, {\"warlordTrait\", Text.Proper, type text}, {\"Faction\", Text.Proper, type text}, {\"forceOrg\", Text.Proper, type text}}),",
                 "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
-                "    #\"Duplicated summarised tb\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - Copy\"),",
-                "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb\", \"tb\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
-                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated to find max VPs\", \"tb - Copy\", {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
-                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded duplicated tb\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"}),",
-                "    #\"Added Winner col\" = Table.AddColumn(#\"Replaced Value\", \"Winner\", each [#\"VPs\"] = [Max VPs]),",
-                "    #\"Changed Winner to T|F\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"Winner\", type logical}})",
+                "    #\"Duplicated summarised tb max\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - MaxVP\"),",
+                "    #\"Duplicated summarised tb min\" = Table.DuplicateColumn(#\"Duplicated summarised tb max\", \"tb\", \"tb - MinVPs\"),",
+                "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb min\", \"tb - MaxVP\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
+                "    #\"Aggregated tb - MinVPs\" = Table.AggregateTableColumn(#\"Aggregated to find max VPs\", \"tb - MinVPs\", {{\"VPs\", List.Min, \"Min VPs\"}}),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated tb - MinVPs\", \"tb\", {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
+                "    #\"Enforced VPs as number\" = Table.TransformColumnTypes(#\"Expanded duplicated tb\",{{\"VPs\", Int64.Type}, {\"Min VPs\", Int64.Type}, {\"Max VPs\", Int64.Type}}),",
+                "    #\"Added Winner col\" = Table.AddColumn(#\"Enforced VPs as number\", \"Winner\", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then \"Draw\" else if ([#\"VPs\"] = [Max VPs]) then \"Win\" else \"Loss\"),",
+                "    #\"Removed Aggregated columns\" = Table.RemoveColumns(#\"Added Winner col\",{\"Max VPs\", \"Min VPs\"}),",
+                "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"})",
                 "in",
-                "    #\"Changed Winner to T|F\""
+                "    #\"Replaced blanks w/ nulls\""
               ],
               "type": "m"
             }
@@ -628,10 +621,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -742,8 +731,8 @@
             "expression": [
               "CALCULATE(",
               "    DISTINCTCOUNT(playerlogs[GameID])",
-              "    , FILTER(playerlogs, playerlogs[Winner] = TRUE)",
-              ") // end calc"
+              "    , FILTER('Result Index', 'Result Index'[Result] = \"Win\")",
+              ") // end calc))"
             ],
             "formatString": "0",
             "lineageTag": "992db15c-574d-4358-be84-2cebcb509d35"
@@ -1308,6 +1297,72 @@
                 ") // end topN"
               ],
               "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Result Index",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Index",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b0352062-3523-4797-9557-c00dcf603dde",
+            "sourceColumn": "Index",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Result",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b795d8e4-64f8-4569-92a7-f9d85738bd4d",
+            "sortByColumn": "Index",
+            "sourceColumn": "Result",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "977f43f6-4ab4-4316-8d19-6ee980ac1c5d",
+        "partitions": [
+          {
+            "name": "Result Index",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WMlTSUQrPzFOK1YlWMgCyXYoSy8EcXZCMT35xsVJsLAA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, Result = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Index\", Int64.Type}, {\"Result\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
             }
           }
         ]
