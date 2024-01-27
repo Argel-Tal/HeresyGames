@@ -410,13 +410,6 @@
         "toTable": "Subfactions"
       },
       {
-        "name": "0f879927-76a2-4e5c-874b-40878bcf9861",
-        "fromColumn": "Warlord",
-        "fromTable": "playerlogs",
-        "toColumn": "Warlord",
-        "toTable": "Most picked Warlords"
-      },
-      {
         "name": "e3d78a54-26af-4d4b-80f5-867a3bcc6061",
         "fromColumn": "Winner",
         "fromTable": "playerlogs",
@@ -732,6 +725,7 @@
         "measures": [
           {
             "name": "Wins",
+            "displayFolder": "Metrics\\Counts",
             "expression": [
               "CALCULATE(",
               "    DISTINCTCOUNT(playerlogs[GameID])",
@@ -743,6 +737,7 @@
           },
           {
             "name": "Games",
+            "displayFolder": "Metrics\\Counts",
             "expression": [
               "CALCULATE(",
               "    DISTINCTCOUNT(playerlogs[GameID])",
@@ -753,12 +748,14 @@
           },
           {
             "name": "Win rate",
+            "displayFolder": "Metrics\\Rates",
             "expression": "IFERROR([Wins] / [Games], 0)",
             "formatString": "0.00%;-0.00%;0.00%",
             "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
           },
           {
             "name": "Most picked Warlord",
+            "displayFolder": "Most X",
             "expression": [
               "",
               "    FIRSTNONBLANK(",
@@ -774,6 +771,7 @@
           },
           {
             "name": "Most successful Warlord",
+            "displayFolder": "Most X",
             "expression": [
               "",
               "    FIRSTNONBLANK(",
@@ -789,6 +787,7 @@
           },
           {
             "name": "Most successful Warlord trait",
+            "displayFolder": "Most X",
             "expression": [
               "",
               "    FIRSTNONBLANK(",
@@ -801,6 +800,13 @@
               "    ) // end FirstNonBlank"
             ],
             "lineageTag": "91168480-158d-4b1c-8e44-97c442a31b02"
+          },
+          {
+            "name": "Win rate display",
+            "displayFolder": "Metrics\\Rates",
+            "expression": "if([Win rate] = 0, BLANK(), [Win rate] - 0.5)",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "4efab7f5-8eba-479e-8115-0b758b2900a6"
           }
         ],
         "partitions": [
@@ -1249,51 +1255,6 @@
                 "    , (\"Mission\", NAMEOF('Missions'[Missions]), 3)",
                 "    , (\"Warlord\", NAMEOF('playerlogs'[Warlord]), 4)",
                 "}"
-              ],
-              "type": "calculated"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Most picked Warlords",
-        "annotations": [
-          {
-            "name": "PBI_Id",
-            "value": "d0fb1df51dda42d4b3b55ea40bf657e9"
-          }
-        ],
-        "columns": [
-          {
-            "name": "Warlord",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isNameInferred": true,
-            "lineageTag": "d50d3424-c81f-45d0-a6e2-a492233ebfa0",
-            "sourceColumn": "playerlogs[Warlord]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          }
-        ],
-        "lineageTag": "4b790bd6-ae98-485e-a03d-06c89f908d41",
-        "partitions": [
-          {
-            "name": "Most picked Warlords",
-            "mode": "import",
-            "source": {
-              "expression": [
-                "",
-                "TOPN(",
-                "    3,",
-                "    VALUES(playerlogs[Warlord]),",
-                "    [Games]",
-                ") // end topN"
               ],
               "type": "calculated"
             }

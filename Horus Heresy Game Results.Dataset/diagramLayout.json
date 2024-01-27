@@ -140,19 +140,6 @@
         },
         {
           "location": {
-            "x": 800.074491,
-            "y": 696.28753192563659
-          },
-          "nodeIndex": "Most picked Warlords",
-          "nodeLineageTag": "4b790bd6-ae98-485e-a03d-06c89f908d41",
-          "size": {
-            "height": 127.36599899999987,
-            "width": 234
-          },
-          "zIndex": 2
-        },
-        {
-          "location": {
             "x": 853.2213210000001,
             "y": 0
           },
