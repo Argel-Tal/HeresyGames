@@ -10,5 +10,8 @@ Faction Page:
 Army List Page: 
 <img src="./readMeImages/021ArmyListDrill.png" width="600">
 
+Games Played Page: 
+<img src="./readMeImages/022GamesPlayed.png" width="600">
+
 Unit analysis page:
 <img src="./readMeImages/030UnitAnalysis.png" width="1000">
