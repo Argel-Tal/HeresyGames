@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 53.146830000000065,
+        "x": 0,
         "y": 0
       },
       "nodes": [
@@ -140,26 +140,38 @@
         },
         {
           "location": {
-            "x": 853.2213210000001,
-            "y": 0
-          },
-          "nodeIndex": "Result Index",
-          "nodeLineageTag": "977f43f6-4ab4-4316-8d19-6ee980ac1c5d",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 3
-        },
-        {
-          "location": {
-            "x": 368.762989036464,
-            "y": 715.24427304299252
+            "x": 336.87489103646396,
+            "y": 697.52866304299255
           },
           "nodeIndex": "ArmyLists",
           "nodeLineageTag": "221556c5-242e-41a4-9ffd-137e0c0d9292",
           "size": {
             "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 693.7120914784573
+          },
+          "nodeIndex": "Index - Force Org",
+          "nodeLineageTag": "59e5fa3a-84ca-4793-804d-1e2011b0c609",
+          "size": {
+            "height": 168.74590300000011,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 853.2213210000001,
+            "y": 0
+          },
+          "nodeIndex": "Index - Result",
+          "size": {
+            "height": 128,
             "width": 234
           },
           "zIndex": 0

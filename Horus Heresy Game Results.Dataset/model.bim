@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Result Index\",\"ListImport\",\"ArmyLists\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Index - Result\",\"ListImport\",\"ArmyLists\",\"Index - Force Org\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -455,7 +455,14 @@
         "fromColumn": "Winner",
         "fromTable": "playerlogs",
         "toColumn": "Result",
-        "toTable": "Result Index"
+        "toTable": "Index - Result"
+      },
+      {
+        "name": "451b86fe-6297-4b7a-98c2-2592cae979ca",
+        "fromColumn": "Force Org Slot Clean",
+        "fromTable": "ArmyLists",
+        "toColumn": "SlotID",
+        "toTable": "Index - Force Org"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -770,7 +777,7 @@
             "expression": [
               "CALCULATE(",
               "    DISTINCTCOUNT(playerlogs[GameID])",
-              "    , FILTER('Result Index', 'Result Index'[Result] = \"Win\")",
+              "    , FILTER('Index - Result', 'Index - Result'[Result] = \"Win\")",
               ") // end calc))"
             ],
             "formatString": "0",
@@ -1303,7 +1310,7 @@
         ]
       },
       {
-        "name": "Result Index",
+        "name": "Index - Result",
         "annotations": [
           {
             "name": "PBI_NavigationStepName",
@@ -1312,6 +1319,11 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          }
+        ],
+        "changedProperties": [
+          {
+            "property": "Name"
           }
         ],
         "columns": [
@@ -1352,7 +1364,7 @@
         "lineageTag": "977f43f6-4ab4-4316-8d19-6ee980ac1c5d",
         "partitions": [
           {
-            "name": "Result Index",
+            "name": "Index - Result",
             "mode": "import",
             "queryGroup": "00 Utilities\\00.02 Support Tables",
             "source": {
@@ -1479,10 +1491,104 @@
                 "    #\"Expanded forces.selections.categories\" = Table.ExpandListColumn(#\"Expanded forces.selections1\", \"Unit categories\"),",
                 "    #\"Expanded forces.selections.categories1\" = Table.ExpandRecordColumn(#\"Expanded forces.selections.categories\", \"Unit categories\", {\"name\"}, {\"Force Org Slot\"}),",
                 "    #\"Added Custom\" = Table.AddColumn(#\"Expanded forces.selections.categories1\", \"Force Org Slot Clean\", each Text.Select([Force Org Slot], {\"A\"..\"z\"})),",
-                "    #\"Filtered Rows\" = Table.SelectRows(#\"Added Custom\", each ([Force Org Slot Clean] = \"Elites\" or [Force Org Slot Clean] = \"FastAttack\" or [Force Org Slot Clean] = \"HeavySupport\" or [Force Org Slot Clean] = \"HQ\" or [Force Org Slot Clean] = \"Troops\")),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Added Custom\", each (",
+                "        [Force Org Slot Clean] = \"HQ\" ",
+                "        or [Force Org Slot Clean] = \"Elites\" ",
+                "        or [Force Org Slot Clean] = \"Troops\" ",
+                "        or [Force Org Slot Clean] = \"FastAttack\" ",
+                "        or [Force Org Slot Clean] = \"HeavySupport\" ",
+                "        or [Force Org Slot Clean] = \"Lords of War\"",
+                "        or [Force Org Slot Clean] = \"Bodyguard\"",
+                "        )",
+                "    ),",
                 "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\" ,{\"List id\", \"list name\", \"Force Org Slot Clean\", \"Force Org\", \"Unit Selection\", \"Faction\"})",
                 "in",
                 "    #\"Removed Other Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Index - Force Org",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Index",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f228f039-6b11-47bb-8ee4-c331cb5de1bf",
+            "sourceColumn": "Index",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SlotID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "73e13fea-b793-4032-a854-08422bc95d27",
+            "sortByColumn": "Index",
+            "sourceColumn": "SlotID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Force Org Slot",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "29099980-662f-4108-9930-b11436faa37b",
+            "sortByColumn": "Index",
+            "sourceColumn": "Force Org Slot",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "59e5fa3a-84ca-4793-804d-1e2011b0c609",
+        "partitions": [
+          {
+            "name": "Index - Force Org",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WMlDSUfIIhBCxOtFKhkCmU35KZXppYlEKChskawQUcc3JLEktRjBA4sZAbkhRfn5BMYIBEjcBct0Si0scS0oSk7OhHAUoD6TAFGRzamJZZXBpQUF+UQmMqwDjgxSZAUV98otSivPTwhOLYByF/DQFEDc2FgA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, SlotID = _t, #\"Force Org Slot\" = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Index\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
               ],
               "type": "m"
             }

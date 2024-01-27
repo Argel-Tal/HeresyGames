@@ -1,5 +1,5 @@
 {
-  "config": "{\"version\":\"5.50\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU11\",\"version\":\"5.50\",\"type\":2},\"customTheme\":{\"name\":\"Custom8714860060569354.json\",\"version\":\"5.50\",\"type\":1}},\"activeSectionIndex\":3,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "config": "{\"version\":\"5.50\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU11\",\"version\":\"5.50\",\"type\":2},\"customTheme\":{\"name\":\"Custom8714860060569354.json\",\"version\":\"5.50\",\"type\":1}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
   "layoutOptimization": 0,
   "pods": [
     {
@@ -285,7 +285,17 @@
       "height": 684.00,
       "name": "ReportSectionf3da924d55faeff87726",
       "ordinal": 3,
-      "visualContainers": [],
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"bd191c4c50010597e5a1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":355.55555555555554,\"y\":131.11111111111111,\"z\":1,\"width\":504.44444444444446,\"height\":393.3333333333333,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"ArmyLists.list name\",\"active\":true},{\"queryRef\":\"Index - Force Org.Force Org Slot\",\"active\":true},{\"queryRef\":\"ArmyLists.Unit Selection\"}],\"Values\":[{\"queryRef\":\"Min(ArmyLists.Unit Selection)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"ArmyLists\",\"Type\":0},{\"Name\":\"i\",\"Entity\":\"Index - Force Org\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"list name\"},\"Name\":\"ArmyLists.list name\",\"NativeReferenceName\":\"list name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Unit Selection\"},\"Name\":\"ArmyLists.Unit Selection\",\"NativeReferenceName\":\"Unit Selection\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Unit Selection\"}},\"Function\":5},\"Name\":\"Min(ArmyLists.Unit Selection)\",\"NativeReferenceName\":\"Count of Unit Selection1\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Force Org Slot\"},\"Name\":\"Index - Force Org.Force Org Slot\",\"NativeReferenceName\":\"Force Org Slot\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"ArmyLists.list name\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"ArmyLists\"}},\"Property\":\"list name\"}}],\"isPinned\":true},{\"queryRefs\":[\"Index - Force Org.Force Org Slot\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Index - Force Org\"}},\"Property\":\"Force Org Slot\"}}],\"isPinned\":true},{\"queryRefs\":[\"ArmyLists.Unit Selection\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Test'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'MultiFactionTest'\"}}],\"isToggled\":true}]}}],\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 393.33,
+          "width": 504.44,
+          "x": 355.56,
+          "y": 131.11,
+          "z": 1.00
+        }
+      ],
       "width": 1000.00
     }
   ],
