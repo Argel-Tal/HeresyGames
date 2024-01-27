@@ -129,7 +129,7 @@
         ],
         "expression": [
           "let",
-          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
           "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
           "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
           "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
@@ -146,12 +146,16 @@
           {
             "name": "PBI_ResultType",
             "value": "Function"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
           "    Source = (#\"playerLog sample file Param\" as binary) => let",
-          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    Source = Csv.Document(#\"playerLog sample file Param\",[Delimiter=\",\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
           "    #\"Trimmed Text\" = Table.TransformColumns(Source,{{\"Column1\", Text.Trim, type text}, {\"Column2\", Text.Trim, type text}, {\"Column3\", Text.Trim, type text}, {\"Column4\", Text.Trim, type text}, {\"Column5\", Text.Trim, type text}, {\"Column6\", Text.Trim, type text}, {\"Column7\", Text.Trim, type text}}),",
           "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Trimmed Text\",{{\"Column1\", Text.Proper, type text}, {\"Column7\", Text.Proper, type text}}),",
           "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Capitalized Each Word\", [PromoteAllScalars=true])",
@@ -189,7 +193,7 @@
           "    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"name\", \"download_url\"}, {\"name\", \"download_url\"}),",
           "    #\"Fetch files\" = Table.AddColumn(#\"Expanded Column1\", \"Contents\", each Web.Contents([download_url])),",
           "    #\"Filtered Hidden Files1\" = Table.SelectRows(#\"Fetch files\", each [Attributes]?[Hidden]? <> true),",
-          "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
+          "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"GameMeta Transform\"([Contents])),",
           "    Navigation1 = #\"Fetch Contents\"{0}[Contents]",
           "in",
           "    Navigation1"
@@ -610,6 +614,19 @@
             "lineageTag": "e6337ff5-6091-442f-8488-b565a37857fb",
             "sourceColumn": "Warlord",
             "summarizeBy": "none"
+          },
+          {
+            "name": "listName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c8a08551-4e13-4a48-b89e-cb20d9a77c4c",
+            "sourceColumn": "listName",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -633,7 +650,7 @@
                 "    #\"Filtered out Hidden Files\" = Table.SelectRows(#\"Fetch binary files\", each [Attributes]?[Hidden]? <> true),",
                 "    #\"Fetch Contents\" = Table.AddColumn(#\"Filtered out Hidden Files\", \"Transform File\", each #\"playerLog Transform\"([Contents])),",
                 "    #\"Expanded CSV Contents\" = Table.ExpandTableColumn(#\"Fetch Contents\", \"Transform File\", Table.ColumnNames(#\"playerLog Transform\"(#\"playerLog Sample File\"))),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded CSV Contents\",{\"name\", \"listName\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
                 "    #\"Split filename by Delimiter\" = Table.SplitColumn(#\"Removed Other Columns\", \"name\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"Player\"}),",
                 "    #\"Removed trailing .csv\" = Table.TransformColumns(#\"Split filename by Delimiter\", {{\"Player\", each Text.BeforeDelimiter(_, \".csv\"), type text}}), ",
                 "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed trailing .csv\",{{\"VPs\", Int64.Type}}),",
@@ -643,11 +660,11 @@
                 "    #\"Duplicated summarised tb min\" = Table.DuplicateColumn(#\"Duplicated summarised tb max\", \"tb\", \"tb - MinVPs\"),",
                 "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb min\", \"tb - MaxVP\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
                 "    #\"Aggregated tb - MinVPs\" = Table.AggregateTableColumn(#\"Aggregated to find max VPs\", \"tb - MinVPs\", {{\"VPs\", List.Min, \"Min VPs\"}}),",
-                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated tb - MinVPs\", \"tb\", {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
+                "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated tb - MinVPs\", \"tb\", {\"Player\", \"listName\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"listName\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
                 "    #\"Enforced VPs as number\" = Table.TransformColumnTypes(#\"Expanded duplicated tb\",{{\"VPs\", Int64.Type}, {\"Min VPs\", Int64.Type}, {\"Max VPs\", Int64.Type}}),",
                 "    #\"Added Winner col\" = Table.AddColumn(#\"Enforced VPs as number\", \"Winner\", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then \"Draw\" else if ([#\"VPs\"] = [Max VPs]) then \"Win\" else \"Loss\"),",
                 "    #\"Removed Aggregated columns\" = Table.RemoveColumns(#\"Added Winner col\",{\"Max VPs\", \"Min VPs\"}),",
-                "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"})",
+                "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"listName\", \"ROW/Subfaction\", \"alliedFaction\"})",
                 "in",
                 "    #\"Replaced blanks w/ nulls\""
               ],
