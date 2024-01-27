@@ -895,7 +895,7 @@
           {
             "name": "Win rate display",
             "displayFolder": "Metrics\\Rates",
-            "expression": "if([Win rate] = 0, BLANK(), [Win rate] - 0.5)",
+            "expression": "if([Win rate] = 0, BLANK(), [Win rate] - 0.5)+0",
             "formatString": "0%;-0%;0%",
             "lineageTag": "4efab7f5-8eba-479e-8115-0b758b2900a6"
           },
