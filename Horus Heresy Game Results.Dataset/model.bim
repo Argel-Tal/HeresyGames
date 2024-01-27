@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Index - Result\",\"ListImport\",\"ArmyLists\",\"Index - Force Org\",\"ArmyLists (2)\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"MacroFactions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Index - Result\",\"ListImport\",\"ArmyLists\",\"Index - Force Org\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -296,48 +296,6 @@
         "kind": "m",
         "lineageTag": "6416e775-6b26-49ee-9cf0-6138dc1af47d",
         "queryGroup": "01.03 Lists"
-      },
-      {
-        "name": "ArmyLists (2)",
-        "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ],
-        "expression": [
-          "let",
-          "    Source = ListImport,",
-          "    #\"Expanded forces Record\" = Table.ExpandRecordColumn(Source, \"roster\", {\"id\", \"name\", \"forces\"}, {\"List id\", \"list name\", \"forces\"}),",
-          "    #\"Expanded forces\" = Table.ExpandListColumn(#\"Expanded forces Record\", \"forces\"),",
-          "    #\"Expanded forces1\" = Table.ExpandRecordColumn(#\"Expanded forces\", \"forces\", {\"selections\", \"name\", \"catalogueName\"}, {\"forces.selections\", \"Force Org\", \"Faction\"}),",
-          "    #\"Extracted Text After Delimiter\" = Table.TransformColumns(#\"Expanded forces1\", {{\"Faction\", each Text.AfterDelimiter(_, \") \"), type text}}),",
-          "    #\"Expanded forces.selections\" = Table.ExpandListColumn(#\"Extracted Text After Delimiter\", \"forces.selections\"),",
-          "    #\"Expanded forces.selections1\" = Table.ExpandRecordColumn(#\"Expanded forces.selections\", \"forces.selections\", {\"selections\", \"categories\", \"name\"}, {\"Unit Options\", \"Unit categories\", \"Unit Selection\"}),",
-          "    #\"Expanded forces.selections.categories\" = Table.ExpandListColumn(#\"Expanded forces.selections1\", \"Unit categories\"),",
-          "    #\"Expanded forces.selections.categories1\" = Table.ExpandRecordColumn(#\"Expanded forces.selections.categories\", \"Unit categories\", {\"name\"}, {\"Force Org Slot\"}),",
-          "    #\"Added Custom\" = Table.AddColumn(#\"Expanded forces.selections.categories1\", \"Force Org Slot Clean\", each Text.Select([Force Org Slot], {\"A\"..\"z\"})),",
-          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added Custom\", each (",
-          "        [Force Org Slot Clean] = \"HQ\" ",
-          "        or [Force Org Slot Clean] = \"Elites\" ",
-          "        or [Force Org Slot Clean] = \"Troops\" ",
-          "        or [Force Org Slot Clean] = \"FastAttack\" ",
-          "        or [Force Org Slot Clean] = \"HeavySupport\" ",
-          "        or [Force Org Slot Clean] = \"Lords of War\"",
-          "        or [Force Org Slot Clean] = \"Bodyguard\"",
-          "        )",
-          "    ),",
-          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\" ,{\"List id\", \"list name\", \"Force Org Slot Clean\", \"Force Org\", \"Unit Selection\", \"Faction\"})",
-          "in",
-          "    #\"Removed Other Columns\""
-        ],
-        "kind": "m",
-        "lineageTag": "be43ca8a-33ae-40ab-bde0-7d3274f806e0",
-        "queryGroup": "01.03 Lists"
       }
     ],
     "queryGroups": [
@@ -507,20 +465,27 @@
         "toTable": "Index - Force Org"
       },
       {
-        "name": "9a696a42-68ce-43c5-ab08-2d0ce9e1f62c",
-        "crossFilteringBehavior": "bothDirections",
-        "fromColumn": "listName",
-        "fromTable": "playerlogs",
-        "toCardinality": "many",
-        "toColumn": "list name",
-        "toTable": "ArmyLists"
-      },
-      {
-        "name": "30098683-8334-438b-95b3-add8c877f5a3",
+        "name": "6e11bfea-6fe7-5067-2c0b-6c00cb38632a",
         "fromColumn": "Faction",
         "fromTable": "ArmyLists",
-        "toColumn": "Faction",
-        "toTable": "Factions"
+        "toColumn": "Macrofaction",
+        "toTable": "MacroFactions"
+      },
+      {
+        "name": "c108ae54-717b-4a08-a502-101df8785e7e",
+        "fromColumn": "Macrofaction",
+        "fromTable": "Factions",
+        "toColumn": "Macrofaction",
+        "toTable": "MacroFactions"
+      },
+      {
+        "name": "e7dda1fa-4a20-b19e-7866-ee6906ad08d9",
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "list name",
+        "fromTable": "ArmyLists",
+        "toCardinality": "many",
+        "toColumn": "listName",
+        "toTable": "playerlogs"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -935,7 +900,7 @@
             "lineageTag": "9d674350-3799-4961-84e8-e2f30a640f30"
           },
           {
-            "name": "Options taken",
+            "name": "Instances taken",
             "displayFolder": "ArmyList",
             "expression": [
               "CALCULATE(",
@@ -1117,7 +1082,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"bZJLb8IwEIT/yopzDyS82iOvFlSo1IaKA+Wwil1sYWy0sVF/fm0TCXXLKZmdSTz7ybtdZy1rhVbX4dR5+CvKXmf/sOtUziDBOPxoozGOuS77ObaO0muEr9DtlkOYBuOb9Mf743KQP3oPsvGOdAOvVh9Utu7NymGOr+RBO5sGM6QjjO1BmqQK5s5PZ0mO8pmjBqZKG0HSRqfHkktyFrZIpB0l3Wf+VmkvoaoxuwPmVmesJWyducgkecllqqHRwLNu8hojFnhL+8HKkUjqkbkT45y4Lfl0r/oCbf626PLijoyAOXqZmxcc0afxhCckbXP1goOZSfQKXgKSSDbnslEuNPFsqK66+IcmPsB9w8JRyAEOJxYUMJFIbUHOpkIT+1nR2hzOB16kvfXjcMbmrBCuOt0fjmdisD42SkuT8ZUcT6XQR3RSwG1Wljm0QdMyyC9pSa8ktHcu5eIq+18=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Macrofaction = _t, Faction = _t, #\"Sort Order\" = _t]),",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"dZJLb8IwEIT/yipnDsS82iOvFlSo1IaKA+WwSlxsYWy0cVB/fm0TCXVLT9HMrOPZT97tsrUsFVpdNqes81uIXrbv7LLCGSQYN9/aaAw216KfxtZBeo3w2XS7YgjTxvg6/vG+LQbp0Fsja+9I1/Bi9UGl6J4nhml8JQ/a2WjMkI4wtgdpospZOj+dJTlKd45qmCptKpI2JD02uSRnYYtE2lHUfZZvlfYSihJTOmBpccZSwtaZi4ySl1zGGhoNPOk6rTFiA69xP1g5qqJ6YOnEOFfdlny8V32BNp3Nu7y4I1PBHL1MzXOO6MN4whOStql6zsHMJHoFzw1SFWPOZaNcU4e7objq/A+a8AH3BQtHTRrgcELBCiYSqS3I2RRoQj9btTGH844XaW/9OJyxOSuEq47vh+OZGCyPtdLSJHyC4ykU+oBOVnDzhEhDGzTtbl5JaJ9aRPKPL8Jm+x8=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Macrofaction = _t, Faction = _t, #\"Sort Order\" = _t]),",
                 "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Macrofaction\", type text}, {\"Faction\", type text}, {\"Sort Order\", Int64.Type}})",
                 "in",
                 "    #\"Changed Type\""
@@ -1721,9 +1686,15 @@
                 "    #\"Expanded model options record\" = Table.ExpandRecordColumn(#\"Expanded model options list\", \"subselections\", {\"name\", \"selections\", \"id\"}, {\"Model Options\", \"selections\", \"weapon ID\"}),",
                 "    #\"Expanded weapon options list\" = Table.ExpandListColumn(#\"Expanded model options record\", \"selections\"),",
                 "    #\"Expanded weapon options record\" = Table.ExpandRecordColumn(#\"Expanded weapon options list\", \"selections\", {\"name\"}, {\"Weapons\"}),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded weapon options record\",{\"List id\", \"list name\", \"Faction\", \"Force Org\", \"Force Org Slot Clean\", \"unit ID\", \"Unit Selection\", \"Unit Options\", \"option id\", \"Model Options\", \"Weapons\", \"weapon ID\"})",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded weapon options record\",{\"List id\", \"list name\", \"Faction\", \"Force Org\", \"Force Org Slot Clean\", \"unit ID\", \"Unit Selection\", \"Unit Options\", \"option id\", \"Model Options\", \"Weapons\", \"weapon ID\"}),",
+                "    #\"Split Unit Selection by Comma\" = Table.SplitColumn(#\"Removed Other Columns\", \"Unit Selection\", Splitter.SplitTextByEachDelimiter({\",\"}, QuoteStyle.Csv, false), {\"Unit Selection\", \"Unit Selection.delete\"}),",
+                "    #\"Split Unit Options by Comma\" = Table.SplitColumn(#\"Split Unit Selection by Comma\", \"Unit Options\", Splitter.SplitTextByEachDelimiter({\",\"}, QuoteStyle.Csv, false), {\"Unit Options\", \"Unit Options.delete\"}),",
+                "    // i.e. \", Legion (Compulsory)\"",
+                "    #\"Removed Columns of trailing names\" = Table.RemoveColumns(#\"Split Unit Options by Comma\",{\"Unit Selection.delete\", \"Unit Options.delete\"}),",
+                "    #\"Filtered out \"\"Legions astartes rows\"\"\" = Table.SelectRows(#\"Removed Columns of trailing names\", each not Text.Contains([Unit Options], \"Legiones Astartes\")),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Filtered out \"\"Legions astartes rows\"\"\",\"Legiones Astartes: Age of Darkness Army List\",\"Legions\",Replacer.ReplaceText,{\"Faction\"})",
                 "in",
-                "    #\"Removed Other Columns\""
+                "    #\"Replaced Value\""
               ],
               "type": "m"
             }
@@ -1805,6 +1776,53 @@
                 "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Index\", Int64.Type}})",
                 "in",
                 "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MacroFactions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Macrofaction",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ad7c29de-18f8-4047-a966-8a92e70ce665",
+            "sourceColumn": "Macrofaction",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "ccbaa526-0095-472c-8ae1-9affb46ee224",
+        "partitions": [
+          {
+            "name": "MacroFactions",
+            "mode": "import",
+            "queryGroup": "00 Utilities\\00.02 Support Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Factions,",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Macrofaction\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Other Columns\")",
+                "in",
+                "    #\"Removed Duplicates\""
               ],
               "type": "m"
             }
