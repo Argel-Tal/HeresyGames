@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 53.146830000000065,
         "y": 0
       },
       "nodes": [
@@ -150,10 +150,23 @@
             "width": 234
           },
           "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 368.762989036464,
+            "y": 715.24427304299252
+          },
+          "nodeIndex": "ArmyLists",
+          "nodeLineageTag": "221556c5-242e-41a4-9ffd-137e0c0d9292",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 56.447393005377712,
+      "zoomValue": 56.447393005377677,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
