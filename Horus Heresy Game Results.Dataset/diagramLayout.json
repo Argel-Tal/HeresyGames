@@ -19,7 +19,7 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 5
         },
         {
           "location": {
@@ -45,7 +45,7 @@
             "height": 104,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 6
         },
         {
           "location": {
@@ -58,12 +58,12 @@
             "height": 124,
             "width": 234
           },
-          "zIndex": 12
+          "zIndex": 10
         },
         {
           "location": {
-            "x": 1440.2790930000006,
-            "y": 70.110143766866713
+            "x": 1307.4120180000004,
+            "y": 629.92341976686748
           },
           "nodeIndex": "Factions",
           "nodeLineageTag": "29cf617a-ffbd-494a-9649-aa8e449bb7f0",
@@ -71,7 +71,7 @@
             "height": 124,
             "width": 234
           },
-          "zIndex": 6
+          "zIndex": 7
         },
         {
           "location": {
@@ -84,12 +84,12 @@
             "height": 124,
             "width": 234
           },
-          "zIndex": 7
+          "zIndex": 8
         },
         {
           "location": {
-            "x": 1425.946235720844,
-            "y": 469.65807112110969
+            "x": 1236.3892087208437,
+            "y": 0
           },
           "nodeIndex": "Warlord Traits",
           "nodeLineageTag": "3a53066d-17fa-4231-a10b-c6386b13f3df",
@@ -97,12 +97,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 8
+          "zIndex": 12
         },
         {
           "location": {
-            "x": 1429.126672400469,
-            "y": 675.428564851273
+            "x": 1413.1826234004691,
+            "y": 209.04419800000028
           },
           "nodeIndex": "Force Organisations",
           "nodeLineageTag": "4ef12bc4-603f-440e-a561-b21da848f6d1",
@@ -114,8 +114,8 @@
         },
         {
           "location": {
-            "x": 1431.8459983873636,
-            "y": 232.64939377586467
+            "x": 1421.2166323873635,
+            "y": 457.63764077586478
           },
           "nodeIndex": "Subfactions",
           "nodeLineageTag": "4aa21526-ab3c-4e89-aadb-17aa8aa26e13",
@@ -123,7 +123,7 @@
             "height": 124,
             "width": 234
           },
-          "zIndex": 10
+          "zIndex": 13
         },
         {
           "location": {
@@ -136,12 +136,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 336.87489103646396,
-            "y": 697.52866304299255
+            "x": 979.95153403646452,
+            "y": 883.54256804299268
           },
           "nodeIndex": "ArmyLists",
           "nodeLineageTag": "221556c5-242e-41a4-9ffd-137e0c0d9292",
@@ -149,12 +149,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 0,
-            "y": 693.7120914784573
+            "x": 1300.3257740000015,
+            "y": 1058.6536574784577
           },
           "nodeIndex": "Index - Force Org",
           "nodeLineageTag": "59e5fa3a-84ca-4793-804d-1e2011b0c609",
@@ -162,7 +162,7 @@
             "height": 168.74590300000011,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
@@ -174,7 +174,7 @@
             "height": 128,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         }
       ],
       "name": "All tables",
