@@ -830,7 +830,7 @@
             "name": "Win rate",
             "displayFolder": "Metrics\\Rates",
             "expression": "IFERROR([Wins] / [Games], 0)",
-            "formatString": "0.00%;-0.00%;0.00%",
+            "formatString": "0%;-0%;0%",
             "lineageTag": "33712573-8a94-48ed-b196-74db657626e6"
           },
           {
