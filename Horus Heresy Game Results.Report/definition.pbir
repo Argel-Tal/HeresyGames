@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../Horus Heresy Game Results.Dataset"
+    },
+    "byConnection": null
+  }
+}
