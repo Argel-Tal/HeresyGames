@@ -512,6 +512,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "IDs",
             "lineageTag": "8b9a1336-5f5f-4fdf-8318-08dc12085218",
             "sourceColumn": "GameID",
             "summarizeBy": "none"
@@ -525,6 +526,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "IDs",
             "lineageTag": "d14149af-1db7-46b7-9e56-705186e80185",
             "sourceColumn": "Player",
             "summarizeBy": "none"
@@ -538,6 +540,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Outcomes",
             "lineageTag": "06245a2a-abfb-463e-8720-483669a83af1",
             "sourceColumn": "Winner",
             "summarizeBy": "none"
@@ -551,6 +554,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "f7257c39-68da-44e4-9e78-c34f756ac75c",
             "sourceColumn": "forceOrg",
             "summarizeBy": "none"
@@ -564,6 +568,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "fcae9fe1-70e0-49e9-8afc-5abcfbc0d216",
             "sourceColumn": "ROW/Subfaction",
             "summarizeBy": "none"
@@ -577,6 +582,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "933e9df4-98b7-4e73-8b2e-e2b4c3cc1de1",
             "sourceColumn": "alliedFaction",
             "summarizeBy": "none"
@@ -590,6 +596,7 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "Outcomes",
             "formatString": "0",
             "lineageTag": "7c2484a6-84af-4a7c-837b-ae35c4e7a5b9",
             "sourceColumn": "VPs",
@@ -604,6 +611,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "dcbd7068-5fc7-492f-a605-7c7a5e58c0e7",
             "sourceColumn": "warlordTrait",
             "summarizeBy": "none"
@@ -617,6 +625,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "883aff79-fa17-43aa-a26c-2f00fbaa311b",
             "sourceColumn": "Faction",
             "summarizeBy": "none"
@@ -630,6 +639,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "List Parameters",
             "lineageTag": "e6337ff5-6091-442f-8488-b565a37857fb",
             "sourceColumn": "Warlord",
             "summarizeBy": "none"
@@ -643,6 +653,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "IDs",
             "lineageTag": "c8a08551-4e13-4a48-b89e-cb20d9a77c4c",
             "sourceColumn": "listName",
             "summarizeBy": "none"
@@ -947,7 +958,13 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
             "dataType": "string",
+            "isHidden": true,
             "lineageTag": "b7cc3b22-e4c5-4099-81de-9483c82113d6",
             "sourceColumn": "Faction",
             "summarizeBy": "none"
@@ -1329,7 +1346,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
@@ -1339,7 +1356,7 @@
             "isNameInferred": false,
             "lineageTag": "f5d5d569-3617-4921-86ae-44343e63ec96",
             "sourceColumn": "[Value3]",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "type": "calculatedTableColumn"
           }
         ],
@@ -1356,6 +1373,7 @@
                 "    , (\"Deployment\", NAMEOF('Deployment Maps'[Maps]), 2)",
                 "    , (\"Mission\", NAMEOF('Missions'[Missions]), 3)",
                 "    , (\"Warlord\", NAMEOF('playerlogs'[Warlord]), 4)",
+                "    , (\"Warlord Trait\", NAMEOF('playerlogs'[warlordTrait]), 5)",
                 "}"
               ],
               "type": "calculated"
@@ -1447,6 +1465,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "ID #s",
             "lineageTag": "e86985f2-5e65-4005-8ac6-f46d2da06ada",
             "sourceColumn": "List id",
             "summarizeBy": "none"
@@ -1465,6 +1484,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Units & Options",
             "isHidden": true,
             "lineageTag": "2ab852b3-cabc-4062-9671-5afd211cc43b",
             "sourceColumn": "Unit Selection",
@@ -1536,6 +1556,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Units & Options",
             "isHidden": true,
             "lineageTag": "b80c449a-fc07-413d-9f7c-382f0156b133",
             "sourceColumn": "Unit Options",
@@ -1555,6 +1576,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Units & Options",
             "isHidden": true,
             "lineageTag": "54e133b1-27af-40f2-a5e3-1ccbb6dfa253",
             "sourceColumn": "Model Options",
@@ -1574,6 +1596,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Units & Options",
             "isHidden": true,
             "lineageTag": "53bf1183-5634-4c98-8a59-028160602d58",
             "sourceColumn": "Weapons",
@@ -1588,6 +1611,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "ID #s",
             "lineageTag": "9655648c-a408-4393-99a3-8d36e081f579",
             "sourceColumn": "unit ID",
             "summarizeBy": "none"
@@ -1601,6 +1625,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "ID #s",
             "lineageTag": "14e7a049-4b38-463f-8069-516ef72c8dc7",
             "sourceColumn": "option id",
             "summarizeBy": "none"
@@ -1614,6 +1639,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "ID #s",
             "lineageTag": "3c1ca2ab-1e5d-4dbe-a3a0-c3ace258e6c7",
             "sourceColumn": "weapon ID",
             "summarizeBy": "none"
@@ -1622,6 +1648,7 @@
         "hierarchies": [
           {
             "name": "Unit Hierarchy",
+            "displayFolder": "Units & Options",
             "levels": [
               {
                 "name": "Unit Selection",
