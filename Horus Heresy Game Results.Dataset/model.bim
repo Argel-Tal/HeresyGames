@@ -451,13 +451,6 @@
         "toTable": "Subfactions"
       },
       {
-        "name": "e3d78a54-26af-4d4b-80f5-867a3bcc6061",
-        "fromColumn": "Winner",
-        "fromTable": "playerlogs",
-        "toColumn": "Result",
-        "toTable": "Index - Result"
-      },
-      {
         "name": "451b86fe-6297-4b7a-98c2-2592cae979ca",
         "fromColumn": "Force Org Slot Clean",
         "fromTable": "ArmyLists",
@@ -486,6 +479,13 @@
         "toCardinality": "many",
         "toColumn": "listName",
         "toTable": "playerlogs"
+      },
+      {
+        "name": "b2a19314-081c-4f6b-a95f-b46537a64105",
+        "fromColumn": "Outcome",
+        "fromTable": "playerlogs",
+        "toColumn": "Result",
+        "toTable": "Index - Result"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -529,20 +529,6 @@
             "displayFolder": "IDs",
             "lineageTag": "d14149af-1db7-46b7-9e56-705186e80185",
             "sourceColumn": "Player",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "Winner",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "displayFolder": "Outcomes",
-            "lineageTag": "06245a2a-abfb-463e-8720-483669a83af1",
-            "sourceColumn": "Winner",
             "summarizeBy": "none"
           },
           {
@@ -657,6 +643,20 @@
             "lineageTag": "c8a08551-4e13-4a48-b89e-cb20d9a77c4c",
             "sourceColumn": "listName",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Outcome",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "displayFolder": "Outcomes",
+            "lineageTag": "892f500a-7097-4077-8c33-8885147468c3",
+            "sourceColumn": "Outcome",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -692,7 +692,7 @@
                 "    #\"Aggregated tb - MinVPs\" = Table.AggregateTableColumn(#\"Aggregated to find max VPs\", \"tb - MinVPs\", {{\"VPs\", List.Min, \"Min VPs\"}}),",
                 "    #\"Expanded duplicated tb\" = Table.ExpandTableColumn(#\"Aggregated tb - MinVPs\", \"tb\", {\"Player\", \"listName\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}, {\"Player\", \"listName\", \"Faction\", \"forceOrg\", \"ROW/Subfaction\", \"alliedFaction\", \"VPs\", \"Warlord\", \"warlordTrait\"}),",
                 "    #\"Enforced VPs as number\" = Table.TransformColumnTypes(#\"Expanded duplicated tb\",{{\"VPs\", Int64.Type}, {\"Min VPs\", Int64.Type}, {\"Max VPs\", Int64.Type}}),",
-                "    #\"Added Winner col\" = Table.AddColumn(#\"Enforced VPs as number\", \"Winner\", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then \"Draw\" else if ([#\"VPs\"] = [Max VPs]) then \"Win\" else \"Loss\"),",
+                "    #\"Added Winner col\" = Table.AddColumn(#\"Enforced VPs as number\", \"Outcome\", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then \"Draw\" else if ([#\"VPs\"] = [Max VPs]) then \"Win\" else \"Loss\"),",
                 "    #\"Removed Aggregated columns\" = Table.RemoveColumns(#\"Added Winner col\",{\"Max VPs\", \"Min VPs\"}),",
                 "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"listName\", \"ROW/Subfaction\", \"alliedFaction\"})",
                 "in",
@@ -920,6 +920,22 @@
             ],
             "formatString": "0",
             "lineageTag": "3493f557-221a-410b-b20c-03edf4c20eff"
+          },
+          {
+            "name": "Average VPs",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Metrics\\Counts",
+            "expression": [
+              "CALCULATE(",
+              "    AVERAGE(playerlogs[VPs])",
+              ") // end calc"
+            ],
+            "lineageTag": "139e3857-72bc-4f22-81a9-e83805af43a8"
           }
         ],
         "partitions": [
@@ -1368,12 +1384,12 @@
             "source": {
               "expression": [
                 "{",
-                "    (\"Subfactions\", NAMEOF('Subfactions'[Subfactions]), 0)",
-                "    , (\"ForceOrg\", NAMEOF('Force Organisations'[ForceOrg]), 1)",
-                "    , (\"Deployment\", NAMEOF('Deployment Maps'[Maps]), 2)",
-                "    , (\"Mission\", NAMEOF('Missions'[Missions]), 3)",
-                "    , (\"Warlord\", NAMEOF('playerlogs'[Warlord]), 4)",
-                "    , (\"Warlord Trait\", NAMEOF('playerlogs'[warlordTrait]), 5)",
+                "    (\"Subfactions\", NAMEOF('Subfactions'[Subfactions]), 1)",
+                "    , (\"ForceOrg\", NAMEOF('Force Organisations'[ForceOrg]), 2)",
+                "    , (\"Deployment\", NAMEOF('Deployment Maps'[Maps]), 3)",
+                "    , (\"Mission\", NAMEOF('Missions'[Missions]), 4)",
+                "    , (\"Warlord\", NAMEOF('playerlogs'[Warlord]), 5)",
+                "    , (\"Warlord Trait\", NAMEOF('playerlogs'[warlordTrait]), 6)",
                 "}"
               ],
               "type": "calculated"
