@@ -1,69 +1,69 @@
-Subfactions
-Legio Cybernetica
-Ordo Reductor
-Angel's Wrath
-Armoured Spearhead
-Orbital Assault
-Pride of the Legion
-Armoured Breakthrough
-Primarch's Chosen
-Brethren of Iron
-Fury of the Ancients
-Legion Recon Company
-Zone Mortalis Assault Force
-Sky Hunter Phalanx
-Drop Assault Vanguard
-Sacrificial Offering
-Outcast Sons
-Orphans of Betrayal
-The Unbroken Vow
-The Serpent's Bane
-The Storm of War
-The Eskaton Imperative
-The Steel Fist
-The Seekers Arrow
-Ravenwing Protocol
-Ironwing Protocol
-The Maru Skara
-3rd Company Elite
-The Hammer of Olympia
-Ironfire
-Chogorian Brotherhood
-Sagyar Mazan
-The Pale Hunters
-The Bloodied Claws
-The Stone Gauntlet
-Hammerfell Strike Force
-Horror Cult
-Terror Assault
-The Cross of Bone
-The Bloodied Gauntlet
-The Swift Blade
-The Day of Revelation
-The Day of Sorrow
-The Head of the Gorgon
-Company of Bitter Iron
-Berserker Assault
-The Crimson Path
-The Logos Lectora
-Vigil Opertii Mission
-The Reaping
-Creeping Death
-The Axis of Dissolution
-The Guard of the Crimson King
-The Long March
-The Black Reaving
-Last of the Serrated Sun
-The Dark Brethren
-The Covenant of Fire
-The Awakening Fire
-Decapitation Strike
-Liberation Force
-The Coils of the Hydra
-Headhunter Leviathal
-After Isstvan
-Hunter-Killer Mission
-Death Seekers
-Orphans of War
-Outlanders
-Chymeriae
+Subfactions	AllowedIn
+Legio Cybernetica	Mechanicum
+Ordo Reductor	Mechanicum
+Angel's Wrath	Legions
+Armoured Spearhead	Legions
+Orbital Assault	Legions
+Pride of the Legion	Legions
+Armoured Breakthrough	Legions
+Primarch's Chosen	Legions
+Brethren of Iron	Legions
+Fury of the Ancients	Legions
+Legion Recon Company	Legions
+Zone Mortalis Assault Force	Legions
+Sky Hunter Phalanx	Legions
+Drop Assault Vanguard	Legions
+Sacrificial Offering	Legions
+Outcast Sons	Legions
+Orphans of Betrayal	Legions
+The Unbroken Vow	Legions
+The Serpent's Bane	Legions
+The Storm of War	Legions
+The Eskaton Imperative	Legions
+The Steel Fist	Legions
+The Seekers Arrow	Legions
+Ravenwing Protocol	Legions
+Ironwing Protocol	Legions
+The Maru Skara	Legions
+3rd Company Elite	Legions
+The Hammer of Olympia	Legions
+Ironfire	Legions
+Chogorian Brotherhood	Legions
+Sagyar Mazan	Legions
+The Pale Hunters	Legions
+The Bloodied Claws	Legions
+The Stone Gauntlet	Legions
+Hammerfell Strike Force	Legions
+Horror Cult	Legions
+Terror Assault	Legions
+The Cross of Bone	Legions
+The Bloodied Gauntlet	Legions
+The Swift Blade	Legions
+The Day of Revelation	Legions
+The Day of Sorrow	Legions
+The Head of the Gorgon	Legions
+Company of Bitter Iron	Legions
+Berserker Assault	Legions
+The Crimson Path	Legions
+The Logos Lectora	Legions
+Vigil Opertii Mission	Legions
+The Reaping	Legions
+Creeping Death	Legions
+The Axis of Dissolution	Legions
+The Guard of the Crimson King	Legions
+The Long March	Legions
+The Black Reaving	Legions
+Last of the Serrated Sun	Legions
+The Dark Brethren	Legions
+The Covenant of Fire	Legions
+The Awakening Fire	Legions
+Decapitation Strike	Legions
+Liberation Force	Legions
+The Coils of the Hydra	Legions
+Headhunter Leviathal	Legions
+After Isstvan	Legions
+Hunter-Killer Mission	Legions
+Death Seekers	Legions
+Orphans of War	Legions
+Outlanders	Legions
+Chymeriae	Legions
