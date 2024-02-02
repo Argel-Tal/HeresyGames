@@ -43,10 +43,6 @@
         "name": "GitURL",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Text"
           }
@@ -63,10 +59,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Text"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "description": "Which branch to pull data off",
@@ -722,10 +714,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -949,6 +937,15 @@
               ") // end calc"
             ],
             "lineageTag": "139e3857-72bc-4f22-81a9-e83805af43a8"
+          },
+          {
+            "name": "FactionName Measure",
+            "expression": [
+              "CALCULATE(",
+              "    FIRSTNONBLANK(Factions[Faction], 1)",
+              ") // end calc"
+            ],
+            "lineageTag": "bdb28225-9932-41fc-86ad-89d0786830d0"
           }
         ],
         "partitions": [
