@@ -29,7 +29,7 @@ MakeGameMeta <- function(index){
   # game meta
   map_mission <- sample(1:6, 2, replace=T)
   gameSize    <- sample(ptSizes, 1)
-  meta <- as.data.frame(t(c(gameSize, Maps[map_mission[1],1], Missions[map_mission[2],1])))
+  meta <- as.data.frame(t(c(gameSize, Missions[map_mission[2],1], Maps[map_mission[1],1])))
   colnames(meta) <- gameHeaders
   return(meta)
 } # end MakeGameMeta
