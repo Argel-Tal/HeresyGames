@@ -69,7 +69,7 @@ MakePlayerMeta <- function(index){
 
 
 ## Loop params
-maxGenGames <- 50
+maxGenGames <- 250
 index <- 1
 ## Loop 
 for(index in 1:maxGenGames){
