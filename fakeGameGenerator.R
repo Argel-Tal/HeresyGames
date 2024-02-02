@@ -33,9 +33,7 @@ MakeGameMeta <- function(index){
   colnames(meta) <- gameHeaders
   return(meta)
 } # end MakeGameMeta
- 
-  
-  
+
 MakePlayerMeta <- function(index){
   faction <- Factions[sample(1:dim(Factions)[1], 1),2]
   parentFaction <- Factions[match(faction,Factions[,2]), 1]
@@ -68,8 +66,10 @@ MakePlayerMeta <- function(index){
   return(playerLog)
 } # end MakePlayerMeta
 
+
+
 ## Loop params
-maxGenGames <- 15
+maxGenGames <- 50
 index <- 1
 ## Loop 
 for(index in 1:maxGenGames){
