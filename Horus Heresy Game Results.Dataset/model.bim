@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"MacroFactions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Index - Result\",\"ListImport\",\"ArmyLists\",\"Index - Force Org\"]"
+        "value": "[\"GitURL\",\"BranchName\",\"playerlogs\",\"playerLog Sample File\",\"playerLog sample file Param\",\"playerlog Sample table\",\"playerLog Transform\",\"GameMeta\",\"GameMeta Sample File\",\"GameMeta sample file param\",\"GameMeta Sample table\",\"GameMeta Transform\",\"MeasuresTable\",\"Warlord Traits\",\"Factions\",\"MacroFactions\",\"Deployment Maps\",\"Missions\",\"Force Organisations\",\"Subfactions\",\"Index - Result\",\"ListImport\",\"ArmyLists\",\"Index - Force Org\",\"branchForLists\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -63,6 +63,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Text"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "description": "Which branch to pull data off",
@@ -77,6 +81,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Binary"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
@@ -84,7 +92,7 @@
           "    Source = Json.Document(",
           "            Web.Contents(",
           "                \"https://api.github.com\"",
-          "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=\" & BranchName]",
+          "                , [RelativePath = GitURL & \"/records/player%20matches?ref=\" & BranchName]",
           "            )",
           "    ),",
           "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
@@ -182,7 +190,7 @@
           "    Source = Json.Document(",
           "            Web.Contents(",
           "                \"https://api.github.com\"",
-          "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/games?ref=\" & BranchName]",
+          "                , [RelativePath = GitURL & \"/records/games?ref=\" & BranchName]",
           "            )",
           "    ),",
           "    #\"Converted to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
@@ -204,10 +212,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Binary"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "expression": "#\"GameMeta Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"GameMeta Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
@@ -282,7 +286,7 @@
           "    Source = Json.Document(",
           "            Web.Contents(",
           "                \"https://api.github.com\"",
-          "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/lists?ref=\" & \"PBI-InitialDev\"]",
+          "                , [RelativePath = GitURL & \"records/lists?ref=\" & branchForLists]",
           "            )",
           "    ),",
           "    #\"Converted Source to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
@@ -296,6 +300,19 @@
         "kind": "m",
         "lineageTag": "6416e775-6b26-49ee-9cf0-6138dc1af47d",
         "queryGroup": "01.03 Lists"
+      },
+      {
+        "name": "branchForLists",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "expression": "\"main\" meta [IsParameterQuery=true, List={\"main\"}, DefaultValue=\"main\", Type=\"Text\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "3f6f491e-c9d9-4ef5-90e2-de4c73b9e4e0",
+        "queryGroup": "00 Utilities\\00.01 Parameters"
       }
     ],
     "queryGroups": [
@@ -495,11 +512,7 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
+            "value": "Exception"
           }
         ],
         "columns": [
@@ -671,7 +684,7 @@
                 "    Source = Json.Document(",
                 "            Web.Contents(",
                 "                \"https://api.github.com\"",
-                "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=\" & BranchName]",
+                "                , [RelativePath = GitURL & \"/records/player%20matches?ref=\" & BranchName]",
                 "            )",
                 "    ),",
                 "    #\"Converted Source to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
@@ -782,7 +795,7 @@
                 "    Source = Json.Document(",
                 "            Web.Contents(",
                 "                \"https://api.github.com\"",
-                "                , [RelativePath = \"/repos/Argel-Tal/HeresyGames/contents/records/games?ref=\" & BranchName]",
+                "                , [RelativePath = GitURL & \"/records/games?ref=\" & BranchName]",
                 "            )",
                 "    ),",
                 "    #\"Converted Source to Table\" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
@@ -1052,10 +1065,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1463,10 +1472,6 @@
         "name": "ArmyLists",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
           }
@@ -1828,10 +1833,6 @@
       {
         "name": "MacroFactions",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
