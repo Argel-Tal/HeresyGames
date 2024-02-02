@@ -42,11 +42,16 @@ MakePlayerMeta <- function(index){
   } else { 
     forceOrg <- ForceOrgs[sample(2:dim(ForceOrgs)[1], 1), 1]
   }
-  # not all factions have subs, so need to do error handling for the ones which dont
   listOfSubFactions <- c(Subfactions[,2] == parentFaction)
-  if (any(listOfSubFactions)) {
-    # pick subfactions they're allowed to choose from
-    ROW <- Subfactions[sample(which(listOfSubFactions), 1), 1]
+  # 2 / 3 times there should be a ROW
+  if ((sample(3:27, 1) %% 3) != 0) {
+    # not all factions have subs, so need to do error handling for the ones which dont
+    if (any(listOfSubFactions)) {
+      # pick subfactions they're allowed to choose from
+      ROW <- Subfactions[sample(which(listOfSubFactions), 1), 1]
+    } else {
+      ROW <- ""
+    }  
   } else {
     ROW <- ""
   }
@@ -69,7 +74,7 @@ MakePlayerMeta <- function(index){
 
 
 ## Loop params
-maxGenGames <- 250
+maxGenGames <- 150
 index <- 1
 ## Loop 
 for(index in 1:maxGenGames){
