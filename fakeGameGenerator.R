@@ -29,7 +29,7 @@ MakeGameMeta <- function(index){
   # game meta
   map_mission <- sample(1:6, 2, replace=T)
   gameSize    <- sample(ptSizes, 1)
-  meta <- as.data.frame(t(c(gameSize, Maps[map_mission[1]], Missions[map_mission[2]])))
+  meta <- as.data.frame(t(c(gameSize, Maps[map_mission[1],1], Missions[map_mission[2],1])))
   colnames(meta) <- gameHeaders
   return(meta)
 } # end MakeGameMeta
@@ -75,20 +75,13 @@ index <- 1
 for(index in 1:maxGenGames){
   # game meta
   write.csv(MakeGameMeta()
-            , paste(DirGamelog, "/", str_pad(
-                index+ngames, 4, pad = "0"
-                )
-              , ".csv", sep = ""
-              )
+            , paste(DirGamelog, "/", str_pad(index+ngames, 4, pad = "0"), ".csv", sep = "")
             , row.names=FALSE
             )
   # player 1
   write.csv(MakePlayerMeta()
             , paste(
-              DirPlayerLog, "/"
-              , str_pad(
-                index+ngames, 4, pad = "0"
-              )
+              DirPlayerLog, "/", str_pad(index+ngames, 4, pad = "0")
               , "-"
               , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
               , ".csv"
@@ -99,10 +92,7 @@ for(index in 1:maxGenGames){
   # player 2
   write.csv(MakePlayerMeta()
             , paste(
-              DirPlayerLog, "/"
-              , str_pad(
-                index+ngames, 4, pad = "0"
-              )
+              DirPlayerLog, "/", str_pad(index+ngames, 4, pad = "0")
               , "-"
               , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
               , ".csv"
