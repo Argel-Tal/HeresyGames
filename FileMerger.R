@@ -25,7 +25,7 @@ manyToOne <- function(mypath){
   # setup
   myfiles <- list.files(mypath)
   filenames <- sapply(strsplit(myfiles,"\\."), `[`, 1)
-  nfiles <- seq(1,length(myfiles), 1)
+  nfiles <- 1:length(myfiles)
   
   
   ## make it a DF 
