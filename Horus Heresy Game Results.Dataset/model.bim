@@ -475,6 +475,20 @@
         "toCardinality": "many",
         "toColumn": "listName",
         "toTable": "playerlogs"
+      },
+      {
+        "name": "1eaf492c-0025-5ab8-3e1f-c371e5c32690",
+        "fromColumn": "Winner",
+        "fromTable": "playerlogs",
+        "toColumn": "Result",
+        "toTable": "Index - Result"
+      },
+      {
+        "name": "1df7c079-ec17-9c4d-3a26-c95b66412816",
+        "fromColumn": "GameIDs",
+        "fromTable": "playerlogs",
+        "toColumn": "GameIDs",
+        "toTable": "GameMeta"
       }
     ],
     "sourceQueryCulture": "en-AU",
@@ -818,7 +832,7 @@
             "displayFolder": "Metrics\\Counts",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(playerlogs[GameID])",
+              "    [Games]",
               "    , FILTER('Index - Result', 'Index - Result'[Result] = \"Win\")",
               ") // end calc))"
             ],
@@ -830,7 +844,7 @@
             "displayFolder": "Metrics\\Counts",
             "expression": [
               "CALCULATE(",
-              "    DISTINCTCOUNT(playerlogs[GameID])",
+              "    DISTINCTCOUNT(playerlogs[GameIDs])",
               "    ) // end calc"
             ],
             "formatString": "0",
