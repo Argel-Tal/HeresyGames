@@ -128,7 +128,7 @@ write.csv(
 )
 ### Player files
 write.csv(
-  gameMetaList
+  playerMeta
   , paste(DirPlayerLog, "/manyplayers", str_pad(ngames, 4, pad = "0"), ".csv", sep = "")
   , row.names=FALSE
 )
