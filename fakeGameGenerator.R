@@ -21,10 +21,19 @@ WarlordTraits <- read.table(file = file.path(DirSupportTbs, files[7]), sep = '\t
 ptSizes <- seq(1000,5000, 50)
 
 gameHeaders <- c("gameSize", "mission", "deployment")
-playerHeaders <- c("faction","forceOrg","ROW/Subfaction","alliedFaction"
-                   ,"warlordTrait","VPs","warlord","listName"
-                  ) # end headers
+playerHeaders <- c(
+  "faction","forceOrg","ROW/Subfaction","alliedFaction"
+  ,"warlordTrait","VPs","warlord","listName"
+) # end headers
 
+nGames <- 1:450
+
+# Game data functions
+
+## Make the basic game meta data
+##  1. Map
+##  2. Mission
+##  3. Game size 
 MakeGameMeta <- function(index){
   # game meta
   map_mission <- sample(1:6, 2, replace=T)
@@ -34,6 +43,19 @@ MakeGameMeta <- function(index){
   return(meta)
 } # end MakeGameMeta
 
+
+## Make player information
+##  1. faction
+##  2. Parent faction (look up what faction the child list belongs to... mechanicum / legion
+##    This is a supporting step, not returned in the final meta
+##  3. Force Org - uses the parent action to determine alternate force-org availability
+##  4. Subfaction / ROW
+##  5. Allied faction - random term to ensure this is not always present
+##  6. ROW if applicable
+##  7. Warlord trait
+##  8. Warlord character - doesn't include any special characters atm
+##  9. How many VPs the player got
+## 10. List name, so it can be matched against a collection of lists
 MakePlayerMeta <- function(index){
   faction <- Factions[sample(1:dim(Factions)[1], 1),2]
   parentFaction <- Factions[match(faction,Factions[,2]), 1]
@@ -45,7 +67,7 @@ MakePlayerMeta <- function(index){
   listOfSubFactions <- c(Subfactions[,2] == parentFaction)
   # 2 / 3 times there should be a ROW
   if ((sample(3:27, 1) %% 3) != 0) {
-    # not all factions have subs, so need to do error handling for the ones which dont
+    # not all factions have subs, so need to do error handling for the ones which don't
     if (any(listOfSubFactions)) {
       # pick subfactions they're allowed to choose from
       ROW <- Subfactions[sample(which(listOfSubFactions), 1), 1]
@@ -72,39 +94,42 @@ MakePlayerMeta <- function(index){
 } # end MakePlayerMeta
 
 
+## make the game info
+gameMetaList <- lapply(nGames, MakeGameMeta)
+gameMetaList <- do.call(rbind, gameMetaList)
+gameMetaList <- cbind(str_pad(nGames, 4, pad = "0"), gameMetaList)
+colnames(gameMetaList)[1] <- "gameID"
 
-## Loop params
-maxGenGames <- 150
-index <- 1
-## Loop 
-for(index in 1:maxGenGames){
-  # game meta
-  write.csv(MakeGameMeta()
-            , paste(DirGamelog, "/", str_pad(index+ngames, 4, pad = "0"), ".csv", sep = "")
-            , row.names=FALSE
-            )
-  # player 1
-  write.csv(MakePlayerMeta()
-            , paste(
-              DirPlayerLog, "/", str_pad(index+ngames, 4, pad = "0")
-              , "-"
-              , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
-              , ".csv"
-              , sep = ""
-            ) # end paste
-            , row.names=FALSE
-  ) # end write CSV
-  # player 2
-  write.csv(MakePlayerMeta()
-            , paste(
-              DirPlayerLog, "/", str_pad(index+ngames, 4, pad = "0")
-              , "-"
-              , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
-              , ".csv"
-              , sep = ""
-            ) # end paste
-            , row.names=FALSE
-  ) # end write CSV
-  # update Index
-  index = index + 1
+## make player info
+MakePlayerMetaDF <- function(PlayerMetalist){
+  playerMeta <- do.call(rbind, PlayerMetalist)
+  playerMeta <- cbind(
+    paste(
+      str_pad(ngames, 4, pad = "0")
+      , "-"
+      , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
+    )
+    , playerMeta
+  )
+  colnames(playerMeta)[1] <- "gameID"
+  return(playerMeta)
 }
+
+### Append 2 sets of player data together
+playerMeta <- rbind(MakePlayerMetaDF(lapply(nGames, MakePlayerMeta)), MakePlayerMetaDF(lapply(nGames, MakePlayerMeta)))
+
+
+## Write out files
+### Game files
+write.csv(
+  gameMetaList
+    , paste(DirGamelog, "/manyGames", str_pad(ngames, 4, pad = "0"), ".csv", sep = "")
+    , row.names=FALSE
+)
+### Player files
+write.csv(
+  gameMetaList
+  , paste(DirPlayerLog, "/manyplayers", str_pad(ngames, 4, pad = "0"), ".csv", sep = "")
+  , row.names=FALSE
+)
+
