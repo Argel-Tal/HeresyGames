@@ -661,6 +661,19 @@
             "lineageTag": "d97d9149-575c-4f4c-98aa-fc818aaf0a75",
             "sourceColumn": "GameIDs",
             "summarizeBy": "none"
+          },
+          {
+            "name": "File Index",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "120afd1f-cc93-4dff-99b6-23dd9a263571",
+            "sourceColumn": "File Index",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "1bb3c248-9082-4d25-9fee-8a5ef95f2193",
@@ -690,12 +703,14 @@
                 "        , {\"Column1\", \"Column2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\", \"Column7\", \"Column8\", \"Column9\"}",
                 "        , {\"GameID\", \"Faction\", \"forceOrg\", \"ROWSubfaction\", \"alliedFaction\", \"warlordTrait\", \"VPs\", \"Warlord\", \"listName\"}",
                 "    ),",
-                "    #\"Filtered out headers\" = Table.SelectRows(#\"Expanded Data\", each [Faction] <> \"faction\"),",
-                "    #\"Split game ID\" = Table.SplitColumn(#\"Filtered out headers\", \"GameID\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"GameID\", \"PlayerID\"}),",
+                "    #\"Filtered out headers\" = Table.SelectRows(#\"Expanded Data\", each ([forceOrg] <> \"forceOrg\")),",
+                "    #\"Split game ID\" = Table.SplitColumn(#\"Filtered out headers\", \"GameID\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"PlayerID\", \"GameID\"}),",
                 "    #\"Trimmed split columns\" = Table.TransformColumns(#\"Split game ID\",{{\"GameID\", Text.Trim, type text}, {\"PlayerID\", Text.Trim, type text}}),",
-                "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Trimmed split columns\",{{\"VPs\", Int64.Type}}),",
+                "    #\"Added Key\" = Table.AddColumn(#\"Trimmed split columns\", \"GameIDs\", each [GameID] & Text.From([File Index]), type text),",
+                "    #\"Removed partial key Columns\" = Table.RemoveColumns(#\"Added Key\",{\"GameID\", \"File Index\"}),",
+                "    #\"Changed VPs to int\" = Table.TransformColumnTypes(#\"Removed partial key Columns\",{{\"VPs\", Int64.Type}}),",
                 "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed VPs to int\",{{\"Warlord\", Text.Proper, type text}, {\"warlordTrait\", Text.Proper, type text}, {\"Faction\", Text.Proper, type text}, {\"forceOrg\", Text.Proper, type text}}),",
-                "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameID\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
+                "    #\"Grouped Rows to calc winner\" = Table.Group(#\"Capitalized Each Word\", {\"GameIDs\"}, {{\"tb\", each _, type table [GameID=nullable text,#\" VPs\"=text]}}),",
                 "    #\"Duplicated summarised tb max\" = Table.DuplicateColumn(#\"Grouped Rows to calc winner\", \"tb\", \"tb - MaxVP\"),",
                 "    #\"Duplicated summarised tb min\" = Table.DuplicateColumn(#\"Duplicated summarised tb max\", \"tb\", \"tb - MinVPs\"),",
                 "    #\"Aggregated to find max VPs\" = Table.AggregateTableColumn(#\"Duplicated summarised tb min\", \"tb - MaxVP\", {{\"VPs\", List.Max, \"Max VPs\"}}),",
@@ -708,11 +723,9 @@
                 "    #\"Added Winner col\" = Table.AddColumn(#\"Expanded tb\", \"Winner\", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then \"Draw\" else if ([#\"VPs\"] = [Max VPs]) then \"Win\" else \"Loss\"),",
                 "    #\"Enforced VPs as number\" = Table.TransformColumnTypes(#\"Added Winner col\",{{\"VPs\", Int64.Type}, {\"Min VPs\", Int64.Type}, {\"Max VPs\", Int64.Type}}),",
                 "    #\"Removed Aggregated columns\" = Table.RemoveColumns(#\"Enforced VPs as number\",{\"Max VPs\", \"Min VPs\"}),",
-                "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"}),",
-                "    #\"Added Key\" = Table.AddColumn(#\"Replaced blanks w/ nulls\", \"GameIDs\", each [GameID] & Text.From([File Index]), type text),",
-                "    #\"Removed partial key Columns\" = Table.RemoveColumns(#\"Added Key\",{\"GameID\", \"File Index\"})",
+                "    #\"Replaced blanks w/ nulls\" = Table.ReplaceValue(#\"Removed Aggregated columns\",\"\",null,Replacer.ReplaceValue,{\"ROW/Subfaction\", \"alliedFaction\"})",
                 "in",
-                "    #\"Removed partial key Columns\""
+                "    #\"Replaced blanks w/ nulls\""
               ],
               "type": "m"
             }
