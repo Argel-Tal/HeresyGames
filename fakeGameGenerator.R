@@ -101,22 +101,27 @@ gameMetaList <- cbind(str_pad(nGames, 4, pad = "0"), gameMetaList)
 colnames(gameMetaList)[1] <- "gameID"
 
 ## make player info
-MakePlayerMetaDF <- function(PlayerMetalist){
+
+### names
+index <- 1
+playerNames <- data.frame(matrix(ncol = 2, nrow = length(nGames)))
+for(index in 1:length(nGames)){
+  playerNames[index, 1] <- paste(sample(LETTERS, 2, replace=TRUE), collapse="")
+  playerNames[index, 2] <- paste(sample(LETTERS, 2, replace=TRUE), collapse="")
+}
+### Outcomes
+MakePlayerMetaDF <- function(PlayerMetalist, nameSet){
   playerMeta <- do.call(rbind, PlayerMetalist)
-  playerMeta <- cbind(
-    paste(
-      str_pad(ngames, 4, pad = "0")
-      , "-"
-      , paste(sample(LETTERS, 2, replace=TRUE), collapse="") # 2 random initals
-    )
-    , playerMeta
-  )
-  colnames(playerMeta)[1] <- "gameID"
+  stg <- cbind(playerNames[,nameSet], str_pad(nGames, 4, pad = "0"))
+  playerMeta <- cbind(stg, playerMeta)
+  colnames(playerMeta)[1:2] <- c("PlayerID", "gameID")
   return(playerMeta)
 }
 
+
+
 ### Append 2 sets of player data together
-playerMeta <- rbind(MakePlayerMetaDF(lapply(nGames, MakePlayerMeta)), MakePlayerMetaDF(lapply(nGames, MakePlayerMeta)))
+playerMeta <- rbind(MakePlayerMetaDF(lapply(nGames, MakePlayerMeta),1), MakePlayerMetaDF(lapply(nGames, MakePlayerMeta),2))
 
 
 ## Write out files
