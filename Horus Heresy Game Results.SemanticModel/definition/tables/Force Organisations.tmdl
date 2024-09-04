@@ -1,0 +1,24 @@
+table 'Force Organisations'
+	lineageTag: 4ef12bc4-603f-440e-a561-b21da848f6d1
+
+	column ForceOrg
+		dataType: string
+		lineageTag: 771e42b4-9492-433e-8da8-cec3e9ad6f27
+		summarizeBy: none
+		sourceColumn: ForceOrg
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Force Organisations' = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wci4qLU5MSVWK1YlW8k0sKcqsUMhPUwgqzcwDC/nnFecklqZnlIB5PqllmYklGYkQOefE4pLUnBwoz7EotxKk1SWxKFvBOT+3ICczMS8ZaHAsAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ForceOrg = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ForceOrg", type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"ForceOrg", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_ResultType = Table
+

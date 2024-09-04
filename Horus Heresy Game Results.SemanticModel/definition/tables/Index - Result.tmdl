@@ -1,0 +1,35 @@
+table 'Index - Result'
+	lineageTag: 977f43f6-4ab4-4316-8d19-6ee980ac1c5d
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: b0352062-3523-4797-9557-c00dcf603dde
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = User
+
+	column Result
+		dataType: string
+		lineageTag: b795d8e4-64f8-4569-92a7-f9d85738bd4d
+		summarizeBy: none
+		sourceColumn: Result
+		sortByColumn: Index
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Index - Result' = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQrPzFOK1YlWMgCyXYoSy8EcXZCMT35xsVJsLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, Result = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Index", Int64.Type}, {"Result", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

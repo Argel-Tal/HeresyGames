@@ -1,0 +1,24 @@
+table MacroFactions
+	lineageTag: ccbaa526-0095-472c-8ae1-9affb46ee224
+
+	column Macrofaction
+		dataType: string
+		lineageTag: ad7c29de-18f8-4047-a966-8a92e70ce665
+		summarizeBy: none
+		sourceColumn: Macrofaction
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MacroFactions = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Factions,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Macrofaction"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_ResultType = Table
+
