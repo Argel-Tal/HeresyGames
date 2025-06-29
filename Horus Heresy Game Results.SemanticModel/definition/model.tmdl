@@ -1,0 +1,77 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-AU
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup '01 GitHub Tables\01.01 Player Logs'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup '00 Utilities'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '01 GitHub Tables\01.00 GameMeta'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '00 Utilities\00.02 Support Tables'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup '00 Utilities\00.01 Parameters'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '01 GitHub Tables'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup '01.03 Lists'
+
+	annotation PBI_QueryGroupOrder = 10
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.132.1053.0 (24.08)
+
+annotation PBI_QueryOrder = ["GitURL","BranchName","playerlogs","playerLog Sample File","playerLog sample file Param","playerlog Sample table","playerLog Transform","GameMeta","GameMeta Sample File","GameMeta sample file param","GameMeta Sample table","GameMeta Transform","MeasuresTable","Warlord Traits","Factions","MacroFactions","Deployment Maps","Missions","Force Organisations","Subfactions","Index - Result","ListImport","ArmyLists","Index - Force Org","branchForLists"]
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
+
+ref table playerlogs
+ref table GameMeta
+ref table MeasuresTable
+ref table 'Warlord Traits'
+ref table Factions
+ref table 'Deployment Maps'
+ref table Missions
+ref table 'Force Organisations'
+ref table Subfactions
+ref table 'Measure by'
+ref table 'Index - Result'
+ref table ArmyLists
+ref table 'Index - Force Org'
+ref table MacroFactions
+
+ref cultureInfo en-US
+

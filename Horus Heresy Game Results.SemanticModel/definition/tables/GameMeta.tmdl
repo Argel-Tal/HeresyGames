@@ -1,0 +1,67 @@
+table GameMeta
+	lineageTag: 0eb22fc7-57ad-49aa-8884-90e4e9487049
+
+	column Mission
+		dataType: string
+		lineageTag: bf82d08d-4dac-4308-9f92-da6497d1efce
+		summarizeBy: none
+		sourceColumn: Mission
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deployment
+		dataType: string
+		lineageTag: 832d27c7-8b19-43f5-8613-d22451b02d58
+		summarizeBy: none
+		sourceColumn: Deployment
+
+		annotation SummarizationSetBy = Automatic
+
+	column gamesize
+		dataType: int64
+		formatString: 0
+		lineageTag: f4298b3f-2176-4e79-9284-f370bbcae9e9
+		summarizeBy: sum
+		sourceColumn: gamesize
+
+		annotation SummarizationSetBy = Automatic
+
+	column GameIDs
+		dataType: string
+		lineageTag: efad7f1a-7300-4435-874f-c4b507921689
+		summarizeBy: none
+		sourceColumn: GameIDs
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GameMeta = m
+		mode: import
+		queryGroup: '01 GitHub Tables\01.00 GameMeta'
+		source =
+				let
+				    Source = Json.Document(
+				            Web.Contents(
+				                "https://api.github.com"
+				                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/records/games?ref=" & BranchName]
+				            )
+				    ),
+				    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Expanded Source TB" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+				    #"Fetch binary files" = Table.AddColumn(#"Expanded Source TB", "Contents", each Web.Contents([download_url])),
+				    #"Filtered Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
+				    #"Fetch CSV Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Csv.Document([Contents])),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Fetch CSV Contents", {"Data"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Other Columns", "File Index", 0, 1, Int64.Type),
+				    #"Expanded Data" = Table.ExpandTableColumn(#"Added Index", "Data", {"Column1", "Column2", "Column3", "Column4"}, {"gameID", "gamesize", "Mission", "Deployment"}),
+				    #"Filtered out headers" = Table.SelectRows(#"Expanded Data", each not Text.Contains([gamesize], "gameSize")),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered out headers",{{"gamesize", Int64.Type}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Mission", Text.Proper, type text}, {"Deployment", Text.Proper, type text}}),
+				    #"Added key" = Table.AddColumn(#"Capitalized Each Word", "GameIDs", each [gameID] & Text.From([File Index]), type text),
+				    #"Removed partial key Columns" = Table.RemoveColumns(#"Added key",{"gameID", "File Index"})
+				in
+				    #"Removed partial key Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

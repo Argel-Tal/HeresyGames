@@ -1,0 +1,159 @@
+table playerlogs
+	lineageTag: 1bb3c248-9082-4d25-9fee-8a5ef95f2193
+
+	column forceOrg
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: f7257c39-68da-44e4-9e78-c34f756ac75c
+		summarizeBy: none
+		sourceColumn: forceOrg
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROW/Subfaction
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: fcae9fe1-70e0-49e9-8afc-5abcfbc0d216
+		summarizeBy: none
+		sourceColumn: ROW/Subfaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column alliedFaction
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: 933e9df4-98b7-4e73-8b2e-e2b4c3cc1de1
+		summarizeBy: none
+		sourceColumn: alliedFaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column VPs
+		dataType: int64
+		formatString: 0
+		displayFolder: Outcomes
+		lineageTag: 7c2484a6-84af-4a7c-837b-ae35c4e7a5b9
+		summarizeBy: none
+		sourceColumn: VPs
+
+		annotation SummarizationSetBy = User
+
+	column warlordTrait
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: dcbd7068-5fc7-492f-a605-7c7a5e58c0e7
+		summarizeBy: none
+		sourceColumn: warlordTrait
+
+		annotation SummarizationSetBy = Automatic
+
+	column Faction
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: 883aff79-fa17-43aa-a26c-2f00fbaa311b
+		summarizeBy: none
+		sourceColumn: Faction
+
+		annotation SummarizationSetBy = Automatic
+
+	column Warlord
+		dataType: string
+		displayFolder: List Parameters
+		lineageTag: e6337ff5-6091-442f-8488-b565a37857fb
+		summarizeBy: none
+		sourceColumn: Warlord
+
+		annotation SummarizationSetBy = Automatic
+
+	column listName
+		dataType: string
+		displayFolder: IDs
+		lineageTag: c8a08551-4e13-4a48-b89e-cb20d9a77c4c
+		summarizeBy: none
+		sourceColumn: listName
+
+		annotation SummarizationSetBy = Automatic
+
+	column PlayerID
+		dataType: string
+		lineageTag: c7e48d1b-79ee-455f-bf6e-aaea9590e5e7
+		summarizeBy: none
+		sourceColumn: PlayerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Winner
+		dataType: string
+		lineageTag: abed757f-b5a8-4c72-9674-9ceaab799adb
+		summarizeBy: none
+		sourceColumn: Winner
+
+		annotation SummarizationSetBy = Automatic
+
+	column GameIDs
+		dataType: string
+		lineageTag: d97d9149-575c-4f4c-98aa-fc818aaf0a75
+		summarizeBy: none
+		sourceColumn: GameIDs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'File Index'
+		dataType: string
+		lineageTag: 120afd1f-cc93-4dff-99b6-23dd9a263571
+		summarizeBy: none
+		sourceColumn: File Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition playerlogs = m
+		mode: import
+		queryGroup: '01 GitHub Tables\01.01 Player Logs'
+		source =
+				let
+				    Source = Json.Document(
+				            Web.Contents(
+				                "https://api.github.com"
+				                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=" & BranchName]
+				            )
+				    ),
+				    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Expanded Source Table" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+				    #"Fetch binary files" = Table.AddColumn(#"Expanded Source Table", "Contents", each Web.Contents([download_url])),
+				    #"Filtered out Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
+				    #"Expanded CSV Contents" = Table.AddColumn(#"Filtered out Hidden Files", "Data", each Csv.Document([Contents])),
+				    #"Kept only data" = Table.SelectColumns(#"Expanded CSV Contents",{"Data"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Kept only data", "File Index", 0, 1, Int64.Type),
+				    #"Expanded Data" = Table.ExpandTableColumn(#"Added Index"
+				        , "Data"
+				        , {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}
+				        , {"GameID", "Faction", "forceOrg", "ROWSubfaction", "alliedFaction", "warlordTrait", "VPs", "Warlord", "listName"}
+				    ),
+				    #"Filtered out headers" = Table.SelectRows(#"Expanded Data", each ([forceOrg] <> "forceOrg")),
+				    #"Split game ID" = Table.SplitColumn(#"Filtered out headers", "GameID", Splitter.SplitTextByEachDelimiter({"-"}, QuoteStyle.Csv, false), {"PlayerID", "GameID"}),
+				    #"Trimmed split columns" = Table.TransformColumns(#"Split game ID",{{"GameID", Text.Trim, type text}, {"PlayerID", Text.Trim, type text}}),
+				    #"Added Key" = Table.AddColumn(#"Trimmed split columns", "GameIDs", each [GameID] & Text.From([File Index]), type text),
+				    #"Removed partial key Columns" = Table.RemoveColumns(#"Added Key",{"GameID", "File Index"}),
+				    #"Changed VPs to int" = Table.TransformColumnTypes(#"Removed partial key Columns",{{"VPs", Int64.Type}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed VPs to int",{{"Warlord", Text.Proper, type text}, {"warlordTrait", Text.Proper, type text}, {"Faction", Text.Proper, type text}, {"forceOrg", Text.Proper, type text}}),
+				    #"Grouped Rows to calc winner" = Table.Group(#"Capitalized Each Word", {"GameIDs"}, {{"tb", each _, type table [GameID=nullable text,#" VPs"=text]}}),
+				    #"Duplicated summarised tb max" = Table.DuplicateColumn(#"Grouped Rows to calc winner", "tb", "tb - MaxVP"),
+				    #"Duplicated summarised tb min" = Table.DuplicateColumn(#"Duplicated summarised tb max", "tb", "tb - MinVPs"),
+				    #"Aggregated to find max VPs" = Table.AggregateTableColumn(#"Duplicated summarised tb min", "tb - MaxVP", {{"VPs", List.Max, "Max VPs"}}),
+				    #"Aggregated tb - MinVPs" = Table.AggregateTableColumn(#"Aggregated to find max VPs", "tb - MinVPs", {{"VPs", List.Min, "Min VPs"}}),
+				    #"Expanded tb" = Table.ExpandTableColumn(#"Aggregated tb - MinVPs"
+				        , "tb"
+				        , {"PlayerID", "Faction", "forceOrg", "ROWSubfaction", "alliedFaction", "warlordTrait", "VPs", "Warlord", "listName", "File Index"}
+				        , {"PlayerID", "Faction", "forceOrg", "ROW/Subfaction", "alliedFaction", "warlordTrait", "VPs", "Warlord", "listName", "File Index"}
+				        ),
+				    #"Added Winner col" = Table.AddColumn(#"Expanded tb", "Winner", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then "Draw" else if ([#"VPs"] = [Max VPs]) then "Win" else "Loss"),
+				    #"Enforced VPs as number" = Table.TransformColumnTypes(#"Added Winner col",{{"VPs", Int64.Type}, {"Min VPs", Int64.Type}, {"Max VPs", Int64.Type}}),
+				    #"Removed Aggregated columns" = Table.RemoveColumns(#"Enforced VPs as number",{"Max VPs", "Min VPs"}),
+				    #"Replaced blanks w/ nulls" = Table.ReplaceValue(#"Removed Aggregated columns","",null,Replacer.ReplaceValue,{"ROW/Subfaction", "alliedFaction"})
+				in
+				    #"Replaced blanks w/ nulls"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

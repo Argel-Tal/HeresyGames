@@ -1,0 +1,46 @@
+table 'Index - Force Org'
+	lineageTag: 59e5fa3a-84ca-4793-804d-1e2011b0c609
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: f228f039-6b11-47bb-8ee4-c331cb5de1bf
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = User
+
+	column SlotID
+		dataType: string
+		lineageTag: 73e13fea-b793-4032-a854-08422bc95d27
+		summarizeBy: none
+		sourceColumn: SlotID
+		sortByColumn: Index
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Force Org Slot'
+		dataType: string
+		lineageTag: 29099980-662f-4108-9930-b11436faa37b
+		summarizeBy: none
+		sourceColumn: Force Org Slot
+		sortByColumn: Index
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Index - Force Org' = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlDSUfIIhBCxOtFKhkCmU35KZXppYlEKChskawQUcc3JLEktRjBA4sZAbkhRfn5BMYIBEjcBct0Si0scS0oSk7OhHAUoD6TAFGRzamJZZXBpQUF+UQmMqwDjgxSZAUV98otSivPTwhOLYByF/DQFEDc2FgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, SlotID = _t, #"Force Org Slot" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Index", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

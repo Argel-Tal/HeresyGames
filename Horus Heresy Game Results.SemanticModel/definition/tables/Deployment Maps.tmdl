@@ -1,0 +1,24 @@
+table 'Deployment Maps'
+	lineageTag: 145ed490-c10a-4439-9c22-d86d3e30f4cb
+
+	column Maps
+		dataType: string
+		lineageTag: d22e4b75-402a-413f-80d7-a5b75e8ce362
+		summarizeBy: none
+		sourceColumn: Maps
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Deployment Maps' = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("HcyxDkAwEMbxV7l09hLCYLBJGBrD0aMNPcm1iLfHbd//N3zWmmrH5OFYIHuCNjCZsbCmxpt/HFC0O0KZPSA7qCllOR7lBmMkUS75CrtiGaczeZ098nqiOOiyhO27Hl8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Maps = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Maps", type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Maps", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_ResultType = Table
+

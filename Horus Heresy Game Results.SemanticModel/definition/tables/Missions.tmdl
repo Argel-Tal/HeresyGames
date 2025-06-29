@@ -1,0 +1,24 @@
+table Missions
+	lineageTag: c1e49b41-42f0-48b9-8cb2-11d2617ca06f
+
+	column Missions
+		dataType: string
+		lineageTag: 8c6fb601-a267-4e68-acb0-1a646ac9aad8
+		summarizeBy: none
+		sourceColumn: Missions
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Missions = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcsrJz09RcEstTVGK1YlW8s8rzkksTc8oAfOCMxJLSlKLFIJLijKzU8FCLvm5mXmZ+XlgTkhmSqpCfpqCc2JRXmI6REF4YhFIyCcztVgpNhYA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Missions = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Missions", type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Missions", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,116 @@
+table MeasuresTable
+	lineageTag: 5a95dd1a-5ba1-4238-be63-102e59600cbc
+
+	measure Wins =
+			CALCULATE(
+			    [Games]
+			    , FILTER('Index - Result', 'Index - Result'[Result] = "Win")
+			) // end calc))
+		formatString: 0
+		displayFolder: Metrics\Counts
+		lineageTag: 992db15c-574d-4358-be84-2cebcb509d35
+
+	measure Games =
+			CALCULATE(
+			    DISTINCTCOUNT(playerlogs[GameIDs])
+			    ) // end calc
+		formatString: 0
+		displayFolder: Metrics\Counts
+		lineageTag: fc089950-95ae-4907-aba6-d06f7f675070
+
+	measure 'Win rate' = IFERROR([Wins] / [Games], 0)
+		formatString: 0%;-0%;0%
+		displayFolder: Metrics\Rates
+		lineageTag: 33712573-8a94-48ed-b196-74db657626e6
+
+	measure 'Most picked Warlord' = ```
+			
+			    FIRSTNONBLANK(
+			        TOPN(
+			            1
+			            , VALUES(playerlogs[Warlord])
+			            , RANKX(ALL(playerlogs[Warlord]),[Games],,ASC)
+			        ), // end TOPN
+			        1
+			    ) // end FirstNonBlank
+			```
+		displayFolder: Most X
+		lineageTag: 16cdec54-e039-4764-a872-7a4036cc5f97
+
+	measure 'Most successful Warlord' = ```
+			
+			    FIRSTNONBLANK(
+			        TOPN(
+			            1
+			            , VALUES(playerlogs[Warlord])
+			            , RANKX(ALL(playerlogs[Warlord]),[Win rate],,ASC)
+			        ), // end TOPN
+			        1
+			    ) // end FirstNonBlank
+			```
+		displayFolder: Most X
+		lineageTag: dd271a88-a02b-461b-9e9d-8b873b5965a6
+
+	measure 'Most successful Warlord trait' = ```
+			
+			    FIRSTNONBLANK(
+			        TOPN(
+			            1
+			            , VALUES('Warlord Traits'[Name])
+			            , RANKX(ALL('Warlord Traits'[Name]),[wins],,ASC)
+			        ), // end TOPN
+			        1
+			    ) // end FirstNonBlank
+			```
+		displayFolder: Most X
+		lineageTag: 91168480-158d-4b1c-8e44-97c442a31b02
+
+	measure 'Win rate display' = if([Win rate] = 0, BLANK(), [Win rate] - 0.5)+0
+		formatString: 0%;-0%;0%
+		displayFolder: Metrics\Rates
+		lineageTag: 4efab7f5-8eba-479e-8115-0b758b2900a6
+
+	measure 'Units taken' =
+			CALCULATE(
+			    DISTINCTCOUNT(ArmyLists[unit ID])
+			)
+		formatString: 0
+		displayFolder: ArmyList
+		lineageTag: 9d674350-3799-4961-84e8-e2f30a640f30
+
+	measure 'Instances taken' =
+			CALCULATE(
+			    DISTINCTCOUNT(ArmyLists[option id])
+			)
+		formatString: 0
+		displayFolder: ArmyList
+		lineageTag: 3493f557-221a-410b-b20c-03edf4c20eff
+
+	measure 'Average VPs' =
+			CALCULATE(
+			    AVERAGE(playerlogs[VPs])
+			) // end calc
+		displayFolder: Metrics\Counts
+		lineageTag: 139e3857-72bc-4f22-81a9-e83805af43a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'FactionName Measure' =
+			CALCULATE(
+			    FIRSTNONBLANK(Factions[Faction], 1)
+			) // end calc
+		lineageTag: bdb28225-9932-41fc-86ad-89d0786830d0
+
+	partition MeasuresTable = m
+		mode: import
+		queryGroup: '00 Utilities'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
