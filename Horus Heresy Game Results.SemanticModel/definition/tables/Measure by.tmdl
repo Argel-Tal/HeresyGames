@@ -2,10 +2,8 @@ table 'Measure by'
 	lineageTag: 68b72fcf-a580-44af-9356-8696366b8e7b
 
 	column 'Measure By'
-		dataType: string
 		lineageTag: 81a2fd81-8aa7-4a45-8e8d-c711230492db
 		summarizeBy: none
-		isDataTypeInferred
 		sourceColumn: [Value1]
 		sortByColumn: 'Measure By Order'
 
@@ -15,11 +13,9 @@ table 'Measure by'
 		annotation SummarizationSetBy = Automatic
 
 	column 'Measure By Fields'
-		dataType: string
 		isHidden
 		lineageTag: ac943799-efff-4bf8-9741-94f7bfd7d773
 		summarizeBy: none
-		isDataTypeInferred
 		sourceColumn: [Value2]
 		sortByColumn: 'Measure By Order'
 
@@ -32,12 +28,10 @@ table 'Measure by'
 		annotation SummarizationSetBy = Automatic
 
 	column 'Measure By Order'
-		dataType: int64
 		isHidden
 		formatString: 0
 		lineageTag: f5d5d569-3617-4921-86ae-44343e63ec96
 		summarizeBy: none
-		isDataTypeInferred
 		sourceColumn: [Value3]
 
 		annotation SummarizationSetBy = User

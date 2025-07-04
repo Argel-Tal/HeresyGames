@@ -3,7 +3,6 @@
   "datasetReference": {
     "byPath": {
       "path": "../Horus Heresy Game Results.SemanticModel"
-    },
-    "byConnection": null
+    }
   }
 }

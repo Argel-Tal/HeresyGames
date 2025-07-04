@@ -129,7 +129,8 @@ table playerlogs
 				        , {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}
 				        , {"GameID", "Faction", "forceOrg", "ROWSubfaction", "alliedFaction", "warlordTrait", "VPs", "Warlord", "listName"}
 				    ),
-				    #"Filtered out headers" = Table.SelectRows(#"Expanded Data", each ([forceOrg] <> "forceOrg")),
+				    #"Filtered out empty rows" = Table.SelectRows(#"Expanded Data", each [GameID] <> null and [GameID] <> ""),
+				    #"Filtered out headers" = Table.SelectRows(#"Filtered out empty rows", each ([forceOrg] <> "forceOrg")),
 				    #"Split game ID" = Table.SplitColumn(#"Filtered out headers", "GameID", Splitter.SplitTextByEachDelimiter({"-"}, QuoteStyle.Csv, false), {"PlayerID", "GameID"}),
 				    #"Trimmed split columns" = Table.TransformColumns(#"Split game ID",{{"GameID", Text.Trim, type text}, {"PlayerID", Text.Trim, type text}}),
 				    #"Added Key" = Table.AddColumn(#"Trimmed split columns", "GameIDs", each [GameID] & Text.From([File Index]), type text),
