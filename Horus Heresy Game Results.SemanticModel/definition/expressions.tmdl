@@ -8,11 +8,13 @@ expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQu
 	annotation PBI_NavigationStepName = Navigation
 
 /// Which branch to pull data off
-expression BranchName = "FakeData" meta [IsParameterQuery=true, List={"Main", "FakeData", "PBI-InitialDev"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
+expression BranchName = "2025-06-Games" meta [IsParameterQuery=true, List={"Main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
 	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
 	queryGroup: '00 Utilities\00.01 Parameters'
 
 	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
 
 expression 'playerLog Sample File' =
 		let
@@ -161,4 +163,6 @@ expression branchForLists = "main" meta [IsParameterQuery=true, List={"main"}, D
 	queryGroup: '00 Utilities\00.01 Parameters'
 
 	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
 

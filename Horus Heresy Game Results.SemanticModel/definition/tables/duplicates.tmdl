@@ -1,0 +1,29 @@
+/// If TRUE then errors in dataset
+table duplicates
+	lineageTag: d8666d55-c0c3-42fc-87e7-e1138df10f36
+
+	column duplicates
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5c1334ca-9ebb-455d-84df-59be94e186b1
+		summarizeBy: none
+		sourceColumn: duplicates
+
+		annotation SummarizationSetBy = Automatic
+
+	partition duplicates = m
+		mode: import
+		queryGroup: '98 Validations'
+		source =
+				let
+				    Source = playerlogs,
+				    #"Grouped Rows" = Table.Group(Source, {"GameIDs"}, {{"Count", each Table.RowCount(_), Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Grouped Rows", each [Count] <> 2),
+				    #"check empty" = Table.RowCount(#"Filtered Rows") <> 0
+				in
+				    #"check empty"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Logical
+
