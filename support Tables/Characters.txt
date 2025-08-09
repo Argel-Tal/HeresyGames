@@ -1,0 +1,44 @@
+unitName	faction
+Praetor	Legions
+Praetor Tribune	Legions
+Centurion	Legions
+Chaplain	Legions
+Champion	Legions
+Vigilator	Legions
+Forge Lord	Legions
+Siege Breaker	Legions
+Delegatus	Legions
+Warmonger	Legions
+Mortificator	Legions
+Primus Nullificator	Legions
+Master of Signals	Legions
+Moritat	Legions
+Librarian	Legions
+Primus Medicae	Legions
+Praevian	Legions
+Herald	Legions
+Armistos	Legions
+Esoterist	Legions
+Legate Commander	Solar Auxilia
+Lord Marshal	Solar Auxilia
+Lord Marshal Ireton MaSade	Solar Auxilia
+Strategos	Solar Auxilia
+Auxilia Tank Commander	Solar Auxilia
+Force Commander	Militia & Cults
+Discipline Master	Militia & Cults
+Platoon Commander	Militia & Cults
+Rogue Psyker	Militia & Cults
+Rogue Psyker Alpha	Militia & Cults
+Seneschal	Questoris Knights
+Lord Scion	Questoris Knights
+Archmagos Draykavac	Questoris Knights
+Archmagos Draykavac	Mechanicum
+Archmagos Inar Satarael	Mechanicum
+Magos Reductor Calleb Decima	Mechanicum
+Anacharis Scoria	Mechanicum
+Magos Dominus	Mechanicum
+Magos Prime	Mechanicum
+Magos reductor	Mechanicum
+Archmagos Dominus	Mechanicum
+Magos Reductor	Mechanicum
+Secutarii Axiarch	Mechanicum

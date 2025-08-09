@@ -1,0 +1,25 @@
+Macrofaction	Faction
+Mechanicum	Mechanicum
+Solar Auxilia	Solar Auxilia
+Militia & Cults	Militia & Cults
+Questoris Knights	Questoris Knights
+Legions	Dark Angels
+Legions	Emperor's Children
+Legions	Iron Warriors
+Legions	White Scars
+Legions	Space Wolves
+Legions	Imperial Fists
+Legions	Night Lords
+Legions	Blood Angels
+Legions	Iron Hands
+Legions	World Eaters
+Legions	Ultramarines
+Legions	Death Guard
+Legions	Thousand Sons
+Legions	Sons of Horus
+Legions	Word Bearers
+Legions	Salamanders
+Legions	Raven Guard
+Legions	Alpha Legion
+Legions	Blackshields
+Legions	Shattered Legions
