@@ -1,49 +1,49 @@
-Faction	Index	Name	Effect
-Mechanicum	1	Master of Mechanisms	Select one MC unit or vehicle squadron with at least AV12 or more in the same detachment. This unit/squadron gets It Will Not Die.
-Mechanicum	2	Perfected Targeting	In the Shooting phase, select a Heavy weapon within 6 inches of the Warlord. The weapon counts as Twin-linked for the turn.
-Mechanicum	3	Predictive Augury	The Warlord and his unit's overwatch hits on a 5+
-Mechanicum	4	The Death of Flesh	All units in the detachment have Preferred Enemy (Infantry - All Types) while within 3 inches of an objective.
-Mechanicum	5	Dread Rites	The Warlord and his unit have seen and done some serious shit. They both cause Fear and are immune to it, and also gain Adamantium Will.
-Mechanicum	6	Battlefield Analysis	After deployment but before the game begins, select a piece of terrain in the opponent's deployment zone and reduce its cover save by -1.
-Command	1	Inspiring Presence	Friendly units within 12 inches of the Warlord can use his Leadership rather than their own.
-Command	2	Intimidating Presence	Enemy units within 12 inches of the Warlord must use their lowest Leadership value, not the highest.
-Command	3	The Dust of a Thousand Worlds	Your Warlord, and all friendly units within 12 inches, have the Move Through Cover special rule.
-Command	4	Master of the Vanguard	Your Warlord, and all friendly units within 12 inches, add 1 inches to the distance that they can move when they Run or Charge.
-Command	5	Target Priority	In the Shooting phase, your Warlord and all friendly units within 12 inches of him re-roll To Hit rolls of 1.
-Command	6	Coordinated Assault	In the Assault phase, your Warlord and all friendly units within 12 inches of him re-roll To Hit rolls of 1.
-Personal	1	Master of Defence	Your Warlord has the Counter-attack special rule.
-Personal	2	Master of Offence	Your Warlord has the Furious Charge special rule.
-Personal	3	Master of Manoeuvre	Your Warlord has the Outflank special rule.
-Personal	4	Legendary Fighter	Your army gains 1 Victory Point for each enemy character slain by your Warlord in a challenge.
-Personal	5	Tenacity	Your Warlord has the Feel No Pain special rule.
-Personal	6	Immovable Object	Your Warlord has the Fearless and It Will Not Die special rules.
-Strategic	1	Conqueror of Cities	Your units have the Move Through Cover special rule if moving through Ruins, and the Stealth (Ruins) special rule.
-Strategic	2	Night Attacker	If you choose to use the Night Fighting rules in your game, there is no need to roll – it is Night on the first turn, and all models in your army have the Night Vision special rule.
-Strategic	3	Master of Ambush	Your Warlord and three non-vehicle units of your choice have the Infiltrate special rule.
-Strategic	4	Strategic Genius	You add +1 to any Seize the Initiative roll. In addition, whilst your Warlord is alive, you can re-roll any Reserve Rolls (failed or successful).
-Strategic	5	Divide to Conquer	Whilst your Warlord is alive, your opponent has a -1 modifier to their Reserve Rolls.
-Strategic	6	Princeps of Deceit	At the start of your opponent’s first turn, pick 3 units in the enemy army. Each of these units must take a Pinning test.
-Legions	1	Bloody Handed	The Warlord and any attached Legiones Astartes cause FEAR.
-Legions	2	Master Tactician	After both have deployed, but before the 1st turn, you may redeploy, or even move one unit from/to reserve.
-Legions	3	World Burner	Nominate D3 units from your Primary Detachment. Their Blast and Template weapons gain Shred.
-Legions	4	Paladin of Glory	Hello Astartes. Look at your Praetor, now back to me, now back at your Praetor, now back to me. Sadly, he isn't me, but if he became a Paladin of Glory, he could be Fearless like he's me. Look down, back up. Where are you? You're in close combat, adding +1 to the combat score of every unit 6 inches around you. Anything is possible when your Praetor is a Paladin of Glory. I'm on a Spartan assault tank.
-Legions	5	Void Walker	Your Praetor gains Adamantium Will and one unit can Deep strike.
-Legions	6	Child of Terra	He and any attached unit rerolls failed To-Wounds of 1.
-Solar Auxilia	1	Uncanny Survivor	Your squishy humie is now an Eternal Warrior.
-Solar Auxilia	2	Shattering Bombardment	Warlord grants Twin-Linked to a single Ordnance weapon within 6 inches.
-Solar Auxilia	3	Bitter Blood	Gains Hatred, but only in challenges.
-Solar Auxilia	4	Blind Barrage	At the start of the game you can give all friendly SA units the Shrouded USR.
-Solar Auxilia	5	Void Master	Being a Rogue Trader makes him Stubborn and any unit they join gains Move Through Cover.
-Solar Auxilia	6	Siege Master	After deployment, before Scout redeployments and Infiltrate moves, one piece of terrain in your opponent’s deployment zone has its cover save decreased by one.
-Militia & Cults	1	Ruthless Tyrant	Gain +1 Leadership (to max 9) and the army may reroll Reserves
-Militia & Cults	2	Merchant Princeling	One infantry unit get better ranged weapons, and count their AP as one value better.
-Militia & Cults	3	Beloved of the People	If the warlord ever dies, then the rest of his army gets Hatred from the remainder of the game.
-Militia & Cults	4	Marcher Lord	The warlord gains Implacable Advance (becoming a scoring unit in AoD games) and Stubborn while within 3 inches of an objective.
-Militia & Cults	5	Connoisseur of Alien Curios	The Warlord gains the Fear and It Will Not Die special rules
-Militia & Cults	6	Robber Baron	The warlord can voluntarily fail any morale check and may also re-roll Run or Fall Back distances.
-Questoris Knight	1	Hell Rider	Warlord & Knights within 12 inches get +1 to Movement and to wound/armour penetration on turn 1 of a game.
-Questoris Knight	2	Glorious Renown	Friendly units within 12 inches may re-roll failed morale checks and enemies suffer -2 to Ld
-Questoris Knight	3	Favoured of Mars	One Knight's weapon gains Master Crafted
-Questoris Knight	4	Lord of the Abyss	Warlord gets Monster Hunter and Adamantium Will
-Questoris Knight	5	Puissant Commander	+1 to Seize the Initiative and -1 to enemy reserve rolls
-Questoris Knight	6	Indomitable	The Warlord gains the It Will Not Die special rule.
+Faction~Index~Name~Effect
+Mechanicum~1~Master of Mechanisms~Select one MC unit or vehicle squadron with at least AV12 or more in the same detachment. This unit/squadron gets It Will Not Die.
+Mechanicum~2~Perfected Targeting~In the Shooting phase, select a Heavy weapon within 6 inches of the Warlord. The weapon counts as Twin-linked for the turn.
+Mechanicum~3~Predictive Augury~The Warlord and his unit's overwatch hits on a 5+
+Mechanicum~4~The Death of Flesh~All units in the detachment have Preferred Enemy (Infantry - All Types) while within 3 inches of an objective.
+Mechanicum~5~Dread Rites~The Warlord and his unit have seen and done some serious shit. They both cause Fear and are immune to it, and also gain Adamantium Will.
+Mechanicum~6~Battlefield Analysis~After deployment but before the game begins, select a piece of terrain in the opponent's deployment zone and reduce its cover save by -1.
+Command~1~Inspiring Presence~Friendly units within 12 inches of the Warlord can use his Leadership rather than their own.
+Command~2~Intimidating Presence~Enemy units within 12 inches of the Warlord must use their lowest Leadership value, not the highest.
+Command~3~The Dust of a Thousand Worlds~Your Warlord, and all friendly units within 12 inches, have the Move Through Cover special rule.
+Command~4~Master of the Vanguard~Your Warlord, and all friendly units within 12 inches, add 1 inches to the distance that they can move when they Run or Charge.
+Command~5~Target Priority~In the Shooting phase, your Warlord and all friendly units within 12 inches of him re-roll To Hit rolls of 1.
+Command~6~Coordinated Assault~In the Assault phase, your Warlord and all friendly units within 12 inches of him re-roll To Hit rolls of 1.
+Personal~1~Master of Defence~Your Warlord has the Counter-attack special rule.
+Personal~2~Master of Offence~Your Warlord has the Furious Charge special rule.
+Personal~3~Master of Manoeuvre~Your Warlord has the Outflank special rule.
+Personal~4~Legendary Fighter~Your army gains 1 Victory Point for each enemy character slain by your Warlord in a challenge.
+Personal~5~Tenacity~Your Warlord has the Feel No Pain special rule.
+Personal~6~Immovable Object~Your Warlord has the Fearless and It Will Not Die special rules.
+Strategic~1~Conqueror of Cities~Your units have the Move Through Cover special rule if moving through Ruins, and the Stealth (Ruins) special rule.
+Strategic~2~Night Attacker~If you choose to use the Night Fighting rules in your game, there is no need to roll – it is Night on the first turn, and all models in your army have the Night Vision special rule.
+Strategic~3~Master of Ambush~Your Warlord and three non-vehicle units of your choice have the Infiltrate special rule.
+Strategic~4~Strategic Genius~You add +1 to any Seize the Initiative roll. In addition, whilst your Warlord is alive, you can re-roll any Reserve Rolls (failed or successful).
+Strategic~5~Divide to Conquer~Whilst your Warlord is alive, your opponent has a -1 modifier to their Reserve Rolls.
+Strategic~6~Princeps of Deceit~At the start of your opponent’s first turn, pick 3 units in the enemy army. Each of these units must take a Pinning test.
+Legions~1~Bloody Handed~The Warlord and any attached Legiones Astartes cause FEAR.
+Legions~2~Master Tactician~After both have deployed, but before the 1st turn, you may redeploy, or even move one unit from/to reserve.
+Legions~3~World Burner~Nominate D3 units from your Primary Detachment. Their Blast and Template weapons gain Shred.
+Legions~4~Paladin of Glory~Hello Astartes. Look at your Praetor, now back to me, now back at your Praetor, now back to me. Sadly, he isn't me, but if he became a Paladin of Glory, he could be Fearless like he's me. Look down, back up. Where are you? You're in close combat, adding +1 to the combat score of every unit 6 inches around you. Anything is possible when your Praetor is a Paladin of Glory. I'm on a Spartan assault tank.
+Legions~5~Void Walker~Your Praetor gains Adamantium Will and one unit can Deep strike.
+Legions~6~Child of Terra~He and any attached unit rerolls failed To-Wounds of 1.
+Solar Auxilia~1~Uncanny Survivor~Your squishy humie is now an Eternal Warrior.
+Solar Auxilia~2~Shattering Bombardment~Warlord grants Twin-Linked to a single Ordnance weapon within 6 inches.
+Solar Auxilia~3~Bitter Blood~Gains Hatred, but only in challenges.
+Solar Auxilia~4~Blind Barrage~At the start of the game you can give all friendly SA units the Shrouded USR.
+Solar Auxilia~5~Void Master~Being a Rogue Trader makes him Stubborn and any unit they join gains Move Through Cover.
+Solar Auxilia~6~Siege Master~After deployment, before Scout redeployments and Infiltrate moves, one piece of terrain in your opponent’s deployment zone has its cover save decreased by one.
+Militia & Cults~1~Ruthless Tyrant~Gain +1 Leadership (to max 9) and the army may reroll Reserves
+Militia & Cults~2~Merchant Princeling~One infantry unit get better ranged weapons, and count their AP as one value better.
+Militia & Cults~3~Beloved of the People~If the warlord ever dies, then the rest of his army gets Hatred from the remainder of the game.
+Militia & Cults~4~Marcher Lord~The warlord gains Implacable Advance (becoming a scoring unit in AoD games) and Stubborn while within 3 inches of an objective.
+Militia & Cults~5~Connoisseur of Alien Curios~The Warlord gains the Fear and It Will Not Die special rules
+Militia & Cults~6~Robber Baron~The warlord can voluntarily fail any morale check and may also re-roll Run or Fall Back distances.
+Questoris Knight~1~Hell Rider~Warlord & Knights within 12 inches get +1 to Movement and to wound/armour penetration on turn 1 of a game.
+Questoris Knight~2~Glorious Renown~Friendly units within 12 inches may re-roll failed morale checks and enemies suffer -2 to Ld
+Questoris Knight~3~Favoured of Mars~One Knight's weapon gains Master Crafted
+Questoris Knight~4~Lord of the Abyss~Warlord gets Monster Hunter and Adamantium Will
+Questoris Knight~5~Puissant Commander~+1 to Seize the Initiative and -1 to enemy reserve rolls
+Questoris Knight~6~Indomitable~The Warlord gains the It Will Not Die special rule.
