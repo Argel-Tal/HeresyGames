@@ -1,0 +1,52 @@
+table 'Measure by'
+	lineageTag: 68b72fcf-a580-44af-9356-8696366b8e7b
+
+	column 'Measure By'
+		lineageTag: 81a2fd81-8aa7-4a45-8e8d-c711230492db
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Measure By Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Measure By Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure By Fields'
+		isHidden
+		lineageTag: ac943799-efff-4bf8-9741-94f7bfd7d773
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Measure By Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "kind": 2,
+				  "version": 3
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure By Order'
+		isHidden
+		formatString: 0
+		lineageTag: f5d5d569-3617-4921-86ae-44343e63ec96
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Measure by' = calculated
+		mode: import
+		source =
+				{
+				    ("Subfactions", NAMEOF('Subfactions'[Subfactions]), 1)
+				    , ("ForceOrg", NAMEOF('Force Organisations'[ForceOrg]), 2)
+				    , ("Deployment", NAMEOF('Deployment Maps'[Maps]), 3)
+				    , ("Mission", NAMEOF('Missions'[Missions]), 4)
+				    , ("Warlord", NAMEOF('playerlogs'[Warlord]), 5)
+				    , ("Warlord Trait", NAMEOF('playerlogs'[warlordTrait]), 6)
+				}
+
+	annotation PBI_Id = 41f029c0625541d38acc299a96189b58
+

@@ -1,0 +1,54 @@
+table 'Warlord Traits'
+	lineageTag: 3a53066d-17fa-4231-a10b-c6386b13f3df
+
+	column Faction
+		dataType: string
+		isHidden
+		lineageTag: b7cc3b22-e4c5-4099-81de-9483c82113d6
+		summarizeBy: none
+		sourceColumn: Faction
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: aab38495-27ff-4400-9653-b181afb388e0
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = User
+
+	column Name
+		dataType: string
+		lineageTag: 85969730-4527-4790-bb5b-b369b5f9787b
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Effect
+		dataType: string
+		lineageTag: 9b39d151-2ecf-4c18-a0c6-2223ff0032ea
+		summarizeBy: none
+		sourceColumn: Effect
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Warlord Traits' = m
+		mode: import
+		queryGroup: '00 Utilities\00.02 Support Tables'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Faction = _t, Index = _t, Name = _t, Effect = _t]),
+				    #"Trimmed Text" = Table.TransformColumns(Source,{{"Faction", Text.Trim, type text}, {"Index", Text.Trim, type text}, {"Name", Text.Trim, type text}, {"Effect", Text.Trim, type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Trimmed Text",{{"Faction", type text}, {"Index", Int64.Type}, {"Name", type text}, {"Effect", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,185 @@
+table ArmyLists
+	lineageTag: 221556c5-242e-41a4-9ffd-137e0c0d9292
+
+	column 'List id'
+		dataType: string
+		displayFolder: ID #s
+		lineageTag: e86985f2-5e65-4005-8ac6-f46d2da06ada
+		summarizeBy: none
+		sourceColumn: List id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Selection'
+		dataType: string
+		isHidden
+		displayFolder: Units & Options
+		lineageTag: 2ab852b3-cabc-4062-9671-5afd211cc43b
+		summarizeBy: none
+		sourceColumn: Unit Selection
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Faction
+		dataType: string
+		lineageTag: 018a75a1-fc05-479f-9901-2a7524c59c1f
+		summarizeBy: none
+		sourceColumn: Faction
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Force Org Slot Clean'
+		dataType: string
+		lineageTag: 1bce1525-b2af-4cde-8e8b-18060f74f984
+		summarizeBy: none
+		sourceColumn: Force Org Slot Clean
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Force Org'
+		dataType: string
+		lineageTag: 9998cc4f-87ad-40ba-9777-648f841314e6
+		summarizeBy: none
+		sourceColumn: Force Org
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'list name'
+		dataType: string
+		lineageTag: 6a58d7ee-de47-4d55-879f-c1cf7cb863f2
+		summarizeBy: none
+		sourceColumn: list name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Options'
+		dataType: string
+		isHidden
+		displayFolder: Units & Options
+		lineageTag: b80c449a-fc07-413d-9f7c-382f0156b133
+		summarizeBy: none
+		sourceColumn: Unit Options
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Model Options'
+		dataType: string
+		isHidden
+		displayFolder: Units & Options
+		lineageTag: 54e133b1-27af-40f2-a5e3-1ccbb6dfa253
+		summarizeBy: none
+		sourceColumn: Model Options
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weapons
+		dataType: string
+		isHidden
+		displayFolder: Units & Options
+		lineageTag: 53bf1183-5634-4c98-8a59-028160602d58
+		summarizeBy: none
+		sourceColumn: Weapons
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'unit ID'
+		dataType: string
+		displayFolder: ID #s
+		lineageTag: 9655648c-a408-4393-99a3-8d36e081f579
+		summarizeBy: none
+		sourceColumn: unit ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'option id'
+		dataType: string
+		displayFolder: ID #s
+		lineageTag: 14e7a049-4b38-463f-8069-516ef72c8dc7
+		summarizeBy: none
+		sourceColumn: option id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'weapon ID'
+		dataType: string
+		displayFolder: ID #s
+		lineageTag: 3c1ca2ab-1e5d-4dbe-a3a0-c3ace258e6c7
+		summarizeBy: none
+		sourceColumn: weapon ID
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Unit Hierarchy'
+		displayFolder: Units & Options
+		lineageTag: 0a5b8b1b-4306-4a7b-9f50-540e5505cd42
+
+		level 'Unit Selection'
+			lineageTag: 01ebe285-5432-4c45-95a4-c5d54764e109
+			column: 'Unit Selection'
+
+		level 'Unit Options'
+			lineageTag: 66b3fb15-e29c-4eb8-9dd2-713f588d803a
+			column: 'Unit Options'
+
+		level 'Model Options'
+			lineageTag: 00721e31-d0f4-49c2-a644-68b5d59f0faa
+			column: 'Model Options'
+
+		level Weapons
+			lineageTag: ba8f7293-7c49-413e-8b02-6e0349f124de
+			column: Weapons
+
+	partition ArmyLists = m
+		mode: import
+		queryGroup: '01.03 Lists'
+		source = ```
+				let
+				    Source = ListImport,
+				    #"Expanded forces Record" = Table.ExpandRecordColumn(Source, "roster", {"id", "name", "forces"}, {"List id", "list name", "forces"}),
+				    #"Expanded forces" = Table.ExpandListColumn(#"Expanded forces Record", "forces"),
+				    #"Expanded forces1" = Table.ExpandRecordColumn(#"Expanded forces", "forces", {"selections", "name", "catalogueName"}, {"forces.selections", "Force Org", "Faction"}),
+				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Expanded forces1", {{"Faction", each Text.AfterDelimiter(_, ") "), type text}}),
+				    #"Expanded forces.selections" = Table.ExpandListColumn(#"Extracted Text After Delimiter", "forces.selections"),
+				    #"Expanded forces.selections1" = Table.ExpandRecordColumn(#"Expanded forces.selections", "forces.selections", {"selections", "categories", "name", "id"}, {"Unit Options", "Unit categories", "Unit Selection", "unit ID"}),
+				    #"Expanded forces.selections.categories" = Table.ExpandListColumn(#"Expanded forces.selections1", "Unit categories"),
+				    #"Expanded forces.selections.categories1" = Table.ExpandRecordColumn(#"Expanded forces.selections.categories", "Unit categories", {"name"}, {"Force Org Slot"}),
+				    #"Added cleaned force org slot" = Table.AddColumn(#"Expanded forces.selections.categories1", "Force Org Slot Clean", each Text.Select([Force Org Slot], {"A".."z"})),
+				    #"Filtered to only force org slots" = Table.SelectRows(#"Added cleaned force org slot", each (
+				        [Force Org Slot Clean] = "HQ" 
+				        or [Force Org Slot Clean] = "Elites" 
+				        or [Force Org Slot Clean] = "Troops" 
+				        or [Force Org Slot Clean] = "FastAttack" 
+				        or [Force Org Slot Clean] = "HeavySupport" 
+				        or [Force Org Slot Clean] = "Lords of War"
+				        or [Force Org Slot Clean] = "Bodyguard"
+				        )
+				    ),
+				    #"Expanded Unit selection list" = Table.ExpandListColumn(#"Filtered to only force org slots", "Unit Options"),
+				    #"Expanded Unit Options record" = Table.ExpandRecordColumn(#"Expanded Unit selection list", "Unit Options", {"selections", "name", "id"}, {"subselections", "Unit Options", "option id"}),
+				    #"Expanded model options list" = Table.ExpandListColumn(#"Expanded Unit Options record", "subselections"),
+				    #"Expanded model options record" = Table.ExpandRecordColumn(#"Expanded model options list", "subselections", {"name", "selections", "id"}, {"Model Options", "selections", "weapon ID"}),
+				    #"Expanded weapon options list" = Table.ExpandListColumn(#"Expanded model options record", "selections"),
+				    #"Expanded weapon options record" = Table.ExpandRecordColumn(#"Expanded weapon options list", "selections", {"name"}, {"Weapons"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded weapon options record",{"List id", "list name", "Faction", "Force Org", "Force Org Slot Clean", "unit ID", "Unit Selection", "Unit Options", "option id", "Model Options", "Weapons", "weapon ID"}),
+				    #"Split Unit Selection by Comma" = Table.SplitColumn(#"Removed Other Columns", "Unit Selection", Splitter.SplitTextByEachDelimiter({","}, QuoteStyle.Csv, false), {"Unit Selection", "Unit Selection.delete"}),
+				    #"Split Unit Options by Comma" = Table.SplitColumn(#"Split Unit Selection by Comma", "Unit Options", Splitter.SplitTextByEachDelimiter({","}, QuoteStyle.Csv, false), {"Unit Options", "Unit Options.delete"}),
+				    // i.e. ", Legion (Compulsory)"
+				    #"Removed Columns of trailing names" = Table.RemoveColumns(#"Split Unit Options by Comma",{"Unit Selection.delete", "Unit Options.delete"}),
+				    #"Filtered out ""Legions astartes rows""" = Table.SelectRows(#"Removed Columns of trailing names", each not Text.Contains([Unit Options], "Legiones Astartes")),
+				    #"Replaced Value" = Table.ReplaceValue(#"Filtered out ""Legions astartes rows""","Legiones Astartes: Age of Darkness Army List","Legions",Replacer.ReplaceText,{"Faction"})
+				in
+				    #"Replaced Value"
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

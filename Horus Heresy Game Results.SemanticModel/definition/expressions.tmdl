@@ -1,0 +1,168 @@
+/// Where are we going?
+expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQuery=true, List={"/repos/Argel-Tal/HeresyGames/contents/"}, DefaultValue="/repos/Argel-Tal/HeresyGames/contents/", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 5106138a-39ff-4e06-bd40-c95f472d15d2
+	queryGroup: '00 Utilities\00.01 Parameters'
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+/// Which branch to pull data off
+expression BranchName = "2025-06-Games" meta [IsParameterQuery=true, List={"Main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
+	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
+	queryGroup: '00 Utilities\00.01 Parameters'
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'playerLog Sample File' =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = GitURL & "/records/player%20matches?ref=" & BranchName]
+		            )
+		    ),
+		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"ReadCSVs" = Table.AddColumn(#"Expanded Column1", "Contents", each Web.Contents([download_url])),
+		    Contents = ReadCSVs{0}[Contents]
+		in
+		    Contents
+	lineageTag: 03b1b911-829c-4a2d-a0dd-96884af44efe
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'playerLog sample file Param' = #"playerLog Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"playerLog Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 0e98d9ce-f1ed-479c-92ab-bd3094c5aec3
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'playerlog Sample table' =
+		let
+		    Source = Csv.Document(#"playerLog sample file Param",[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Trimmed Text" = Table.TransformColumns(Source,{{"Column1", Text.Trim, type text}, {"Column2", Text.Trim, type text}, {"Column3", Text.Trim, type text}, {"Column4", Text.Trim, type text}, {"Column5", Text.Trim, type text}, {"Column6", Text.Trim, type text}, {"Column7", Text.Trim, type text}}),
+		    #"Capitalized Each Word" = Table.TransformColumns(#"Trimmed Text",{{"Column1", Text.Proper, type text}, {"Column7", Text.Proper, type text}}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Capitalized Each Word", [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: 47d3d3dd-8574-4b51-bc91-0f0dcbcae792
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'playerLog Transform' =
+		let
+		    Source = (#"playerLog sample file Param" as binary) => let
+		    Source = Csv.Document(#"playerLog sample file Param",[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Trimmed Text" = Table.TransformColumns(Source,{{"Column1", Text.Trim, type text}, {"Column2", Text.Trim, type text}, {"Column3", Text.Trim, type text}, {"Column4", Text.Trim, type text}, {"Column5", Text.Trim, type text}, {"Column6", Text.Trim, type text}, {"Column7", Text.Trim, type text}}),
+		    #"Capitalized Each Word" = Table.TransformColumns(#"Trimmed Text",{{"Column1", Text.Proper, type text}, {"Column7", Text.Proper, type text}}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Capitalized Each Word", [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+		in
+		    Source
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""playerlog Sample table""}" ]
+	lineageTag: 85666415-5cca-43e6-9e79-949941851163
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+
+	annotation PBI_ResultType = Function
+
+expression 'GameMeta Sample File' =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = GitURL & "/records/games?ref=" & BranchName]
+		            )
+		    ),
+		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"Fetch files" = Table.AddColumn(#"Expanded Column1", "Contents", each Web.Contents([download_url])),
+		    #"Filtered Hidden Files1" = Table.SelectRows(#"Fetch files", each [Attributes]?[Hidden]? <> true),
+		    #"Fetch Contents" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File", each #"GameMeta Transform"([Contents])),
+		    Navigation1 = #"Fetch Contents"{0}[Contents]
+		in
+		    Navigation1
+	lineageTag: 78635b28-ae2c-495a-8ebc-d1dfa4fb77f7
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'GameMeta sample file param' = #"GameMeta Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"GameMeta Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 7ca63196-48c2-4049-9baa-2bbdff584f6d
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'GameMeta Sample table' =
+		let
+		    Source = Csv.Document(#"GameMeta sample file param",[Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Trimmed Text" = Table.TransformColumns(Source,{{"Column1", Text.Trim, type text}, {"Column2", Text.Trim, type text}, {"Column3", Text.Trim, type text}}),
+		    #"Capitalized Each Word" = Table.TransformColumns(#"Trimmed Text",{{"Column3", Text.Proper, type text}, {"Column2", Text.Proper, type text}, {"Column1", Text.Proper, type text}}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Capitalized Each Word", [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: 5701e3cd-9568-46be-b1a8-05ee9160cbd9
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'GameMeta Transform' =
+		let
+		    Source = (#"GameMeta sample file param" as binary) => let
+		    Source = Csv.Document(#"GameMeta sample file param",[Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Trimmed Text" = Table.TransformColumns(Source,{{"Column1", Text.Trim, type text}, {"Column2", Text.Trim, type text}, {"Column3", Text.Trim, type text}}),
+		    #"Capitalized Each Word" = Table.TransformColumns(#"Trimmed Text",{{"Column3", Text.Proper, type text}, {"Column2", Text.Proper, type text}, {"Column1", Text.Proper, type text}}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Capitalized Each Word", [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+		in
+		    Source
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""GameMeta Sample table""}" ]
+	lineageTag: cc8968ed-ed07-4076-b2bf-7c9dbf034f97
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+
+	annotation PBI_ResultType = Function
+
+expression ListImport =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = GitURL & "records/lists?ref=" & branchForLists]
+		            )
+		    ),
+		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Source Table" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"Filtered out DELTE file" = Table.SelectRows(#"Expanded Source Table", each not Text.Contains([name], "DELETE")),
+		    #"Fetch JSON" = Table.AddColumn(#"Filtered out DELTE file", "Contents", each Json.Document(Web.Contents([download_url]))),
+		    #"fetch Roster" = Table.ExpandRecordColumn(#"Fetch JSON", "Contents", {"roster"}, {"roster"})
+		in
+		    #"fetch Roster"
+	lineageTag: 6416e775-6b26-49ee-9cf0-6138dc1af47d
+	queryGroup: '01.03 Lists'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression branchForLists = "main" meta [IsParameterQuery=true, List={"main"}, DefaultValue="main", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 3f6f491e-c9d9-4ef5-90e2-de4c73b9e4e0
+	queryGroup: '00 Utilities\00.01 Parameters'
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
