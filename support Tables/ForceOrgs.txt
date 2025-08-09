@@ -1,6 +1,6 @@
-ForceOrgs	mechOnly
-matrixOfRuin	TRUE
-Crusade	FALSE
-Leviathan	FALSE
-Castellan	FALSE
-Onslaught	FALSE
+ForceOrgs~mechOnly
+matrixOfRuin~TRUE
+Crusade~FALSE
+Leviathan~FALSE
+Castellan~FALSE
+Onslaught~FALSE
