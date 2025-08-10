@@ -2,22 +2,22 @@
 library(stringr)
 
 ## File load
-setwd("C:/Users/64223/Documents/GitHub/HeresyGames")
+setwd("C:/Users/jackm/Documents/GitHub/HeresyGames")
 DirSupportTbs <- file.path(getwd(), "support Tables")
 files <- list.files(DirSupportTbs)
-DirGamelog <- file.path(getwd(), "records/games")
-DirPlayerLog <- file.path(getwd(), "records/player matches")
+DirGamelog <- file.path(getwd(), "fakeRecords/games")
+DirPlayerLog <- file.path(getwd(), "fakeRecords/player matches")
 # how many fake games are already logged
 ngames <- length(list.files(DirGamelog))
 
 ## tables for randomised selection
-Warlords  <- read.table(file = file.path(DirSupportTbs, files[1]), sep = '\t', header = TRUE, quote = "")
-Factions  <- read.table(file = file.path(DirSupportTbs, files[2]), sep = '\t', header = TRUE, quote = "")
-ForceOrgs <- read.table(file = file.path(DirSupportTbs, files[3]), sep = '\t', header = TRUE, quote = "")
-Maps      <- read.table(file = file.path(DirSupportTbs, files[4]), sep = '\t', header = TRUE, quote = "")
-Missions  <- read.table(file = file.path(DirSupportTbs, files[5]), sep = '\t', header = TRUE, quote = "")
-Subfactions <- read.table(file = file.path(DirSupportTbs, files[6]), sep = '\t', header = TRUE, quote = "")
-WarlordTraits <- read.table(file = file.path(DirSupportTbs, files[7]), sep = '\t', header = TRUE, quote = "")
+Warlords  <- read.table(file = file.path(DirSupportTbs, files[1]), sep = '~', header = TRUE, quote = "")
+Factions  <- read.table(file = file.path(DirSupportTbs, files[2]), sep = '~', header = TRUE, quote = "")
+ForceOrgs <- read.table(file = file.path(DirSupportTbs, files[3]), sep = '~', header = TRUE, quote = "")
+Maps      <- read.table(file = file.path(DirSupportTbs, files[4]), sep = '~', header = TRUE, quote = "")
+Missions  <- read.table(file = file.path(DirSupportTbs, files[5]), sep = '~', header = TRUE, quote = "")
+Subfactions <- read.table(file = file.path(DirSupportTbs, files[6]), sep = '~', header = TRUE, quote = "")
+WarlordTraits <- read.table(file = file.path(DirSupportTbs, files[7]), sep = '~', header = TRUE, quote = "")
 ptSizes <- seq(1000,5000, 50)
 
 gameHeaders <- c("gameSize", "mission", "deployment")
@@ -64,8 +64,8 @@ MakePlayerMeta <- function(index){
   } else { 
     forceOrg <- ForceOrgs[sample(2:dim(ForceOrgs)[1], 1), 1]
   }
-  # Create list of subfactions if faction has any - does not account for legion specific ROWs
-  listOfSubFactions <- c(Subfactions[,2] == parentFaction)
+  # Create list of subfactions if faction has any, filtering for legion specific ROWs - i.e. stop Iron Warriors running RG's Decapitation Strike
+  listOfSubFactions <- c(Subfactions[,2] == parentFaction & ((Subfactions[,3] == faction) | Subfactions[,3] == ""))
   # 2 / 3 times there should be a ROW
   if ((sample(3:27, 1) %% 3) != 0) {
     # not all factions have subs, so perform check to see if list from above is empty, proceeding if not

@@ -1,70 +1,69 @@
-Subfactions~AllowedIn
-Taghmata Omnissiah~Mechanicum
-Legio Cybernetica~Mechanicum
-Ordo Reductor~Mechanicum
-Angel's Wrath~Legions
-Armoured Spearhead~Legions
-Orbital Assault~Legions
-Pride of the Legion~Legions
-Armoured Breakthrough~Legions
-Primarch's Chosen~Legions
-Brethren of Iron~Legions
-Fury of the Ancients~Legions
-Legion Recon Company~Legions
-Zone Mortalis Assault Force~Legions
-Sky Hunter Phalanx~Legions
-Drop Assault Vanguard~Legions
-Sacrificial Offering~Legions
-Outcast Sons~Legions
-Orphans of Betrayal~Legions
-The Unbroken Vow~Legions
-The Serpent's Bane~Legions
-The Storm of War~Legions
-The Eskaton Imperative~Legions
-The Steel Fist~Legions
-The Seekers Arrow~Legions
-Ravenwing Protocol~Legions
-Ironwing Protocol~Legions
-The Maru Skara~Legions
-3rd Company Elite~Legions
-The Hammer of Olympia~Legions
-Ironfire~Legions
-Chogorian Brotherhood~Legions
-Sagyar Mazan~Legions
-The Pale Hunters~Legions
-The Bloodied Claws~Legions
-The Stone Gauntlet~Legions
-Hammerfell Strike Force~Legions
-Horror Cult~Legions
-Terror Assault~Legions
-The Cross of Bone~Legions
-The Bloodied Gauntlet~Legions
-The Swift Blade~Legions
-The Day of Revelation~Legions
-The Day of Sorrow~Legions
-The Head of the Gorgon~Legions
-Company of Bitter Iron~Legions
-Berserker Assault~Legions
-The Crimson Path~Legions
-The Logos Lectora~Legions
-Vigil Opertii Mission~Legions
-The Reaping~Legions
-Creeping Death~Legions
-The Axis of Dissolution~Legions
-The Guard of the Crimson King~Legions
-The Long March~Legions
-The Black Reaving~Legions
-Last of the Serrated Sun~Legions
-The Dark Brethren~Legions
-The Covenant of Fire~Legions
-The Awakening Fire~Legions
-Decapitation Strike~Legions
-Liberation Force~Legions
-The Coils of the Hydra~Legions
-Headhunter Leviathal~Legions
-After Isstvan~Legions
-Hunter-Killer Mission~Legions
-Death Seekers~Legions
-Orphans of War~Legions
-Outlanders~Legions
-Chymeriae~Legions
+Subfactions~AllowedIn~ExclusiveTo
+Taghmata Omnissiah~Mechanicum~
+Legio Cybernetica~Mechanicum~
+Ordo Reductor~Mechanicum~
+Angel's Wrath~Legions~
+Armoured Spearhead~Legions~
+Orbital Assault~Legions~
+Pride of the Legion~Legions~
+Armoured Breakthrough~Legions~
+Primarch's Chosen~Legions~
+Brethren of Iron~Legions~
+Fury of the Ancients~Legions~
+Legion Recon Company~Legions~
+Zone Mortalis Assault Force~Legions~
+Sky Hunter Phalanx~Legions~
+Drop Assault Vanguard~Legions~
+Sacrificial Offering~Legions~
+Outcast Sons~Legions~
+Orphans of Betrayal~Legions~
+After Isstvan~Legions~
+Hunter-Killer Mission~Legions~
+The Unbroken Vow~Legions~Dark Angels
+The Serpent's Bane~Legions~Dark Angels
+The Storm of War~Legions~Dark Angels
+The Eskaton Imperative~Legions~Dark Angels
+The Steel Fist~Legions~Dark Angels
+The Seekers Arrow~Legions~Dark Angels
+Ravenwing Protocol~Legions~Dark Angels
+Ironwing Protocol~Legions~Dark Angels
+The Maru Skara~Legions~Emperor's Children
+3rd Company Elite~Legions~Emperor's Children
+The Hammer of Olympia~Legions~Iron Warriors
+Ironfire~Legions~Iron Warriors
+Chogorian Brotherhood~Legions~White Scars
+Sagyar Mazan~Legions~White Scars
+The Pale Hunters~Legions~Space Wolves
+The Bloodied Claws~Legions~Space Wolves
+The Stone Gauntlet~Legions~Imperial Fists
+Hammerfell Strike Force~Legions~Imperial Fists
+Horror Cult~Legions~Night Lords
+The Cross of Bone~Legions~Night Lords
+The Bloodied Gauntlet~Legions~Night Lords
+The Swift Blade~Legions~Night Lords
+The Day of Revelation~Legions~Blood Angels
+The Day of Sorrow~Legions~Blood Angels
+The Head of the Gorgon~Legions~Iron Hands
+Company of Bitter Iron~Legions~Iron Hands
+Berserker Assault~Legions~World Eaters
+The Crimson Path~Legions~World Eaters
+The Logos Lectora~Legions~Ultramarines
+Vigil Opertii Mission~Legions~Ultramarines
+The Reaping~Legions~Death Guard
+Creeping Death~Legions~Death Guard
+The Axis of Dissolution~Legions~Thousand Sons
+The Guard of the Crimson King~Legions~Thousand Sons
+The Long March~Legions~Sons of Horus
+The Black Reaving~Legions~Sons of Horus
+Last of the Serrated Sun~Legions~Word Bearers
+The Dark Brethren~Legions~Word Bearers
+The Covenant of Fire~Legions~Salamanders
+The Awakening Fire~Legions~Salamanders
+Decapitation Strike~Legions~Raven Guard
+Liberation Force~Legions~Raven Guard
+The Coils of the Hydra~Legions~Alpha Legion
+Headhunter Leviathal~Legions~Alpha Legion
+Death Seekers~Legions~Blackshields
+Orphans of War~Legions~Blackshields
+Outlanders~Legions~Blackshields
+Chymeriae~Legions~Blackshields
