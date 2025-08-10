@@ -14,11 +14,15 @@ table 'Deployment Maps'
 		queryGroup: '00 Utilities\00.02 Support Tables'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("HcyxDkAwEMbxV7l09hLCYLBJGBrD0aMNPcm1iLfHbd//N3zWmmrH5OFYIHuCNjCZsbCmxpt/HFC0O0KZPSA7qCllOR7lBmMkUS75CrtiGaczeZ098nqiOOiyhO27Hl8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Maps = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Maps", type text}}),
+				    Source = #"supportTables-stg",
+				    Data = Source{3}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Maps", type text}}),
 				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Maps", Text.Proper, type text}})
 				in
 				    #"Capitalized Each Word"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

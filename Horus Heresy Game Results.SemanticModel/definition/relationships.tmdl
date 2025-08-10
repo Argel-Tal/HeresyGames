@@ -10,10 +10,6 @@ relationship d88105c0-11fe-4c5f-a4b2-601f0e63ef3e
 	fromColumn: playerlogs.warlordTrait
 	toColumn: 'Warlord Traits'.Name
 
-relationship 6f437bba-85ea-4bec-83b9-b77f6adcd15d
-	fromColumn: playerlogs.forceOrg
-	toColumn: 'Force Organisations'.ForceOrg
-
 relationship 556c5ae2-54f5-4b3e-b932-5509f705007b
 	fromColumn: playerlogs.Faction
 	toColumn: Factions.Faction
@@ -25,14 +21,6 @@ relationship 0bdb355f-75f5-4172-975a-1beb492d1ef7
 relationship 451b86fe-6297-4b7a-98c2-2592cae979ca
 	fromColumn: ArmyLists.'Force Org Slot Clean'
 	toColumn: 'Index - Force Org'.SlotID
-
-relationship 6e11bfea-6fe7-5067-2c0b-6c00cb38632a
-	fromColumn: ArmyLists.Faction
-	toColumn: MacroFactions.Macrofaction
-
-relationship c108ae54-717b-4a08-a502-101df8785e7e
-	fromColumn: Factions.Macrofaction
-	toColumn: MacroFactions.Macrofaction
 
 relationship e7dda1fa-4a20-b19e-7866-ee6906ad08d9
 	crossFilteringBehavior: bothDirections
@@ -47,4 +35,8 @@ relationship 1eaf492c-0025-5ab8-3e1f-c371e5c32690
 relationship 1df7c079-ec17-9c4d-3a26-c95b66412816
 	fromColumn: playerlogs.GameIDs
 	toColumn: GameMeta.GameIDs
+
+relationship 169560bd-86b5-9823-bb01-f2453a89f053
+	fromColumn: playerlogs.forceOrg
+	toColumn: 'Force Organisations'.ForceOrgs
 

@@ -14,11 +14,15 @@ table Missions
 		queryGroup: '00 Utilities\00.02 Support Tables'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcsrJz09RcEstTVGK1YlW8s8rzkksTc8oAfOCMxJLSlKLFIJLijKzU8FCLvm5mXmZ+XlgTkhmSqpCfpqCc2JRXmI6REF4YhFIyCcztVgpNhYA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Missions = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Missions", type text}}),
+				    Source = #"supportTables-stg",
+				    Data = Source{4}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Missions", type text}}),
 				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Missions", Text.Proper, type text}})
 				in
 				    #"Capitalized Each Word"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

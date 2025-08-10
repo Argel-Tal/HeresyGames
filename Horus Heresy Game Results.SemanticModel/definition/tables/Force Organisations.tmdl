@@ -1,11 +1,20 @@
 table 'Force Organisations'
 	lineageTag: 4ef12bc4-603f-440e-a561-b21da848f6d1
 
-	column ForceOrg
+	column ForceOrgs
 		dataType: string
-		lineageTag: 771e42b4-9492-433e-8da8-cec3e9ad6f27
+		lineageTag: b17eb7a7-7bae-4932-9292-f377b6ae7d44
 		summarizeBy: none
-		sourceColumn: ForceOrg
+		sourceColumn: ForceOrgs
+
+		annotation SummarizationSetBy = Automatic
+
+	column mechOnly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 21e6882d-b7db-4300-8999-b29c63fb4646
+		summarizeBy: none
+		sourceColumn: mechOnly
 
 		annotation SummarizationSetBy = Automatic
 
@@ -14,11 +23,16 @@ table 'Force Organisations'
 		queryGroup: '00 Utilities\00.02 Support Tables'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wci4qLU5MSVWK1YlW8k0sKcqsUMhPUwgqzcwDC/nnFecklqZnlIB5PqllmYklGYkQOefE4pLUnBwoz7EotxKk1SWxKFvBOT+3ICczMS8ZaHAsAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ForceOrg = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ForceOrg", type text}}),
-				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"ForceOrg", Text.Proper, type text}})
+				    Source = #"supportTables-stg",
+				    Data = Source{2}[Data],
+				    #"Split Column by Delimiter" = Table.SplitColumn(Data, "Column1", Splitter.SplitTextByDelimiter("~", QuoteStyle.Csv), {"Column1.1", "Column1.2"}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Split Column by Delimiter", [PromoteAllScalars=true]),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Promoted Headers",{{"ForceOrgs", Text.Proper, type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Capitalized Each Word",{{"mechOnly", type logical}})
 				in
-				    #"Capitalized Each Word"
+				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

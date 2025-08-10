@@ -9,15 +9,28 @@ table Subfactions
 
 		annotation SummarizationSetBy = Automatic
 
+	column AllowedIn
+		dataType: string
+		lineageTag: 98a3788c-c27a-4b37-ba1a-a35110d19d03
+		summarizeBy: none
+		sourceColumn: AllowedIn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Subfactions = m
 		mode: import
 		queryGroup: '00 Utilities\00.02 Support Tables'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bVTBbtswDP0VoecNKLbDzonTNkUTNEi6FljXA2PTtmBZMig5qff1oyTLcbtdDJikyMfHR76+Xm2wkkZkwxFJo5M5XL19eb16pMKIPRZ97gwFy0JXqH7319fffljxQuDqaKbW9ISFOHQIVCMU4/ujdKDEwlrolQu2HckChSmFq1GEsvpjiiUhNK4m01d1etEC5XUqm9XGYnzEsRyJ2ue7pzHTbU9DKrDQuUTtbHDEatxQzt/MtB3oITh+GY1ia4ixSpvQiltDOQb/oRnEutcOSexqUKDfg3lFppuin0FXPVBs/AA5yVLmkpt/LEskqavISO9ysE4cjLYjRV0N2nq8S3QEA6hgf2LwP/WRTMPdPZvzZDwgddxRImMJGi8+HlPrU70ATcYb24Djhu/bDnlg8jSPR1TiVlo3S48NEpNANBbdwwn1mRsQOzLO5CYC9HT/a/UptkC9ODRAUUTfqUhkixsl3aX8GtqWKWW8j2poOwlT4lJSDONZV4YkaJaF4YFSbUyiuBqAuNgf0FPGHSgcJ2Un41LxG8nKyhSc7ZwsnvodcLTCSEAEVKJS7CXZ4EwDa8OMkMiSjp8w/M+l7bNmZGycppkNZoLwoVxAcZalYz8Ul+gVBP3u8YSKB2b0Z8/BTNMJPPK+JcHfGarGB4l0D0Y6L95pRZbMDxIP+j/4ZWtZLbu02t644SFYXlZ/BuKQnmUlWdqsKCel2Epr5zD3CF1SfEaI/kescJ5y8S4DTSt+alT/ocs7v0epoQToISWMgDjh1h+FGcWQN77yKQVu/KKNWXhrWPv+QPVzNqkR6YRcGDCsd9Dh6W3SYYB8Bl5G38pkXmHOnbowpFEysbQ8hl1j60VBMblUNoFaD8VIp59gHQ/MBk+SiRrPwKIMc7PWnUaZR3V/fZBKsWfOfCA4LfDn45IuAh8gvl9FisjqgRUvgRG+/QU=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Subfactions = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Subfactions", type text}})
+				    Source = #"supportTables-stg",
+				    Data = Source{5}[Data],
+				    #"Split Column by Delimiter" = Table.SplitColumn(Data, "Column1", Splitter.SplitTextByDelimiter("~", QuoteStyle.Csv), {"Column1.1", "Column1.2"}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Split Column by Delimiter", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Subfactions", type text}})
 				in
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

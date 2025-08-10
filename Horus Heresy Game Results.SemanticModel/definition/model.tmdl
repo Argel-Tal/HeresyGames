@@ -56,9 +56,9 @@ queryGroup '98 Validations'
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+annotation PBIDesktopVersion = 2.145.1602.0 (25.07)+10647c9fa319b5e39936cdb21328038c371d1fe4
 
-annotation PBI_QueryOrder = ["GitURL","BranchName","playerlogs","playerLog Sample File","playerLog sample file Param","playerlog Sample table","playerLog Transform","GameMeta","GameMeta Sample File","GameMeta sample file param","GameMeta Sample table","GameMeta Transform","MeasuresTable","Warlord Traits","Factions","MacroFactions","Deployment Maps","Missions","Force Organisations","Subfactions","Index - Result","ListImport","ArmyLists","Index - Force Org","branchForLists","duplicates"]
+annotation PBI_QueryOrder = ["GitURL","BranchName","playerlogs","playerLog Sample File","playerLog sample file Param","playerlog Sample table","playerLog Transform","GameMeta","GameMeta Sample File","GameMeta sample file param","GameMeta Sample table","GameMeta Transform","MeasuresTable","supportTables-stg","Warlord Traits","Factions","Subfactions","Deployment Maps","Missions","Force Organisations","Index - Result","ListImport","ArmyLists","Index - Force Org","branchForLists","DataFolder","duplicates","supportTables-stg (2)"]
 
 annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
 
@@ -75,7 +75,6 @@ ref table 'Measure by'
 ref table 'Index - Result'
 ref table ArmyLists
 ref table 'Index - Force Org'
-ref table MacroFactions
 ref table duplicates
 
 ref cultureInfo en-US

@@ -8,7 +8,7 @@ expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQu
 	annotation PBI_NavigationStepName = Navigation
 
 /// Which branch to pull data off
-expression BranchName = "2025-06-Games" meta [IsParameterQuery=true, List={"Main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
+expression BranchName = "supportingtbs" meta [IsParameterQuery=true, List={"Main"}, DefaultValue=..., Type="Any", IsParameterQueryRequired=true]
 	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
 	queryGroup: '00 Utilities\00.01 Parameters'
 
@@ -21,7 +21,7 @@ expression 'playerLog Sample File' =
 		    Source = Json.Document(
 		            Web.Contents(
 		                "https://api.github.com"
-		                , [RelativePath = GitURL & "/records/player%20matches?ref=" & BranchName]
+		                , [RelativePath = GitURL & DataFolder & "/player%20matches?ref=" & BranchName]
 		            )
 		    ),
 		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -80,7 +80,7 @@ expression 'GameMeta Sample File' =
 		    Source = Json.Document(
 		            Web.Contents(
 		                "https://api.github.com"
-		                , [RelativePath = GitURL & "/records/games?ref=" & BranchName]
+		                , [RelativePath = GitURL & DataFolder & "/games?ref=" & BranchName]
 		            )
 		    ),
 		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -94,7 +94,7 @@ expression 'GameMeta Sample File' =
 	lineageTag: 78635b28-ae2c-495a-8ebc-d1dfa4fb77f7
 	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
 
-	annotation PBI_ResultType = Binary
+	annotation PBI_ResultType = Exception
 
 	annotation PBI_NavigationStepName = Navigation
 
@@ -141,7 +141,7 @@ expression ListImport =
 		    Source = Json.Document(
 		            Web.Contents(
 		                "https://api.github.com"
-		                , [RelativePath = GitURL & "records/lists?ref=" & branchForLists]
+		                , [RelativePath = GitURL & DataFolder & "/lists?ref=" & branchForLists]
 		            )
 		    ),
 		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -165,4 +165,60 @@ expression branchForLists = "main" meta [IsParameterQuery=true, List={"main"}, D
 	annotation PBI_ResultType = Text
 
 	annotation PBI_NavigationStepName = Navigation
+
+expression supportTables-stg =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/support%20Tables?ref=" & BranchName]
+		            )
+		    ),
+		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Source TB" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"Fetch binary files" = Table.AddColumn(#"Expanded Source TB", "Contents", each Web.Contents([download_url])),
+		    #"Filtered Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
+		    #"Fetch CSV Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Csv.Document([Contents])),
+		    #"removed TXT suffix" = Table.TransformColumns(#"Fetch CSV Contents", {{"name", each Text.BeforeDelimiter(_, ".txt"), type text}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"removed TXT suffix",{"name", "Data"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 37ac2d72-d685-4b1b-b31e-8cc477e527e2
+	queryGroup: '00 Utilities\00.02 Support Tables'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+/// Which folder are we looking in for games, the fake one or the main one
+expression DataFolder = "records" meta [IsParameterQuery=true, List={"records", "fakeRecords"}, DefaultValue="records", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 5da904f1-05df-460b-91e1-3581d032d5b2
+	queryGroup: '00 Utilities\00.01 Parameters'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression 'supportTables-stg (2)' =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/support%20Tables?ref=" & BranchName]
+		            )
+		    ),
+		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Source TB" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"Fetch binary files" = Table.AddColumn(#"Expanded Source TB", "Contents", each Web.Contents([download_url])),
+		    #"Filtered Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
+		    #"Fetch CSV Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Csv.Document([Contents])),
+		    #"removed TXT suffix" = Table.TransformColumns(#"Fetch CSV Contents", {{"name", each Text.BeforeDelimiter(_, ".txt"), type text}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"removed TXT suffix",{"name", "Data"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 778ffe52-9b74-4271-b914-6a22c0fbdb9c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 

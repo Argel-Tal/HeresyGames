@@ -14,30 +14,24 @@ table Factions
 		lineageTag: 1ad90d5e-19d2-456a-a71e-b4af8c92bf07
 		summarizeBy: none
 		sourceColumn: Faction
-		sortByColumn: 'Sort Order'
 
 		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
-
-	column 'Sort Order'
-		dataType: int64
-		formatString: 0
-		lineageTag: b16af6f9-111d-43eb-b263-ce64d15e0ea6
-		summarizeBy: none
-		sourceColumn: Sort Order
-
-		annotation SummarizationSetBy = User
 
 	partition Factions = m
 		mode: import
 		queryGroup: '00 Utilities\00.02 Support Tables'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("dZJLb8IwEIT/yipnDsS82iOvFlSo1IaKA+WwSlxsYWy0cVB/fm0TCXVLT9HMrOPZT97tsrUsFVpdNqes81uIXrbv7LLCGSQYN9/aaAw216KfxtZBeo3w2XS7YgjTxvg6/vG+LQbp0Fsja+9I1/Bi9UGl6J4nhml8JQ/a2WjMkI4wtgdpospZOj+dJTlKd45qmCptKpI2JD02uSRnYYtE2lHUfZZvlfYSihJTOmBpccZSwtaZi4ySl1zGGhoNPOk6rTFiA69xP1g5qqJ6YOnEOFfdlny8V32BNp3Nu7y4I1PBHL1MzXOO6MN4whOStql6zsHMJHoFzw1SFWPOZaNcU4e7objq/A+a8AH3BQtHTRrgcELBCiYSqS3I2RRoQj9btTGH844XaW/9OJyxOSuEq47vh+OZGCyPtdLSJHyC4ykU+oBOVnDzhEhDGzTtbl5JaJ9aRPKPL8Jm+x8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Macrofaction = _t, Faction = _t, #"Sort Order" = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Macrofaction", type text}, {"Faction", type text}, {"Sort Order", Int64.Type}})
+				    Source = #"supportTables-stg",
+				    Data = Source{1}[Data],
+				    #"Split Column by Delimiter" = Table.SplitColumn(Data, "Column1", Splitter.SplitTextByDelimiter("~", QuoteStyle.Csv), {"Column1.1", "Column1.2"}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Split Column by Delimiter", [PromoteAllScalars=true])
 				in
-				    #"Changed Type"
+				    #"Promoted Headers"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
