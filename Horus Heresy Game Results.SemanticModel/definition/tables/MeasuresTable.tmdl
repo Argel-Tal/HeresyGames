@@ -101,6 +101,9 @@ table MeasuresTable
 			) // end calc
 		lineageTag: bdb28225-9932-41fc-86ad-89d0786830d0
 
+	measure 'WinRate Colour' = IF([Win rate]>0.5, "#216C51", "#7D2116")
+		lineageTag: 03d9338e-cb58-4ed7-aefa-511b1829cc89
+
 	partition MeasuresTable = m
 		mode: import
 		queryGroup: '00 Utilities'

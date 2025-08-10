@@ -42,7 +42,7 @@ table GameMeta
 				    Source = Json.Document(
 				            Web.Contents(
 				                "https://api.github.com"
-				                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/records/games?ref=" & BranchName]
+				                , [RelativePath = GitURL & DataFolder & "/games?ref=" & BranchName]
 				            )
 				    ),
 				    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),

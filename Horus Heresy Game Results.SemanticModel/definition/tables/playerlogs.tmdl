@@ -109,12 +109,12 @@ table playerlogs
 	partition playerlogs = m
 		mode: import
 		queryGroup: '01 GitHub Tables\01.01 Player Logs'
-		source =
+		source = ```
 				let
 				    Source = Json.Document(
 				            Web.Contents(
 				                "https://api.github.com"
-				                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/records/player%20matches?ref=" & BranchName]
+				                ,  [RelativePath = GitURL & DataFolder & "/player%20matches?ref=" & BranchName]
 				            )
 				    ),
 				    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -151,9 +151,18 @@ table playerlogs
 				    #"Added Winner col" = Table.AddColumn(#"Expanded tb", "Winner", each if ([VPs] = [Max VPs] and [VPs] = [Min VPs]) then "Draw" else if ([#"VPs"] = [Max VPs]) then "Win" else "Loss"),
 				    #"Enforced VPs as number" = Table.TransformColumnTypes(#"Added Winner col",{{"VPs", Int64.Type}, {"Min VPs", Int64.Type}, {"Max VPs", Int64.Type}}),
 				    #"Removed Aggregated columns" = Table.RemoveColumns(#"Enforced VPs as number",{"Max VPs", "Min VPs"}),
-				    #"Replaced blanks w/ nulls" = Table.ReplaceValue(#"Removed Aggregated columns","",null,Replacer.ReplaceValue,{"ROW/Subfaction", "alliedFaction"})
+				    #"Replaced blanks w/ nulls" = Table.ReplaceValue(#"Removed Aggregated columns","",null,Replacer.ReplaceValue,{"ROW/Subfaction", "alliedFaction"}),
+				    #"AI replace" = 
+				            Table.ReplaceValue(
+				            #"Replaced blanks w/ nulls",
+				            each [#"ROW/Subfaction"], // Value to find (can be the value of the column itself)
+				            each if [Faction] = "Mechanicum" and [#"ROW/Subfaction"] = null then "Taghmata Omnissiah" else [#"ROW/Subfaction"], // Value to replace with (conditional)
+				            Replacer.ReplaceValue,
+				            {"ROW/Subfaction"}
+				        )
 				in
-				    #"Replaced blanks w/ nulls"
+				    #"AI replace"
+				```
 
 	annotation PBI_ResultType = Table
 

@@ -1,4 +1,5 @@
 Subfactions~AllowedIn
+Taghmata Omnissiah~Mechanicum
 Legio Cybernetica~Mechanicum
 Ordo Reductor~Mechanicum
 Angel's Wrath~Legions

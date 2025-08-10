@@ -197,7 +197,7 @@ expression supportTables-stg =
 	annotation PBI_ResultType = Table
 
 /// Which folder are we looking in for games, the fake one or the main one
-expression DataFolder = "records" meta [IsParameterQuery=true, List={"records", "fakeRecords"}, DefaultValue="records", Type="Text", IsParameterQueryRequired=true]
+expression DataFolder = "fakeRecords" meta [IsParameterQuery=true, List={"records", "fakeRecords"}, DefaultValue="records", Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 5da904f1-05df-460b-91e1-3581d032d5b2
 	queryGroup: '00 Utilities\00.01 Parameters'
 
