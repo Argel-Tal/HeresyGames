@@ -8,7 +8,7 @@ expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQu
 	annotation PBI_NavigationStepName = Navigation
 
 /// Which branch to pull data off
-expression BranchName = "supportingtbs" meta [IsParameterQuery=true, List={"Main"}, DefaultValue=..., Type="Any", IsParameterQueryRequired=true]
+expression BranchName = "fakeData-Comments" meta [IsParameterQuery=true, List={"Main"}, DefaultValue=..., Type="Any", IsParameterQueryRequired=true]
 	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
 	queryGroup: '00 Utilities\00.01 Parameters'
 
@@ -147,7 +147,7 @@ expression ListImport =
 		    Source = Json.Document(
 		            Web.Contents(
 		                "https://api.github.com"
-		                , [RelativePath = GitURL & DataFolder & "/lists?ref=" & branchForLists]
+		                , [RelativePath = GitURL & ListsFolder & "/lists?ref=" & branchForLists]
 		            )
 		    ),
 		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -199,6 +199,15 @@ expression supportTables-stg =
 /// Which folder are we looking in for games, the fake one or the main one
 expression DataFolder = "fakeRecords" meta [IsParameterQuery=true, List={"records", "fakeRecords"}, DefaultValue="records", Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 5da904f1-05df-460b-91e1-3581d032d5b2
+	queryGroup: '00 Utilities\00.01 Parameters'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+/// Which folder are we looking in for games, the fake one or the main one
+expression ListsFolder = "records" meta [IsParameterQuery=true, List={"records", "fakeRecords"}, DefaultValue="records", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c3d978ba-3d54-46f2-8142-353c31a9751b
 	queryGroup: '00 Utilities\00.01 Parameters'
 
 	annotation PBI_NavigationStepName = Navigation

@@ -65,7 +65,7 @@ table MeasuresTable
 		displayFolder: Most X
 		lineageTag: 91168480-158d-4b1c-8e44-97c442a31b02
 
-	measure 'Win rate display' = if([Win rate] = 0, BLANK(), [Win rate] - 0.5)+0
+	measure 'Win rate display' = if([Win rate] = 0, BLANK(), [Win rate] - 0.5)
 		formatString: 0%;-0%;0%
 		displayFolder: Metrics\Rates
 		lineageTag: 4efab7f5-8eba-479e-8115-0b758b2900a6
@@ -78,7 +78,7 @@ table MeasuresTable
 		displayFolder: ArmyList
 		lineageTag: 9d674350-3799-4961-84e8-e2f30a640f30
 
-	measure 'Instances taken' =
+	measure 'Times taken' =
 			CALCULATE(
 			    DISTINCTCOUNT(ArmyLists[option id])
 			)

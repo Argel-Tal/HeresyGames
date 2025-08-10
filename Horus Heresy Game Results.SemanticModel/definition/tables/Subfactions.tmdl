@@ -17,6 +17,14 @@ table Subfactions
 
 		annotation SummarizationSetBy = Automatic
 
+	column ExclusiveTo
+		dataType: string
+		lineageTag: 111902e4-3963-4c68-916c-b8c453d4ad65
+		summarizeBy: none
+		sourceColumn: ExclusiveTo
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Subfactions = m
 		mode: import
 		queryGroup: '00 Utilities\00.02 Support Tables\00.02.00 FromGit'
