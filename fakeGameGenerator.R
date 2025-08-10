@@ -60,9 +60,9 @@ MakePlayerMeta <- function(index){
   faction <- Factions[sample(1:dim(Factions)[1], 1),2]
   parentFaction <- Factions[match(faction,Factions[,2]), 1]
   if (parentFaction == "Mechanicum"){
-    forceOrg <- ForceOrgs[sample(1:dim(ForceOrgs)[1], 1),1] 
+    forceOrg <- sample(ForceOrgs,1) # if Mechanicum, grab all forceOrgs
   } else { 
-    forceOrg <- ForceOrgs[sample(2:dim(ForceOrgs)[1], 1), 1]
+    forceOrg <- sample(ForceOrgs[!ForceOrgs[,2],1], 1) # if not mechanicum, only sample from the ones that aren't exclusive to Mechanicum
   }
   # Create list of subfactions if faction has any, filtering for legion specific ROWs - i.e. stop Iron Warriors running RG's Decapitation Strike
   listOfSubFactions <- c(Subfactions[,2] == parentFaction & ((Subfactions[,3] == faction) | Subfactions[,3] == ""))
