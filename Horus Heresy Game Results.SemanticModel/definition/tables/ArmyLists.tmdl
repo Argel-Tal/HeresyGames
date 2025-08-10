@@ -139,7 +139,7 @@ table ArmyLists
 
 	partition ArmyLists = m
 		mode: import
-		queryGroup: '01.03 Lists'
+		queryGroup: '01 GitHub Tables\01.02 Lists'
 		source = ```
 				let
 				    Source = ListImport,

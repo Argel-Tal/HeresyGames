@@ -20,13 +20,13 @@ table 'Force Organisations'
 
 	partition 'Force Organisations' = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.02 Support Tables\00.02.00 FromGit'
 		source =
 				let
 				    Source = #"supportTables-stg",
 				    Data = Source{2}[Data],
-				    #"Split Column by Delimiter" = Table.SplitColumn(Data, "Column1", Splitter.SplitTextByDelimiter("~", QuoteStyle.Csv), {"Column1.1", "Column1.2"}),
-				    #"Promoted Headers" = Table.PromoteHeaders(#"Split Column by Delimiter", [PromoteAllScalars=true]),
+				    #"Converted to Table" = Table.FromList(Data, Splitter.SplitTextByDelimiter("~"), null, null, ExtraValues.Error),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Converted to Table", [PromoteAllScalars=true]),
 				    #"Capitalized Each Word" = Table.TransformColumns(#"Promoted Headers",{{"ForceOrgs", Text.Proper, type text}}),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Capitalized Each Word",{{"mechOnly", type logical}})
 				in

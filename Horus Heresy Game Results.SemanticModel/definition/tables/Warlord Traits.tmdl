@@ -39,15 +39,14 @@ table 'Warlord Traits'
 
 	partition 'Warlord Traits' = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.02 Support Tables\00.02.00 FromGit'
 		source =
 				let
 				    Source = #"supportTables-stg",
 				    Data = Source{6}[Data],
-				    #"Split Column by Delimiter" = Table.SplitColumn(Data, "Column1", Splitter.SplitTextByDelimiter("~", QuoteStyle.Csv), {"Column1.1", "Column1.2", "Column1.3", "Column1.4"}),
-				    #"Promoted Headers" = Table.PromoteHeaders(#"Split Column by Delimiter", [PromoteAllScalars=true]),
-				    #"TEMP RemoveErrors" = Table.RemoveRowsWithErrors(#"Promoted Headers", {"Faction"}),
-				    #"Changed all to types" = Table.TransformColumnTypes(#"TEMP RemoveErrors",{{"Faction", type text}, {"Index", Int32.Type}, {"Name", type text}, {"Effect", type text}})
+				    #"Converted to Table" = Table.FromList(Data, Splitter.SplitTextByDelimiter("~"), null, null, ExtraValues.Error),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Converted to Table", [PromoteAllScalars=true]),
+				    #"Changed all to types" = Table.TransformColumnTypes(#"Promoted Headers",{{"Faction", type text}, {"Index", Int32.Type}, {"Name", type text}, {"Effect", type text}})
 				in
 				    #"Changed all to types"
 

@@ -11,14 +11,14 @@ table Missions
 
 	partition Missions = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.02 Support Tables\00.02.00 FromGit'
 		source =
 				let
 				    Source = #"supportTables-stg",
 				    Data = Source{4}[Data],
-				    #"Promoted Headers" = Table.PromoteHeaders(Data, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Missions", type text}}),
-				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Missions", Text.Proper, type text}})
+				    #"Converted to Table" = Table.FromList(Data, Splitter.SplitTextByDelimiter("~"), null, null, ExtraValues.Error),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Converted to Table", [PromoteAllScalars=true]),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Promoted Headers",{{"Missions", Text.Proper, type text}})
 				in
 				    #"Capitalized Each Word"
 

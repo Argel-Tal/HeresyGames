@@ -31,7 +31,7 @@ expression 'playerLog Sample File' =
 		in
 		    Contents
 	lineageTag: 03b1b911-829c-4a2d-a0dd-96884af44efe
-	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs'
 
 	annotation PBI_ResultType = Binary
 
@@ -39,7 +39,7 @@ expression 'playerLog Sample File' =
 
 expression 'playerLog sample file Param' = #"playerLog Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"playerLog Sample File", Type="Binary", IsParameterQueryRequired=true]
 	lineageTag: 0e98d9ce-f1ed-479c-92ab-bd3094c5aec3
-	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs'
 
 	annotation PBI_ResultType = Binary
 
@@ -71,9 +71,11 @@ expression 'playerLog Transform' =
 		    Source
 	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""playerlog Sample table""}" ]
 	lineageTag: 85666415-5cca-43e6-9e79-949941851163
-	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs'
 
 	annotation PBI_ResultType = Function
+
+	annotation PBI_NavigationStepName = Navigation
 
 expression 'GameMeta Sample File' =
 		let
@@ -92,17 +94,19 @@ expression 'GameMeta Sample File' =
 		in
 		    Navigation1
 	lineageTag: 78635b28-ae2c-495a-8ebc-d1dfa4fb77f7
-	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta'
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Binary
 
 	annotation PBI_NavigationStepName = Navigation
 
 expression 'GameMeta sample file param' = #"GameMeta Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"GameMeta Sample File", Type="Binary", IsParameterQueryRequired=true]
 	lineageTag: 7ca63196-48c2-4049-9baa-2bbdff584f6d
-	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta'
 
 	annotation PBI_ResultType = Binary
+
+	annotation PBI_NavigationStepName = Navigation
 
 expression 'GameMeta Sample table' =
 		let
@@ -132,9 +136,11 @@ expression 'GameMeta Transform' =
 		    Source
 	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""GameMeta Sample table""}" ]
 	lineageTag: cc8968ed-ed07-4076-b2bf-7c9dbf034f97
-	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
+	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta'
 
 	annotation PBI_ResultType = Function
+
+	annotation PBI_NavigationStepName = Navigation
 
 expression ListImport =
 		let
@@ -152,7 +158,7 @@ expression ListImport =
 		in
 		    #"fetch Roster"
 	lineageTag: 6416e775-6b26-49ee-9cf0-6138dc1af47d
-	queryGroup: '01.03 Lists'
+	queryGroup: '01 GitHub Tables\01.02 Lists'
 
 	annotation PBI_NavigationStepName = Navigation
 
@@ -178,13 +184,13 @@ expression supportTables-stg =
 		    #"Expanded Source TB" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
 		    #"Fetch binary files" = Table.AddColumn(#"Expanded Source TB", "Contents", each Web.Contents([download_url])),
 		    #"Filtered Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
-		    #"Fetch CSV Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Csv.Document([Contents])),
-		    #"removed TXT suffix" = Table.TransformColumns(#"Fetch CSV Contents", {{"name", each Text.BeforeDelimiter(_, ".txt"), type text}}),
+		    #"Fetch binary Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Lines.FromBinary([Contents],null,null,65001)),
+		    #"removed TXT suffix" = Table.TransformColumns(#"Fetch binary Contents", {{"name", each Text.BeforeDelimiter(_, ".txt"), type text}}),
 		    #"Removed Other Columns" = Table.SelectColumns(#"removed TXT suffix",{"name", "Data"})
 		in
 		    #"Removed Other Columns"
 	lineageTag: 37ac2d72-d685-4b1b-b31e-8cc477e527e2
-	queryGroup: '00 Utilities\00.02 Support Tables'
+	queryGroup: '00 Utilities\00.02 Support Tables\00.02.00 FromGit'
 
 	annotation PBI_NavigationStepName = Navigation
 
@@ -198,27 +204,4 @@ expression DataFolder = "records" meta [IsParameterQuery=true, List={"records", 
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Text
-
-expression 'supportTables-stg (2)' =
-		let
-		    Source = Json.Document(
-		            Web.Contents(
-		                "https://api.github.com"
-		                , [RelativePath = "/repos/Argel-Tal/HeresyGames/contents/support%20Tables?ref=" & BranchName]
-		            )
-		    ),
-		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-		    #"Expanded Source TB" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
-		    #"Fetch binary files" = Table.AddColumn(#"Expanded Source TB", "Contents", each Web.Contents([download_url])),
-		    #"Filtered Hidden Files" = Table.SelectRows(#"Fetch binary files", each [Attributes]?[Hidden]? <> true),
-		    #"Fetch CSV Contents" = Table.AddColumn(#"Filtered Hidden Files", "Data", each Csv.Document([Contents])),
-		    #"removed TXT suffix" = Table.TransformColumns(#"Fetch CSV Contents", {{"name", each Text.BeforeDelimiter(_, ".txt"), type text}}),
-		    #"Removed Other Columns" = Table.SelectColumns(#"removed TXT suffix",{"name", "Data"})
-		in
-		    #"Removed Other Columns"
-	lineageTag: 778ffe52-9b74-4271-b914-6a22c0fbdb9c
-
-	annotation PBI_NavigationStepName = Navigation
-
-	annotation PBI_ResultType = Table
 
