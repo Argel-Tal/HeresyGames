@@ -48,8 +48,8 @@ MakeGameMeta <- function(index){
 ##  1. faction
 ##  2. Parent faction (look up what faction the child list belongs to... mechanicum / legion
 ##    This is a supporting step, not returned in the final meta
-##  3. Force Org - uses the parent action to determine alternate force-org availability
-##  4. Subfaction / ROW
+##  3. Force Org - uses the parent faction to determine alternate force-org availability 
+##  4. Subfaction / ROW - does not account for legion specific ROWs
 ##  5. Allied faction - random term to ensure this is not always present
 ##  6. ROW if applicable
 ##  7. Warlord trait
@@ -64,10 +64,11 @@ MakePlayerMeta <- function(index){
   } else { 
     forceOrg <- ForceOrgs[sample(2:dim(ForceOrgs)[1], 1), 1]
   }
+  # Create list of subfactions if faction has any - does not account for legion specific ROWs
   listOfSubFactions <- c(Subfactions[,2] == parentFaction)
   # 2 / 3 times there should be a ROW
   if ((sample(3:27, 1) %% 3) != 0) {
-    # not all factions have subs, so need to do error handling for the ones which don't
+    # not all factions have subs, so perform check to see if list from above is empty, proceeding if not
     if (any(listOfSubFactions)) {
       # pick subfactions they're allowed to choose from
       ROW <- Subfactions[sample(which(listOfSubFactions), 1), 1]
