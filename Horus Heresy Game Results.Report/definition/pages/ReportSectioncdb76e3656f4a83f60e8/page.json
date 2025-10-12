@@ -170,16 +170,6 @@
   "visibility": "HiddenInViewMode",
   "visualInteractions": [
     {
-      "source": "6938ece0b855e9806989",
-      "target": "bfeef522440e3abb1e55",
-      "type": "DataFilter"
-    },
-    {
-      "source": "fa8362b0068256a14034",
-      "target": "bfeef522440e3abb1e55",
-      "type": "DataFilter"
-    },
-    {
       "source": "fa8362b0068256a14034",
       "target": "6938ece0b855e9806989",
       "type": "DataFilter"

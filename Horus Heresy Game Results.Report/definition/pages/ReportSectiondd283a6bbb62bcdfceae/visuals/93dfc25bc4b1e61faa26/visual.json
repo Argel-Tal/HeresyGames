@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "93dfc25bc4b1e61faa26",
   "position": {
-    "x": 18.75,
-    "y": 553.75,
+    "x": 18.850258175559379,
+    "y": 553.72633390705676,
     "z": 1000,
-    "height": 262.5,
-    "width": 893.75,
-    "tabOrder": 3000
+    "height": 702.17211703958685,
+    "width": 894.2091222030981,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "tableEx",
@@ -15,6 +15,20 @@
       "queryState": {
         "Values": {
           "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "GameIDs"
+                }
+              },
+              "queryRef": "playerlogs.GameIDs",
+              "nativeQueryRef": "GameIDs"
+            },
             {
               "field": {
                 "Column": {
@@ -198,7 +212,7 @@
             "wordWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -225,7 +239,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "104.96666666666667D"
+                  "Value": "94.3586556824291D"
                 }
               }
             }
@@ -239,7 +253,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "99.47460928600609D"
+                  "Value": "100.64719787629669D"
                 }
               }
             }
@@ -253,13 +267,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "128.2278024212732D"
+                  "Value": "135.28458798613966D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "playerlogs.ROW/Subfaction"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.55771406967949D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.listName"
           }
         }
       ],
@@ -282,6 +310,24 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }

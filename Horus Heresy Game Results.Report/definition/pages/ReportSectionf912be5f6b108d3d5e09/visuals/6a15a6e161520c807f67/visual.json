@@ -1,12 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "6a15a6e161520c807f67",
   "position": {
     "x": 88,
     "y": 194,
     "z": 0,
     "height": 404,
-    "width": 814
+    "width": 814,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -428,6 +429,59 @@
                   "isToggled": true
                 }
               ]
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "' Crusade'"
+                  }
+                }
+              ],
+              "isToggled": true,
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'HQ'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Elites'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Troops'"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'Terminator Squad'"
+                          }
+                        }
+                      ],
+                      "isToggled": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -565,7 +619,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "533.999809535765D"
+                  "Value": "519.9993998795836D"
                 }
               }
             }

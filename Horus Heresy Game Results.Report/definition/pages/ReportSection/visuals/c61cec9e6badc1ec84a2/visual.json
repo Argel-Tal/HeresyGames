@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "c61cec9e6badc1ec84a2",
   "position": {
-    "x": 78.181818181818173,
-    "y": 505.45454545454544,
+    "x": 78.571428571428569,
+    "y": 505.71428571428572,
     "z": 0,
-    "height": 469.09090909090907,
-    "width": 734.5454545454545,
-    "tabOrder": 1000
+    "height": 458.57142857142861,
+    "width": 734.28571428571433
   },
   "visual": {
     "visualType": "pivotTable",
@@ -20,14 +19,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "MacroFactions"
+                      "Entity": "Factions"
                     }
                   },
                   "Property": "Macrofaction"
                 }
               },
-              "queryRef": "MacroFactions.Macrofaction",
-              "nativeQueryRef": "Macrofaction",
+              "queryRef": "Factions.Macrofaction",
+              "nativeQueryRef": "Macrofaction1",
               "active": true
             },
             {
@@ -130,19 +129,6 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "MacroFactions"
-                  }
-                },
-                "Property": "Macrofaction"
-              }
-            },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
                     "Entity": "Factions"
                   }
                 },
@@ -162,7 +148,7 @@
         "levels": [
           {
             "queryRefs": [
-              "MacroFactions.Macrofaction"
+              "Factions.Macrofaction"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -170,7 +156,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "MacroFactions"
+                      "Entity": "Factions"
                     }
                   },
                   "Property": "Macrofaction"
@@ -248,20 +234,6 @@
           },
           "selector": {
             "metadata": "Factions.Faction"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "368.4056145938312D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MacroFactions.Macrofaction"
           }
         },
         {

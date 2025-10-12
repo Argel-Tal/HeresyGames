@@ -1,12 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "253c72876d9a3c28295b",
   "position": {
     "x": 155.95436839176409,
     "y": 0,
     "z": 0,
     "height": 278.53785900783328,
-    "width": 427.37896494156928
+    "width": 427.37896494156928,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -14,22 +15,6 @@
       "queryState": {
         "Rows": {
           "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Force Organisations"
-                    }
-                  },
-                  "Property": "ForceOrg"
-                }
-              },
-              "queryRef": "Force Organisations.ForceOrg",
-              "nativeQueryRef": "ForceOrg1",
-              "active": true,
-              "displayName": "ForceOrg"
-            },
             {
               "field": {
                 "Column": {
@@ -45,6 +30,22 @@
               "nativeQueryRef": "Warlord",
               "active": true,
               "displayName": "Warlord"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Missions"
+                    }
+                  },
+                  "Property": "Missions"
+                }
+              },
+              "queryRef": "Missions.Missions",
+              "nativeQueryRef": "Mission",
+              "active": true,
+              "displayName": "Mission"
             }
           ],
           "fieldParameters": [
@@ -137,7 +138,7 @@
         "levels": [
           {
             "queryRefs": [
-              "Force Organisations.ForceOrg"
+              "playerlogs.Warlord"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -145,10 +146,10 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Force Organisations"
+                      "Entity": "playerlogs"
                     }
                   },
-                  "Property": "ForceOrg"
+                  "Property": "Warlord"
                 }
               }
             ],
@@ -156,7 +157,7 @@
           },
           {
             "queryRefs": [
-              "playerlogs.Warlord"
+              "Missions.Missions"
             ],
             "isCollapsed": true,
             "isPinned": true
@@ -168,7 +169,7 @@
               "identityValues": [
                 {
                   "Literal": {
-                    "Value": "'Crusade'"
+                    "Value": "'Delegatus'"
                   }
                 }
               ],
