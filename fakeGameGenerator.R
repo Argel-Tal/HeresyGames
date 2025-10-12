@@ -98,7 +98,7 @@ MakePlayerMeta <- function(index){
 gameMetaList <- lapply(nGames, MakeGameMeta)
 gameMetaList <- do.call(rbind, gameMetaList)
 gameMetaList <- cbind(str_pad(nGames, 4, pad = "0"), gameMetaList)
-colnames(gameMetaList)[1] <- "gameID"
+colnames(gameMetaList)[1] <- "faction"
 
 ## make player info
 
@@ -114,7 +114,7 @@ MakePlayerMetaDF <- function(PlayerMetalist, nameSet){
   playerMeta <- do.call(rbind, PlayerMetalist)
   stg <- cbind(playerNames[,nameSet], str_pad(nGames, 4, pad = "0"))
   playerMeta <- cbind(stg, playerMeta)
-  colnames(playerMeta)[1:2] <- c("PlayerID", "gameID")
+  colnames(playerMeta)[1:2] <- c("PlayerID", "faction")
   return(playerMeta)
 }
 

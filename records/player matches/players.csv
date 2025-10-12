@@ -1,4 +1,4 @@
-PlayerID,gameID,forceOrg,ROW/Subfaction,alliedFaction,warlordTrait,VPs,warlord,listName
+PlayerID,gameID,faction,ROW/Subfaction,alliedFaction,warlordTrait,VPs,warlord,listName
 AH-0001,mechanicum,crusade,,,strategic genius,11,magos dominus,
 JM-0001,solar auxilia,crusade,,,divide to conquer,2,legate marshall,
 AH-0002,mechanicum,crusade,,,strategic genius,11,magos dominus,
