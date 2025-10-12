@@ -35,16 +35,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Deployment Maps"
+                      "Entity": "playerlogs"
                     }
                   },
-                  "Property": "Maps"
+                  "Property": "Warlord"
                 }
               },
-              "queryRef": "Deployment Maps.Maps",
-              "nativeQueryRef": "Deployment",
+              "queryRef": "playerlogs.Warlord",
+              "nativeQueryRef": "Warlord",
               "active": true,
-              "displayName": "Deployment"
+              "displayName": "Warlord"
             }
           ],
           "fieldParameters": [
@@ -156,7 +156,7 @@
           },
           {
             "queryRefs": [
-              "Deployment Maps.Maps"
+              "playerlogs.Warlord"
             ],
             "isCollapsed": true,
             "isPinned": true
@@ -168,7 +168,7 @@
               "identityValues": [
                 {
                   "Literal": {
-                    "Value": "'Castellan'"
+                    "Value": "'Crusade'"
                   }
                 }
               ],

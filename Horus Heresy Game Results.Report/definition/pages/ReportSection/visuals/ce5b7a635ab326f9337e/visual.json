@@ -34,7 +34,7 @@
                     "url": "https://github.com/Argel-Tal"
                   }
                 ],
-                "listType": "bullet"
+                "horizontalTextAlignment": "right"
               },
               {
                 "textRuns": [
@@ -54,7 +54,7 @@
                     "url": "https://github.com/Argel-Tal/HeresyGames"
                   }
                 ],
-                "listType": "bullet"
+                "horizontalTextAlignment": "right"
               }
             ]
           }

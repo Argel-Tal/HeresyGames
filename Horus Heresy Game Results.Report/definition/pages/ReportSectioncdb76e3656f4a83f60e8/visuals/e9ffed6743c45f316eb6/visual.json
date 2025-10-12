@@ -75,7 +75,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''Deployment Maps''[Maps]'"
+                                "Value": "'''playerlogs''[Warlord]'"
                               }
                             }
                           ]
@@ -114,7 +114,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''Deployment Maps''[Maps]'"
+                                      "Value": "'''playerlogs''[Warlord]'"
                                     }
                                   }
                                 ]
@@ -141,7 +141,7 @@
                             "0": "ForceOrg"
                           },
                           {
-                            "0": "Deployment"
+                            "0": "Warlord"
                           }
                         ]
                       }
