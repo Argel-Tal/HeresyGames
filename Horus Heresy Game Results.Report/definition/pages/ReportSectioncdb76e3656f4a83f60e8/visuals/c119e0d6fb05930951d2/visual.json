@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "c119e0d6fb05930951d2",
+  "position": {
+    "x": 80,
+    "y": 969.16666666666674,
+    "z": 0,
+    "height": 286.66666666666669,
+    "width": 841.66666666666674,
+    "tabOrder": 1000
+  },
+  "visualGroup": {
+    "displayName": "Win rate graphs",
+    "groupMode": "ScaleMode"
+  }
+}

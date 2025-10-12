@@ -8,7 +8,7 @@ expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQu
 	annotation PBI_NavigationStepName = Navigation
 
 /// Which branch to pull data off
-expression BranchName = "2025-06-Games" meta [IsParameterQuery=true, List={"Main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
+expression BranchName = "Argel-Tal-patch-1" meta [IsParameterQuery=true, List={"Main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
 	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
 	queryGroup: '00 Utilities\00.01 Parameters'
 
@@ -158,7 +158,7 @@ expression ListImport =
 
 	annotation PBI_ResultType = Table
 
-expression branchForLists = "main" meta [IsParameterQuery=true, List={"main"}, DefaultValue="main", Type="Text", IsParameterQueryRequired=true]
+expression branchForLists = "Argel-Tal-patch-1" meta [IsParameterQuery=true, List={"main"}, DefaultValue="main", Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 3f6f491e-c9d9-4ef5-90e2-de4c73b9e4e0
 	queryGroup: '00 Utilities\00.01 Parameters'
 

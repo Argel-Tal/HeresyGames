@@ -1,0 +1,309 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "93dfc25bc4b1e61faa26",
+  "position": {
+    "x": 18.75,
+    "y": 553.75,
+    "z": 1000,
+    "height": 262.5,
+    "width": 893.75,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "PlayerID"
+                }
+              },
+              "queryRef": "playerlogs.PlayerID",
+              "nativeQueryRef": "PlayerID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "listName"
+                }
+              },
+              "queryRef": "playerlogs.listName",
+              "nativeQueryRef": "listName"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Factions"
+                    }
+                  },
+                  "Property": "Faction"
+                }
+              },
+              "queryRef": "Factions.Faction",
+              "nativeQueryRef": "Faction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "ROW/Subfaction"
+                }
+              },
+              "queryRef": "playerlogs.ROW/Subfaction",
+              "nativeQueryRef": "ROW/Subfaction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "alliedFaction"
+                }
+              },
+              "queryRef": "playerlogs.alliedFaction",
+              "nativeQueryRef": "alliedFaction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Missions"
+                    }
+                  },
+                  "Property": "Missions"
+                }
+              },
+              "queryRef": "Missions.Missions",
+              "nativeQueryRef": "Missions"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deployment Maps"
+                    }
+                  },
+                  "Property": "Maps"
+                }
+              },
+              "queryRef": "Deployment Maps.Maps",
+              "nativeQueryRef": "Maps"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "VPs"
+                }
+              },
+              "queryRef": "playerlogs.VPs",
+              "nativeQueryRef": "VPs"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "Winner"
+                }
+              },
+              "queryRef": "playerlogs.Winner",
+              "nativeQueryRef": "Winner"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "Warlord"
+                }
+              },
+              "queryRef": "playerlogs.Warlord",
+              "nativeQueryRef": "Warlord"
+            }
+          ],
+          "showAll": true
+        }
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "87.82284841213942D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.Warlord"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104.96666666666667D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Deployment Maps.Maps"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.47460928600609D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.alliedFaction"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "128.2278024212732D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.ROW/Subfaction"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

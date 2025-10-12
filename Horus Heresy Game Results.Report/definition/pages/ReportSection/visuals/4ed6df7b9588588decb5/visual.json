@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "4ed6df7b9588588decb5",
+  "position": {
+    "x": 77.5,
+    "y": 83.75,
+    "z": 3000,
+    "height": 288.75,
+    "width": 732.5
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "The Horus Heresy, also known as the Age of Darkness, was the first and most devastating civil war in Imperial history.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Cambria Math",
+                      "fontSize": "18pt"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Cambria Math",
+                      "fontSize": "20pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Occurring in early M31 and lasting several years, it divided and nearly destroyed the fledgling Imperium. It marked the end of the Great Crusade and the encasing of the Emperor of Mankind into the Golden Throne.",
+                    "textStyle": {
+                      "fontFamily": "Cambria Math",
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Ultimately, the Horus Heresy was instrumental for the ten-thousand year decay that has since set into the Imperium. The Emperor's grand ambition, the Imperial Webway, was abandoned and Chaos continued to plague humanity.",
+                    "textStyle": {
+                      "fontFamily": "Cambria Math",
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Quote'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

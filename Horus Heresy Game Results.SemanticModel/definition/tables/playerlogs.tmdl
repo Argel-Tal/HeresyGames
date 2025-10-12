@@ -130,7 +130,7 @@ table playerlogs
 				        , {"GameID", "Faction", "forceOrg", "ROWSubfaction", "alliedFaction", "warlordTrait", "VPs", "Warlord", "listName"}
 				    ),
 				    #"Filtered out empty rows" = Table.SelectRows(#"Expanded Data", each [GameID] <> null and [GameID] <> ""),
-				    #"Filtered out headers" = Table.SelectRows(#"Filtered out empty rows", each ([forceOrg] <> "forceOrg")),
+				    #"Filtered out headers" = Table.SelectRows(#"Filtered out empty rows", each ([alliedFaction] <> "alliedFaction")),
 				    #"Split game ID" = Table.SplitColumn(#"Filtered out headers", "GameID", Splitter.SplitTextByEachDelimiter({"-"}, QuoteStyle.Csv, false), {"PlayerID", "GameID"}),
 				    #"Trimmed split columns" = Table.TransformColumns(#"Split game ID",{{"GameID", Text.Trim, type text}, {"PlayerID", Text.Trim, type text}}),
 				    #"Added Key" = Table.AddColumn(#"Trimmed split columns", "GameIDs", each [GameID] & Text.From([File Index]), type text),
