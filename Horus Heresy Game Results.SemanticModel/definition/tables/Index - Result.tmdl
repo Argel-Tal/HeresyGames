@@ -23,7 +23,7 @@ table 'Index - Result'
 
 	partition 'Index - Result' = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.02 Index'
 		source =
 				let
 				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQrPzFOK1YlWMgCyXYoSy8EcXZCMT35xsVJsLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t, Result = _t]),
@@ -32,4 +32,6 @@ table 'Index - Result'
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

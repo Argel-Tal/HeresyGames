@@ -69,7 +69,6 @@ expression 'playerLog Transform' =
 		    #"Promoted Headers"
 		in
 		    Source
-	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""playerlog Sample table""}" ]
 	lineageTag: 85666415-5cca-43e6-9e79-949941851163
 	queryGroup: '01 GitHub Tables\01.01 Player Logs\Transform function for playerlogs\Helper Queries'
 
@@ -130,11 +129,12 @@ expression 'GameMeta Transform' =
 		    #"Promoted Headers"
 		in
 		    Source
-	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""GameMeta Sample table""}" ]
 	lineageTag: cc8968ed-ed07-4076-b2bf-7c9dbf034f97
 	queryGroup: '01 GitHub Tables\01.00 GameMeta\Transform function for GameMeta\Helper Queries'
 
 	annotation PBI_ResultType = Function
+
+	annotation PBI_NavigationStepName = Navigation
 
 expression ListImport =
 		let
@@ -165,4 +165,26 @@ expression branchForLists = "Argel-Tal-patch-1" meta [IsParameterQuery=true, Lis
 	annotation PBI_ResultType = Text
 
 	annotation PBI_NavigationStepName = Navigation
+
+expression SupportTables =
+		let
+		    Source = Json.Document(
+		            Web.Contents(
+		                "https://api.github.com"
+		                , [RelativePath = GitURL & "support%20Tables?ref=" & BranchName]
+		            )
+		    ),
+		    #"Converted Source to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Source Table" = Table.ExpandRecordColumn(#"Converted Source to Table", "Column1", {"name", "download_url"}, {"name", "download_url"}),
+		    #"Filtered out DELTE file" = Table.SelectRows(#"Expanded Source Table", each not Text.Contains([name], "DELETE")),
+		    #"Fetch JSON" = Table.AddColumn(#"Filtered out DELTE file", "Contents", each Csv.Document(Web.Contents([download_url]))),
+		    #"Added Custom" = Table.AddColumn(#"Fetch JSON", "Custom", each Csv.Document(Web.Contents([download_url]),4,"#(tab)"))
+		in
+		    #"Added Custom"
+	lineageTag: c0372227-24b1-4e75-a434-10f0c3d5cd50
+	queryGroup: '00 Utilities\00.03 FromGitHub'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 

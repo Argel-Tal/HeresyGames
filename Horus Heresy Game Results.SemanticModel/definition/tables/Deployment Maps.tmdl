@@ -11,14 +11,19 @@ table 'Deployment Maps'
 
 	partition 'Deployment Maps' = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.03 FromGitHub'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("HcyxDkAwEMbxV7l09hLCYLBJGBrD0aMNPcm1iLfHbd//N3zWmmrH5OFYIHuCNjCZsbCmxpt/HFC0O0KZPSA7qCllOR7lBmMkUS75CrtiGaczeZ098nqiOOiyhO27Hl8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Maps = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Maps", type text}}),
-				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Maps", Text.Proper, type text}})
+				    Source = SupportTables,
+				    Custom = Source{3}[Custom],
+				    #"Changed Type" = Table.TransformColumnTypes(Custom,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Maps", type text}, {"", type text}, {"_1", type text}, {"_2", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type1",{"Maps"})
 				in
-				    #"Capitalized Each Word"
+				    #"Removed Other Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

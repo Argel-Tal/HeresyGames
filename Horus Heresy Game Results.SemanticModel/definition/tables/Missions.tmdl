@@ -11,14 +11,19 @@ table Missions
 
 	partition Missions = m
 		mode: import
-		queryGroup: '00 Utilities\00.02 Support Tables'
+		queryGroup: '00 Utilities\00.03 FromGitHub'
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcsrJz09RcEstTVGK1YlW8s8rzkksTc8oAfOCMxJLSlKLFIJLijKzU8FCLvm5mXmZ+XlgTkhmSqpCfpqCc2JRXmI6REF4YhFIyCcztVgpNhYA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Missions = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Missions", type text}}),
-				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type",{{"Missions", Text.Proper, type text}})
+				    Source = SupportTables,
+				    Custom = Source{4}[Custom],
+				    #"Changed Type" = Table.TransformColumnTypes(Custom,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Column1"}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Other Columns", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Missions", type text}})
 				in
-				    #"Capitalized Each Word"
+				    #"Changed Type1"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
