@@ -1,25 +1,26 @@
-Macrofaction	Faction
-Mechanicum	Mechanicum
-Solar Auxilia	Solar Auxilia
-Militia & Cults	Militia & Cults
-Questoris Knights	Questoris Knights
-Legions	Dark Angels
-Legions	Emperor's Children
-Legions	Iron Warriors
-Legions	White Scars
-Legions	Space Wolves
-Legions	Imperial Fists
-Legions	Night Lords
-Legions	Blood Angels
-Legions	Iron Hands
-Legions	World Eaters
-Legions	Ultramarines
-Legions	Death Guard
-Legions	Thousand Sons
-Legions	Sons of Horus
-Legions	Word Bearers
-Legions	Salamanders
-Legions	Raven Guard
-Legions	Alpha Legion
-Legions	Blackshields
-Legions	Shattered Legions
+Macrofaction	Faction	Sort Order
+Mechanicum	Mechanicum	23
+Solar Auxilia	Solar Auxilia	24
+Militia & Cults	Militia & Cults	25
+Questoris Knights	Questoris Knights	26
+Legions	Dark Angels	1
+Legions	Emperor's Children	3
+Legions	Iron Warriors	4
+Legions	White Scars	5
+Legions	Space Wolves	6
+Legions	Imperial Fists	7
+Legions	Night Lords	8
+Legions	Blood Angels	9
+Legions	Iron Hands	10
+Legions	World Eaters	11
+Legions	Ultramarines	13
+Legions	Death Guard	14
+Legions	Thousand Sons	15
+Legions	Sons of Horus	16
+Legions	Word Bearers	17
+Legions	Salamanders	18
+Legions	Raven Guard	19
+Legions	Alpha Legion	20
+Legions	Blackshields	21
+Legions	Shattered Legions	22
+Talons of the Emperor	Talons of the Emperor	27
