@@ -1,4 +1,4 @@
-"PlayerID","gameID","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
+"PlayerID","faction","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
 "VN-0001","Alpha Legion","Onslaught","","","Indomitable","14","Forge Lord",""
 "FQ-0002","Iron Warriors","Crusade","The Covenant of Fire","","Connoisseur of Alien Curios","14","Armistos",""
 "GM-0003","Thousand Sons","Castellan","Legion Recon Company","Salamanders","World Burner","4","Siege Breaker",""

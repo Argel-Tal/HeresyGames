@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "d2f2b8a57cd61dafbc15",
+  "position": {
+    "x": 92.857142857142861,
+    "y": 145.71428571428572,
+    "z": 2000,
+    "height": 521.42857142857156,
+    "width": 381.42857142857144,
+    "tabOrder": 2000
+  },
+  "visualGroup": {
+    "displayName": "Call out stats",
+    "groupMode": "ScaleMode"
+  }
+}

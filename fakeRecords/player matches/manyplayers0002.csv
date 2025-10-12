@@ -1,4 +1,4 @@
-"PlayerID","gameID","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
+"PlayerID","faction","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
 "JT-0001","Militia & Cults","Crusade","","","World Burner","11","Rogue Psyker",""
 "PG-0002","Questoris Knights","Crusade","","","Void Master","14","Archmagos Draykavac",""
 "OY-0003","Thousand Sons","Crusade","","Sons of Horus","Battlefield Analysis","4","Armistos",""

@@ -1,0 +1,37 @@
+table Characters
+	lineageTag: 1e692d94-0b15-4976-bfc8-7d851e1dff19
+
+	column unitName
+		dataType: string
+		lineageTag: db46c19d-df8c-477f-a220-0339efd9d018
+		summarizeBy: none
+		sourceColumn: unitName
+
+		annotation SummarizationSetBy = Automatic
+
+	column faction
+		dataType: string
+		lineageTag: 87e8af68-f4ff-49ac-9286-3a3fc7a01246
+		summarizeBy: none
+		sourceColumn: faction
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Characters = m
+		mode: import
+		queryGroup: '00 Utilities\00.03 FromGitHub'
+		source =
+				let
+				    Source = SupportTables,
+				    Custom = Source{0}[Custom],
+				    #"Changed Type" = Table.TransformColumnTypes(Custom,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Column1", "Column2"}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Other Columns", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"unitName", type text}, {"faction", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

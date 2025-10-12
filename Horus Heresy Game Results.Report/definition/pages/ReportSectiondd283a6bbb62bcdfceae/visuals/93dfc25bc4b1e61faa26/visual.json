@@ -1,0 +1,355 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "93dfc25bc4b1e61faa26",
+  "position": {
+    "x": 18.850258175559379,
+    "y": 553.72633390705676,
+    "z": 1000,
+    "height": 702.17211703958685,
+    "width": 894.2091222030981,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "GameIDs"
+                }
+              },
+              "queryRef": "playerlogs.GameIDs",
+              "nativeQueryRef": "GameIDs"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "PlayerID"
+                }
+              },
+              "queryRef": "playerlogs.PlayerID",
+              "nativeQueryRef": "PlayerID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "listName"
+                }
+              },
+              "queryRef": "playerlogs.listName",
+              "nativeQueryRef": "listName"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Factions"
+                    }
+                  },
+                  "Property": "Faction"
+                }
+              },
+              "queryRef": "Factions.Faction",
+              "nativeQueryRef": "Faction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "ROW/Subfaction"
+                }
+              },
+              "queryRef": "playerlogs.ROW/Subfaction",
+              "nativeQueryRef": "ROW/Subfaction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "alliedFaction"
+                }
+              },
+              "queryRef": "playerlogs.alliedFaction",
+              "nativeQueryRef": "alliedFaction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Missions"
+                    }
+                  },
+                  "Property": "Missions"
+                }
+              },
+              "queryRef": "Missions.Missions",
+              "nativeQueryRef": "Missions"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deployment Maps"
+                    }
+                  },
+                  "Property": "Maps"
+                }
+              },
+              "queryRef": "Deployment Maps.Maps",
+              "nativeQueryRef": "Maps"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "VPs"
+                }
+              },
+              "queryRef": "playerlogs.VPs",
+              "nativeQueryRef": "VPs"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "Winner"
+                }
+              },
+              "queryRef": "playerlogs.Winner",
+              "nativeQueryRef": "Winner"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "Warlord"
+                }
+              },
+              "queryRef": "playerlogs.Warlord",
+              "nativeQueryRef": "Warlord"
+            }
+          ],
+          "showAll": true
+        }
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "87.82284841213942D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.Warlord"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "94.3586556824291D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Deployment Maps.Maps"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100.64719787629669D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.alliedFaction"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "135.28458798613966D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.ROW/Subfaction"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.55771406967949D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "playerlogs.listName"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

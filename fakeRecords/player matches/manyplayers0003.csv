@@ -1,4 +1,4 @@
-"PlayerID","gameID","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
+"PlayerID","faction","forceOrg","ROW/Subfaction","alliedFaction","warlordTrait","VPs","warlord","listName"
 "ND-0001","Sons of Horus","Onslaught","The Bloodied Gauntlet","","Intimidating Presence","13","Warmonger",""
 "XG-0002","Thousand Sons","Onslaught","Terror Assault","","Night Attacker","12","Praetor Tribune",""
 "AF-0003","Sons of Horus","Crusade","","","Strategic Genius","9","Praetor Tribune",""

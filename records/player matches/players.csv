@@ -1,4 +1,4 @@
-PlayerID,gameID,forceOrg,ROW/Subfaction,alliedFaction,warlordTrait,VPs,warlord,listName
+PlayerID,faction,forceOrg,ROW/Subfaction,alliedFaction,warlordTrait,VPs,warlord,listName
 AH-0001,mechanicum,crusade,,,strategic genius,11,magos dominus,
 JM-0001,solar auxilia,crusade,,,divide to conquer,2,legate marshall,
 AH-0002,mechanicum,crusade,,,strategic genius,11,magos dominus,
@@ -16,4 +16,6 @@ AH-0007,Imperial Fists,crusade,pride of the legion,,master tactician,8,alexus po
 AH-0008,mechanicum,crusade,Legio Cybernetica,,Perfected Targeting,9,magos dominus,
 JM-0008,solar auxilia,crusade,,,Master of Ambush,25,legate commander,
 MB-0009,sons of horus,crusade,,,,0,centurion,
-MB-0009,Emperor's Children,crusade,,,,0,chaplain,
+JM-0009,Emperor's Children,crusade,,,,0,chaplain,
+JM-0010,Emperor's Children,Crusade,Pride of the Legion, ,,9,Delegatus,2000 Emperors Children Delegatus
+MB-0010,Mechanicum,Matrix of Ruin,Ordo Reductor,,,8,Magos Reductor,2000 Mechanicum Ordo Reductor

@@ -174,9 +174,10 @@ table ArmyLists
 				    // i.e. ", Legion (Compulsory)"
 				    #"Removed Columns of trailing names" = Table.RemoveColumns(#"Split Unit Options by Comma",{"Unit Selection.delete", "Unit Options.delete"}),
 				    #"Filtered out ""Legions astartes rows""" = Table.SelectRows(#"Removed Columns of trailing names", each not Text.Contains([Unit Options], "Legiones Astartes")),
-				    #"Replaced Value" = Table.ReplaceValue(#"Filtered out ""Legions astartes rows""","Legiones Astartes: Age of Darkness Army List","Legions",Replacer.ReplaceText,{"Faction"})
+				    #"Replaced Legiones with Legions" = Table.ReplaceValue(#"Filtered out ""Legions astartes rows""","Legiones Astartes: Age of Darkness Army List","Legions",Replacer.ReplaceText,{"Faction"}),
+				    #"Replaced Mechanicum: Taghmata Army List" = Table.ReplaceValue(#"Replaced Legiones with Legions","Mechanicum: Taghmata Army List","Mechanicum",Replacer.ReplaceText,{"Faction"})
 				in
-				    #"Replaced Value"
+				    #"Replaced Mechanicum: Taghmata Army List"
 				```
 
 	annotation PBI_ResultType = Table

@@ -41,7 +41,7 @@ table 'Measure by'
 		source =
 				{
 				    ("Subfactions", NAMEOF('Subfactions'[Subfactions]), 1)
-				    , ("ForceOrg", NAMEOF('Force Organisations'[ForceOrg]), 2)
+				    , ("ForceOrg", NAMEOF('Force Organisations'[ForceOrgs]), 2)
 				    , ("Deployment", NAMEOF('Deployment Maps'[Maps]), 3)
 				    , ("Mission", NAMEOF('Missions'[Missions]), 4)
 				    , ("Warlord", NAMEOF('playerlogs'[Warlord]), 5)
