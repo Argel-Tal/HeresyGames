@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "253c72876d9a3c28295b",
   "position": {
     "x": 155.95436839176409,
@@ -169,7 +169,7 @@
               "identityValues": [
                 {
                   "Literal": {
-                    "Value": "'Delegatus'"
+                    "Value": "'Eidolon'"
                   }
                 }
               ],

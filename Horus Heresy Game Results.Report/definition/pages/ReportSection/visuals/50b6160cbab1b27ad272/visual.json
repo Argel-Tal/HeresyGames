@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "50b6160cbab1b27ad272",
   "position": {
     "x": 1000,
@@ -47,6 +47,34 @@
               },
               "queryRef": "MeasuresTable.Win rate",
               "nativeQueryRef": "Win rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MeasuresTable"
+                    }
+                  },
+                  "Property": "Games"
+                }
+              },
+              "queryRef": "MeasuresTable.Games",
+              "nativeQueryRef": "Games"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MeasuresTable"
+                    }
+                  },
+                  "Property": "Wins"
+                }
+              },
+              "queryRef": "MeasuresTable.Wins",
+              "nativeQueryRef": "Wins"
             }
           ]
         },
@@ -192,7 +220,7 @@
                       "Entity": "MeasuresTable"
                     }
                   },
-                  "Property": "Win rate"
+                  "Property": "winrate&games"
                 }
               }
             }
@@ -336,6 +364,17 @@
               }
             ]
           }
+        },
+        {
+          "properties": {
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
         }
       ],
       "y1AxisReferenceLine": [
@@ -431,6 +470,63 @@
           },
           "selector": {
             "id": "1"
+          }
+        }
+      ],
+      "error": [
+        {
+          "properties": {
+            "enabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "markerShape": {
+              "expr": {
+                "Literal": {
+                  "Value": "'circle'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MeasuresTable.Win rate display"
+          }
+        },
+        {
+          "properties": {
+            "errorRange": {
+              "kind": "ErrorRange",
+              "percentage": {
+                "lowerBoundDelta": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "0D"
+                    }
+                  }
+                },
+                "upperBoundDelta": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "0D"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "MeasuresTable.Win rate display",
+            "highlightMatching": 1
           }
         }
       ]

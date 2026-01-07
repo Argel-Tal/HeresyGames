@@ -2,10 +2,16 @@ table MeasuresTable
 	lineageTag: 5a95dd1a-5ba1-4238-be63-102e59600cbc
 
 	measure Wins =
-			CALCULATE(
+			
+			
+			var winsCache = CALCULATE(
 			    [Games]
 			    , FILTER('Index - Result', 'Index - Result'[Result] = "Win")
 			) // end calc))
+			
+			var winsReturn = IF(winsCache = 0, 0, winsCache)
+			
+			RETURN IF([Games] = BLANK(), BLANK(), winsReturn)
 		formatString: 0
 		displayFolder: Metrics\Counts
 		lineageTag: 992db15c-574d-4358-be84-2cebcb509d35
@@ -65,8 +71,14 @@ table MeasuresTable
 		displayFolder: Most X
 		lineageTag: 91168480-158d-4b1c-8e44-97c442a31b02
 
-	measure 'Win rate display' = if([Win rate] = 0, BLANK(), [Win rate] - 0.5)+0
-		formatString: 0%;-0%;0%
+	measure 'Win rate display' =
+			
+			
+			VAR winRateOffset = if([Win rate] = 0, 0, [Win rate] - 0.5)
+			VAR winsCheck = [Games] <> BLANK()
+			VAR result = IF(winsCheck, winRateOffset, BLANK())
+			RETURN result
+		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Metrics\Rates
 		lineageTag: 4efab7f5-8eba-479e-8115-0b758b2900a6
 
@@ -100,6 +112,9 @@ table MeasuresTable
 			    FIRSTNONBLANK(Factions[Faction], 1)
 			) // end calc
 		lineageTag: bdb28225-9932-41fc-86ad-89d0786830d0
+
+	measure winrate&games = "WR: " & FORMAT([Win rate display], "Percent") & ", G: " & [Games]
+		lineageTag: 098a5635-ebac-41b2-b9a8-53f25f7e8354
 
 	partition MeasuresTable = m
 		mode: import
