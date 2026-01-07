@@ -8,7 +8,7 @@ expression GitURL = "/repos/Argel-Tal/HeresyGames/contents/" meta [IsParameterQu
 	annotation PBI_NavigationStepName = Navigation
 
 /// Which branch to pull data off
-expression BranchName = "main" meta [IsParameterQuery=true, List={"main", "FakeData", "2025-06-Games"}, DefaultValue="FakeData", Type="Any", IsParameterQueryRequired=true]
+expression BranchName = "main" meta [IsParameterQuery=true, List={"main", "2025-11-games", "2025-06-Games"}, DefaultValue="main", Type="Any", IsParameterQueryRequired=true]
 	lineageTag: 51e36f11-e1c3-431c-84b4-8e5a27629d90
 	queryGroup: '00 Utilities\00.01 Parameters'
 
