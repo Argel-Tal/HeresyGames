@@ -2,11 +2,15 @@
 0001,1250,blood feud,search and destroy
 0002,2500,blood feud,search and destroy
 0003,2000,war of lies,clash of the line
-0004,2000,Onslaught,Vanguard Strike
-0005,2000,Onslaught,Vanguard Strike
+0004,2000,onslaught,vanguard strike
+0005,2000,onslaught,vanguard strike
 0006,1600,shatter strike,hammer and anvil
 0007,3000,blood feud,hammer and anvil
-0008,2200,Dominion,Hammer And Anvil
-0009,1000,Custom,Custom
-0010,2000,Custom,Custom
+0008,2200,dominion,hammer and anvil
+0009,1000,custom,custom
+0010,2000,custom,custom
 0011,2500,war of lies,search and destroy
+0012,2500,custom,custom
+0013,1500,tide of carnage,clash of the line
+0014,1500,onslaught,search and destroy
+0015,1500,shatter strike,search and destroy
