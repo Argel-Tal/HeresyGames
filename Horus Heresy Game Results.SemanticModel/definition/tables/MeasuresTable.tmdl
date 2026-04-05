@@ -113,7 +113,7 @@ table MeasuresTable
 			) // end calc
 		lineageTag: bdb28225-9932-41fc-86ad-89d0786830d0
 
-	measure winrate&games = "WR: " & FORMAT([Win rate display], "Percent") & ", G: " & [Games]
+	measure winrate&games = "WR: " & FORMAT([Win rate], "Percent") & ", G: " & [Games]
 		lineageTag: 098a5635-ebac-41b2-b9a8-53f25f7e8354
 
 	partition MeasuresTable = m

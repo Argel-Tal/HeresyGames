@@ -574,5 +574,79 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4de4c0b13ed1147bd56f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Factions"
+              }
+            },
+            "Property": "Faction"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b51cb61429c9039ff6d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Win rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c33afcfd59cbc76b19ac",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Games"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a28d687798a1d68e3dd1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Wins"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2e2edf2d37a57bce0af4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Win rate display"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

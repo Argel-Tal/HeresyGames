@@ -74,11 +74,11 @@
                       "Entity": "MeasuresTable"
                     }
                   },
-                  "Property": "Win rate"
+                  "Property": "Wins"
                 }
               },
-              "queryRef": "MeasuresTable.Win rate",
-              "nativeQueryRef": "Win rate"
+              "queryRef": "MeasuresTable.Wins",
+              "nativeQueryRef": "Wins"
             }
           ]
         }
@@ -275,6 +275,25 @@
           "selector": {
             "metadata": "MeasuresTable.Games"
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MeasuresTable.Wins"
+          }
         }
       ]
     },
@@ -395,6 +414,48 @@
             }
           ]
         }
+      },
+      {
+        "name": "d5ac7a9c0373ef8e801e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Games"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "90db1f7e7a71d2bf72e7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Wins"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a6b3550fdfdcb64529bc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MeasuresTable"
+              }
+            },
+            "Property": "Win rate"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }
