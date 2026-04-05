@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "a4fae879ebeefd3f83e9",
   "position": {
     "x": 465,
@@ -65,6 +65,20 @@
               },
               "queryRef": "MeasuresTable.Games",
               "nativeQueryRef": "Games"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MeasuresTable"
+                    }
+                  },
+                  "Property": "Win rate"
+                }
+              },
+              "queryRef": "MeasuresTable.Win rate",
+              "nativeQueryRef": "Win rate"
             }
           ]
         }
@@ -95,7 +109,7 @@
             "position": {
               "expr": {
                 "Literal": {
-                  "Value": "'LeftCenter'"
+                  "Value": "'TopCenter'"
                 }
               }
             }
@@ -220,6 +234,46 @@
               }
             ],
             "highlightMatching": 1
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MeasuresTable.Win rate"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MeasuresTable.Games"
           }
         }
       ]
