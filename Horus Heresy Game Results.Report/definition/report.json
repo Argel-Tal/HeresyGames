@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "baseTheme": {
       "name": "CY23SU11",
@@ -170,7 +170,10 @@
     "defaultDrillFilterOtherVisuals": true,
     "allowChangeFilterTypes": true,
     "useEnhancedTooltips": true,
-    "useDefaultAggregateDisplayName": true
+    "useDefaultAggregateDisplayName": true,
+    "queryLimitOption": "None",
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
   },
   "slowDataSourceSettings": {
     "isCrossHighlightingDisabled": false,

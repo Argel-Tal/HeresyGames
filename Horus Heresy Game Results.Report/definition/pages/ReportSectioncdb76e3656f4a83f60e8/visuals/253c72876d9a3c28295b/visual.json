@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "253c72876d9a3c28295b",
   "position": {
     "x": 155.95436839176409,
@@ -20,16 +20,48 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "playerlogs"
+                      "Entity": "Subfactions"
                     }
                   },
-                  "Property": "Warlord"
+                  "Property": "Subfactions"
                 }
               },
-              "queryRef": "playerlogs.Warlord",
-              "nativeQueryRef": "Warlord",
+              "queryRef": "Subfactions.Subfactions",
+              "nativeQueryRef": "Subfactions",
+              "active": false,
+              "displayName": "Subfactions"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Force Organisations"
+                    }
+                  },
+                  "Property": "ForceOrgs"
+                }
+              },
+              "queryRef": "Force Organisations.ForceOrgs",
+              "nativeQueryRef": "ForceOrg",
+              "active": false,
+              "displayName": "ForceOrg"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Deployment Maps"
+                    }
+                  },
+                  "Property": "Maps"
+                }
+              },
+              "queryRef": "Deployment Maps.Maps",
+              "nativeQueryRef": "Deployment",
               "active": true,
-              "displayName": "Warlord"
+              "displayName": "Deployment"
             },
             {
               "field": {
@@ -44,8 +76,40 @@
               },
               "queryRef": "Missions.Missions",
               "nativeQueryRef": "Mission",
-              "active": true,
+              "active": false,
               "displayName": "Mission"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "Warlord"
+                }
+              },
+              "queryRef": "playerlogs.Warlord",
+              "nativeQueryRef": "Warlord",
+              "active": false,
+              "displayName": "Warlord"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "playerlogs"
+                    }
+                  },
+                  "Property": "warlordTrait"
+                }
+              },
+              "queryRef": "playerlogs.warlordTrait",
+              "nativeQueryRef": "Warlord Trait",
+              "active": false,
+              "displayName": "Warlord Trait"
             }
           ],
           "fieldParameters": [
@@ -61,7 +125,7 @@
                 }
               },
               "index": 0,
-              "length": 2
+              "length": 6
             }
           ]
         },
@@ -130,55 +194,6 @@
         ]
       }
     },
-    "expansionStates": [
-      {
-        "roles": [
-          "Rows"
-        ],
-        "levels": [
-          {
-            "queryRefs": [
-              "playerlogs.Warlord"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "playerlogs"
-                    }
-                  },
-                  "Property": "Warlord"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "Missions.Missions"
-            ],
-            "isCollapsed": true,
-            "isPinned": true
-          }
-        ],
-        "root": {
-          "children": [
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'Eidolon'"
-                  }
-                }
-              ],
-              "isToggled": true
-            }
-          ]
-        }
-      }
-    ],
     "objects": {
       "columnWidth": [
         {

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "c61cec9e6badc1ec84a2",
   "position": {
     "x": 78.571428571428569,
@@ -57,7 +57,7 @@
               },
               "queryRef": "Subfactions.Subfactions",
               "nativeQueryRef": "Subfactions",
-              "active": true
+              "active": false
             }
           ]
         },
@@ -203,41 +203,7 @@
             "isPinned": true
           }
         ],
-        "root": {
-          "children": [
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'Solar Auxilia'"
-                  }
-                }
-              ],
-              "isToggled": true
-            },
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'Mechanicum'"
-                  }
-                }
-              ],
-              "children": [
-                {
-                  "identityValues": [
-                    {
-                      "Literal": {
-                        "Value": "'Mechanicum'"
-                      }
-                    }
-                  ],
-                  "isToggled": true
-                }
-              ]
-            }
-          ]
-        }
+        "root": {}
       }
     ],
     "objects": {
