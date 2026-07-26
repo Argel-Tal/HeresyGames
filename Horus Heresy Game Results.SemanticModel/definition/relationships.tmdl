@@ -36,3 +36,7 @@ relationship 1df7c079-ec17-9c4d-3a26-c95b66412816
 	fromColumn: playerlogs.GameIDs
 	toColumn: GameMeta.GameIDs
 
+relationship 3c34f7a3-8c0b-c209-f0e1-92f0a1a54c52
+	fromColumn: playerlogs.forceOrg
+	toColumn: 'Force Organisations'.ForceOrgs
+
