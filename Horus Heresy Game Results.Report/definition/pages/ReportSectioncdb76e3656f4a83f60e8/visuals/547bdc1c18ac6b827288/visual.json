@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "547bdc1c18ac6b827288",
   "position": {
     "x": 666.66666666666674,
@@ -133,20 +133,6 @@
   },
   "filterConfig": {
     "filters": [
-      {
-        "name": "5377022285898a9408f6",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Games"
-          }
-        },
-        "type": "Advanced"
-      },
       {
         "name": "79176a2cefbbe063f3f0",
         "field": {

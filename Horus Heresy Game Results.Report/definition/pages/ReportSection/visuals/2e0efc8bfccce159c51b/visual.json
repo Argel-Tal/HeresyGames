@@ -7,7 +7,7 @@
     "z": 7000,
     "height": 260,
     "width": 227.14285714285717,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "slicer",
@@ -117,23 +117,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "a51dfb1c9197d80e95ea",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Missions"
-              }
-            },
-            "Property": "Missions"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

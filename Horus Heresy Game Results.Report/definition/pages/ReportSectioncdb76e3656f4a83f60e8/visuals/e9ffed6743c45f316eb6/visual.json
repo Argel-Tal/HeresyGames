@@ -6,7 +6,8 @@
     "y": 0.36553524804144388,
     "z": 1000,
     "height": 279.6344647519586,
-    "width": 152.75459098497495
+    "width": 152.75459098497495,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -67,7 +68,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''playerlogs''[warlordTrait]'"
+                                "Value": "'''Subfactions''[Subfactions]'"
                               }
                             }
                           ]
@@ -95,7 +96,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''playerlogs''[warlordTrait]'"
+                                      "Value": "'''Subfactions''[Subfactions]'"
                                     }
                                   }
                                 ]
@@ -119,7 +120,7 @@
                         },
                         "valueMap": [
                           {
-                            "0": "Warlord Trait"
+                            "0": "Subfactions"
                           }
                         ]
                       }

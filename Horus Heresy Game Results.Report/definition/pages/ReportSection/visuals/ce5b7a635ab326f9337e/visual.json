@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "ce5b7a635ab326f9337e",
   "position": {
     "x": 1285,
@@ -7,7 +7,7 @@
     "z": 4000,
     "height": 66.25,
     "width": 628.75,
-    "tabOrder": 2000
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,14 +22,14 @@
                     "value": "Author: ",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#000000"
+                      "color": "#ffffff"
                     }
                   },
                   {
                     "value": "https://github.com/Argel-Tal",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#000000"
+                      "color": "#ffffff"
                     },
                     "url": "https://github.com/Argel-Tal"
                   }
@@ -42,14 +42,14 @@
                     "value": "Repo link: ",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#000000"
+                      "color": "#ffffff"
                     }
                   },
                   {
                     "value": "https://github.com/Argel-Tal/HeresyGames",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#000000"
+                      "color": "#ffffff"
                     },
                     "url": "https://github.com/Argel-Tal/HeresyGames"
                   }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "a4fae879ebeefd3f83e9",
   "position": {
     "x": 465,
@@ -7,7 +7,7 @@
     "z": 3000,
     "height": 416.25,
     "width": 447.5,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -414,48 +414,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "d5ac7a9c0373ef8e801e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Games"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "90db1f7e7a71d2bf72e7",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Wins"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a6b3550fdfdcb64529bc",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Win rate"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

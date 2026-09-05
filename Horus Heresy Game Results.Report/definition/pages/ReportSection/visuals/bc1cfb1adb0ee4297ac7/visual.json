@@ -7,7 +7,7 @@
     "z": 6000,
     "height": 260,
     "width": 227.14285714285717,
-    "tabOrder": 5000
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "slicer",
@@ -110,23 +110,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "b33344d22ec76393d2de",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Deployment Maps"
-              }
-            },
-            "Property": "Maps"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

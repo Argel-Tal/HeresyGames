@@ -7,7 +7,7 @@
     "z": 0,
     "height": 278.53785900783328,
     "width": 427.37896494156928,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "pivotTable",
@@ -20,16 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "playerlogs"
+                      "Entity": "Subfactions"
                     }
                   },
-                  "Property": "warlordTrait"
+                  "Property": "Subfactions"
                 }
               },
-              "queryRef": "playerlogs.warlordTrait",
-              "nativeQueryRef": "Warlord Trait",
+              "queryRef": "Subfactions.Subfactions",
+              "nativeQueryRef": "Subfactions",
               "active": true,
-              "displayName": "Warlord Trait"
+              "displayName": "Subfactions"
             }
           ],
           "fieldParameters": [
@@ -106,7 +106,7 @@
                     "Entity": "MeasuresTable"
                   }
                 },
-                "Property": "Games"
+                "Property": "Win rate"
               }
             },
             "direction": "Descending"

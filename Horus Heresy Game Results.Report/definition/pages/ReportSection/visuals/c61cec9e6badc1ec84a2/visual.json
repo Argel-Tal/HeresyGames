@@ -1,12 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "c61cec9e6badc1ec84a2",
   "position": {
     "x": 78.571428571428569,
     "y": 505.71428571428572,
     "z": 0,
     "height": 458.57142857142861,
-    "width": 734.28571428571433
+    "width": 734.28571428571433,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -474,107 +475,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "44a4b26e661f7d2bff54",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Factions"
-              }
-            },
-            "Property": "Macrofaction"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "53b0f1144243df56ee77",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Factions"
-              }
-            },
-            "Property": "Faction"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "4dae13217038eb09c189",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Subfactions"
-              }
-            },
-            "Property": "Subfactions"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "09333a9169a4b16a0721",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Games"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "eb8e03de9ac213b3fc47",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Wins"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "372b065c5b5ab7fd88be",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Average VPs"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "509ff1f7310d729f0de8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MeasuresTable"
-              }
-            },
-            "Property": "Win rate"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
