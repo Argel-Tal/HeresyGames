@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "2e0efc8bfccce159c51b",
   "position": {
     "x": 331.42857142857144,
@@ -117,5 +117,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a51dfb1c9197d80e95ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Missions"
+              }
+            },
+            "Property": "Missions"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -46,6 +46,90 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "subfactions.subfactions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Subfactions",
+			          "ConceptualProperty": "Subfactions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Subfactions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "force_organisations.forceorgs": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Force Organisations",
+			          "ConceptualProperty": "ForceOrgs"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ForceOrg": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "deployment_maps.maps": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Deployment Maps",
+			          "ConceptualProperty": "Maps"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Deployment": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "playerlogs.warlordtrait": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "playerlogs",
+			          "ConceptualProperty": "warlordTrait"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Warlord Trait": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

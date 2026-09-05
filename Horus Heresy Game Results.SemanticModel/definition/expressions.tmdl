@@ -162,7 +162,7 @@ expression branchForLists = "main" meta [IsParameterQuery=true, List={"main"}, D
 	lineageTag: 3f6f491e-c9d9-4ef5-90e2-de4c73b9e4e0
 	queryGroup: '00 Utilities\00.01 Parameters'
 
-	annotation PBI_ResultType = Text
+	annotation PBI_ResultType = Exception
 
 	annotation PBI_NavigationStepName = Navigation
 
