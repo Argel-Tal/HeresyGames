@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "ReportSectionf912be5f6b108d3d5e09",
   "displayName": "Army List Detail",
   "displayOption": "ActualSize",
@@ -49,7 +49,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'2000 Emperors Children Delegatus'"
+                          "Value": "'2500 Emperors Terminator Pods'"
                         }
                       }
                     ]

@@ -63,7 +63,7 @@ table MeasuresTable
 			        TOPN(
 			            1
 			            , VALUES('Warlord Traits'[Name])
-			            , RANKX(ALL('Warlord Traits'[Name]),[wins],,ASC)
+			            , RANKX(ALL('Warlord Traits'[Name]),[Win rate],,ASC)
 			        ), // end TOPN
 			        1
 			    ) // end FirstNonBlank
